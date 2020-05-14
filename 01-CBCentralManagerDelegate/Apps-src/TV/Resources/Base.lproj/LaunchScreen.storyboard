@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="15705" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="appleTV" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2hJ-AV-8sg"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dmc-w7-jFR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundGradient" translatesAutoresizingMaskIntoConstraints="NO" id="PLa-Uc-vFu">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Central" translatesAutoresizingMaskIntoConstraints="NO" id="mqZ-0L-0CX">
+                                <rect key="frame" x="896" y="476" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="98E-dS-xuN"/>
+                                    <constraint firstAttribute="width" secondItem="mqZ-0L-0CX" secondAttribute="height" multiplier="1:1" id="bgC-D3-VhT"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="PLa-Uc-vFu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5ob-Dl-gC6"/>
+                            <constraint firstItem="mqZ-0L-0CX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NiM-CQ-R2Q"/>
+                            <constraint firstAttribute="trailing" secondItem="PLa-Uc-vFu" secondAttribute="trailing" id="R2j-RM-Zyt"/>
+                            <constraint firstItem="PLa-Uc-vFu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mGK-yD-1eb"/>
+                            <constraint firstAttribute="bottom" secondItem="PLa-Uc-vFu" secondAttribute="bottom" id="mSL-bn-vbA"/>
+                            <constraint firstItem="mqZ-0L-0CX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nL7-7Z-5D1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="64"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BackgroundGradient" width="10" height="3000"/>
+        <image name="Central" width="64" height="64"/>
+    </resources>
+</document>

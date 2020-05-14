@@ -1,0 +1,39 @@
+disabled_rules:
+- identifier_name
+- nesting
+- function_parameter_count
+- trailing_whitespace
+- type_name
+- function_body_length
+- weak_delegate
+- large_tuple
+- todo
+- inert_defer
+- reduce_boolean
+- syntactic_sugar
+- colon
+- switch_case_alignment
+- implicit_getter
+
+opt_in_rules:
+- control_statement
+- empty_count
+- trailing_newline
+- colon
+- comma
+
+file_length:
+- 550 # warning
+- 551 # error
+
+type_body_length:
+- 100 # warning
+- 101 # error
+
+line_length:
+- 249 # warning
+- 250 # error
+
+cyclomatic_complexity:
+- 5 # warning
+- 6 # error

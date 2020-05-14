@@ -1,0 +1,20 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "layers" : [
+    {
+      "filename" : "1776-1066-Foreground.imagestacklayer"
+    },
+    {
+      "filename" : "1776-1066-Background.imagestacklayer"
+    }
+  ],
+  "properties" : {
+    "canvasSize" : {
+      "width" : 400,
+      "height" : 240
+    }
+  }
+}

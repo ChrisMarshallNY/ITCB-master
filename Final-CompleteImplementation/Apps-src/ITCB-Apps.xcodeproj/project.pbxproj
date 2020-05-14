@@ -1,0 +1,1720 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D40B434023F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D40B433F23F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D40B437523F3836900CFE862 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D40B437223F3836900CFE862 /* Interface.storyboard */; };
+		D40B437623F3836900CFE862 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D40B437423F3836900CFE862 /* Assets.xcassets */; };
+		D40FF5BF2406A1C200349E77 /* ITCB_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40FF5BE2406A1C200349E77 /* ITCB_AppDelegate.swift */; };
+		D40FF5C22406A4D300349E77 /* ITCB_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */; };
+		D40FF5C32406A5DB00349E77 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05B223F347FB008266BC /* Localizable.strings */; };
+		D40FF5C42406A5DF00349E77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D452A2EE23F0DB8500016D71 /* InfoPlist.strings */; };
+		D40FF5DA2406A69800349E77 /* ITCB_SDK_TVOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40FF5D92406A69800349E77 /* ITCB_SDK_TVOS.framework */; };
+		D40FF5DB2406A69800349E77 /* ITCB_SDK_TVOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D40FF5D92406A69800349E77 /* ITCB_SDK_TVOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D417F2162419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D417F2152419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift */; };
+		D417F2172419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D417F2152419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift */; };
+		D4195FA223F454200031A99E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4195F9D23F454200031A99E /* LaunchScreen.storyboard */; };
+		D4195FA323F454200031A99E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4195F9F23F454200031A99E /* Main.storyboard */; };
+		D4195FA423F454200031A99E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4195FA123F454200031A99E /* Assets.xcassets */; };
+		D41DD51E2401D94500A99087 /* ITCB_SDK_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41DD51D2401D94500A99087 /* ITCB_SDK_IOS.framework */; };
+		D41DD51F2401D94500A99087 /* ITCB_SDK_IOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D41DD51D2401D94500A99087 /* ITCB_SDK_IOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D420990C2409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42099082409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift */; };
+		D420990D2409BEE900C4CCE5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05B223F347FB008266BC /* Localizable.strings */; };
+		D452A2F323F0DB8500016D71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D452A2EE23F0DB8500016D71 /* InfoPlist.strings */; };
+		D452A2F423F0DB8500016D71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D452A2F023F0DB8500016D71 /* Main.storyboard */; };
+		D464CBF023FDCDD100229FAA /* ITCB_SDK_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FC12BB23F7363A00C3ED12 /* ITCB_SDK_Mac.framework */; };
+		D464CBF123FDCDD100229FAA /* ITCB_SDK_Mac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4FC12BB23F7363A00C3ED12 /* ITCB_SDK_Mac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4802538240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4802535240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift */; };
+		D4802539240306A700CF6AA0 /* ITCB_Central_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4802537240306A700CF6AA0 /* ITCB_Central_ViewController.swift */; };
+		D48CEDD823F2CB180083F1A4 /* ITCB_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */; };
+		D4950AB22402E08B00D9789B /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4950AB02402E08B00D9789B /* SharedAssets.xcassets */; };
+		D4950AB32402E08B00D9789B /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4950AB02402E08B00D9789B /* SharedAssets.xcassets */; };
+		D4950AB42402E08B00D9789B /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4950AB02402E08B00D9789B /* SharedAssets.xcassets */; };
+		D4950AB52402E08B00D9789B /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4950AB02402E08B00D9789B /* SharedAssets.xcassets */; };
+		D4950AB72402E34700D9789B /* ITCB_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB62402E34700D9789B /* ITCB_AppDelegate.swift */; };
+		D4950ABA2402E35500D9789B /* ITCB_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB82402E35500D9789B /* ITCB_Base_ViewController.swift */; };
+		D4950ABB2402E35500D9789B /* ITCB_Mode_Selection_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4950AB92402E35500D9789B /* ITCB_Mode_Selection_ViewController.swift */; };
+		D49AE2F124083CD50002D53C /* ITCB_ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49AE2EB24083CD50002D53C /* ITCB_ExtensionDelegate.swift */; };
+		D49AE2F424083D070002D53C /* ITCB_Main_Central_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49AE2F324083D070002D53C /* ITCB_Main_Central_InterfaceController.swift */; };
+		D49AE30C2408421B0002D53C /* ITCB_SDK_Watch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49AE30B2408420B0002D53C /* ITCB_SDK_Watch.framework */; };
+		D49AE30D2408421B0002D53C /* ITCB_SDK_Watch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D49AE30B2408420B0002D53C /* ITCB_SDK_Watch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D49AE311240848680002D53C /* ITCB_Base_InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49AE310240848680002D53C /* ITCB_Base_InterfaceController.swift */; };
+		D49CABD7246B6426005ECD6B /* Bluetooth 8-Ball On Watch App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D40B434E23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D4AED472240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AED470240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift */; };
+		D4B7AE7923F38834006C9076 /* ITCB_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */; };
+		D4BA633523FDE12F0086EF9F /* ITCB_About_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA633323FDE12F0086EF9F /* ITCB_About_ViewController.swift */; };
+		D4BC059823F345ED008266BC /* ITCB_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */; };
+		D4BC05A123F346AB008266BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05A023F346AB008266BC /* Assets.xcassets */; };
+		D4BC05AA23F346B7008266BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05A223F346B7008266BC /* Main.storyboard */; };
+		D4BC05AD23F346B7008266BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05A823F346B7008266BC /* LaunchScreen.storyboard */; };
+		D4BC05B423F347FB008266BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05B223F347FB008266BC /* Localizable.strings */; };
+		D4BC05B523F347FB008266BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4BC05B223F347FB008266BC /* Localizable.strings */; };
+		D4BEA54823FF0F5800664AF9 /* ITCB_Central_Peripheral_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BEA54623FF0F5800664AF9 /* ITCB_Central_Peripheral_Device_ViewController.swift */; };
+		D4CFE80823FEB505003D2BFA /* ITCB_CENTRAL_Initial_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFE80723FEB505003D2BFA /* ITCB_CENTRAL_Initial_ViewController.swift */; };
+		D4CFE80A23FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFE80923FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift */; };
+		D4CFE80C23FEBB79003D2BFA /* ITCB_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFE80B23FEBB78003D2BFA /* ITCB_Base_ViewController.swift */; };
+		D4CFE80E23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFE80D23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift */; };
+		D4DBD5C923F41F7B001C9DE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D452A2EE23F0DB8500016D71 /* InfoPlist.strings */; };
+		D4DBD5CB23F41F80001C9DE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D452A2EE23F0DB8500016D71 /* InfoPlist.strings */; };
+		D4E05CEF2407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E05CE82407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift */; };
+		D4E05CF02407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E05CE92407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift */; };
+		D4E05CF22407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E05CEC2407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift */; };
+		D4E05CF32407FF4F00AF6BCA /* ITCB_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E05CED2407FF4F00AF6BCA /* ITCB_Base_ViewController.swift */; };
+		D4E6777C23EEF4C40066B0C0 /* ITCB_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6777423EEF4C40066B0C0 /* ITCB_AppDelegate.swift */; };
+		D4E6777D23EEF4C40066B0C0 /* ITCB_Mode_Selection_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6777523EEF4C40066B0C0 /* ITCB_Mode_Selection_ViewController.swift */; };
+		D4E6777F23EEF4C40066B0C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E6777823EEF4C40066B0C0 /* Assets.xcassets */; };
+		D4FFD7582405B106003D418B /* ITCB_iOS_About_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FFD7572405B106003D418B /* ITCB_iOS_About_ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D40B434123F381F100CFE862 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4D5F5C123EEF33400E4F52B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D40B433E23F381F100CFE862;
+			remoteInfo = "Watch WatchKit App";
+		};
+		D40FF5D82406A69800349E77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D40FF5CC2406A66100349E77;
+			remoteInfo = ITCB_SDK_TVOS;
+		};
+		D41DD51C2401D94500A99087 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D41DD5012401D71B00A99087;
+			remoteInfo = ITCB_SDK_IOS;
+		};
+		D49AE30A2408420B0002D53C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D49AE2FC240841A00002D53C;
+			remoteInfo = ITCB_SDK_Watch;
+		};
+		D49CABD8246B6426005ECD6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4D5F5C123EEF33400E4F52B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D40B434D23F381F200CFE862;
+			remoteInfo = "Bluetooth 8-Ball On Watch App Extension";
+		};
+		D4B01262246D99E20030EF15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D41DD5002401D71B00A99087;
+			remoteInfo = ITCB_SDK_IOS;
+		};
+		D4B01264246D99F00030EF15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D40FF5CB2406A66100349E77;
+			remoteInfo = ITCB_SDK_TVOS;
+		};
+		D4B01266246D99FA0030EF15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D49AE2FB240841A00002D53C;
+			remoteInfo = ITCB_SDK_Watch;
+		};
+		D4FC12BA23F7363A00C3ED12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D4BFAF8723F42B6F006D2C07;
+			remoteInfo = "ITCB-Mac";
+		};
+		D4FC12BE23F7364400C3ED12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D4BFAF8623F42B6F006D2C07;
+			remoteInfo = "ITCB-Mac";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D40B435F23F381F300CFE862 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D40B434023F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D40FF5DC2406A69800349E77 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D40FF5DB2406A69800349E77 /* ITCB_SDK_TVOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D41DD5212401D94600A99087 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D41DD51F2401D94500A99087 /* ITCB_SDK_IOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D464CBF223FDCDD100229FAA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D464CBF123FDCDD100229FAA /* ITCB_SDK_Mac.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D49AE30F2408421C0002D53C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D49AE30D2408421B0002D53C /* ITCB_SDK_Watch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D49CABDA246B6426005ECD6B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D49CABD7246B6426005ECD6B /* Bluetooth 8-Ball On Watch App Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D40B433C23F381F100CFE862 /* Bluetooth 8-Ball On Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40B433F23F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40B434E23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Bluetooth 8-Ball On Watch App Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D40B437323F3836900CFE862 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = App/Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D40B437423F3836900CFE862 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = App/Assets.xcassets; sourceTree = "<group>"; };
+		D40B437723F3838700CFE862 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = App/Meta/Info.plist; sourceTree = "<group>"; };
+		D40B438323F3845F00CFE862 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Extension/Meta/Info.plist; sourceTree = "<group>"; };
+		D40FF5BE2406A1C200349E77 /* ITCB_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_AppDelegate.swift; path = Source/Application/ITCB_AppDelegate.swift; sourceTree = "<group>"; };
+		D417F2152419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Peripheral_ViewController_Extension.swift; sourceTree = "<group>"; };
+		D4195F8723F4533E0031A99E /* Bluetooth 8-Ball On TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4195F9A23F453EE0031A99E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Meta/Info.plist; sourceTree = "<group>"; };
+		D4195F9E23F454200031A99E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D4195FA023F454200031A99E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4195FA123F454200031A99E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		D42099082409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Main_Central_Device_InterfaceController.swift; sourceTree = "<group>"; };
+		D452A2EF23F0DB8500016D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D452A2F123F0DB8500016D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D480010823F42C4500599729 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D4802535240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Peripheral_ViewController.swift; sourceTree = "<group>"; };
+		D4802537240306A700CF6AA0 /* ITCB_Central_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Central_ViewController.swift; sourceTree = "<group>"; };
+		D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Utilities.swift; sourceTree = "<group>"; };
+		D4950AB02402E08B00D9789B /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
+		D4950AB62402E34700D9789B /* ITCB_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_AppDelegate.swift; path = Source/Application/ITCB_AppDelegate.swift; sourceTree = "<group>"; };
+		D4950AB82402E35500D9789B /* ITCB_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_ViewController.swift; sourceTree = "<group>"; };
+		D4950AB92402E35500D9789B /* ITCB_Mode_Selection_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Mode_Selection_ViewController.swift; sourceTree = "<group>"; };
+		D49AE2EB24083CD50002D53C /* ITCB_ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D49AE2F324083D070002D53C /* ITCB_Main_Central_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Main_Central_InterfaceController.swift; sourceTree = "<group>"; };
+		D49AE310240848680002D53C /* ITCB_Base_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_InterfaceController.swift; sourceTree = "<group>"; };
+		D4A7887F23F5D1C70087D78F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D4AED470240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Central_Device_ViewController.swift; sourceTree = "<group>"; };
+		D4B683E9246C3CE100FD400B /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = "../Project-Meta/Warnings.xcconfig"; sourceTree = "<group>"; };
+		D4BA633323FDE12F0086EF9F /* ITCB_About_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_About_ViewController.swift; sourceTree = "<group>"; };
+		D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4BC05A023F346AB008266BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		D4BC05A323F346B7008266BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4BC05A923F346B7008266BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resources/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D4BC05AE23F346C4008266BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Meta/Info.plist; sourceTree = "<group>"; };
+		D4BC05B323F347FB008266BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D4BEA54623FF0F5800664AF9 /* ITCB_Central_Peripheral_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Central_Peripheral_Device_ViewController.swift; sourceTree = "<group>"; };
+		D4CFE80723FEB505003D2BFA /* ITCB_CENTRAL_Initial_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_CENTRAL_Initial_ViewController.swift; sourceTree = "<group>"; };
+		D4CFE80923FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Peripheral_ViewController.swift; sourceTree = "<group>"; };
+		D4CFE80B23FEBB78003D2BFA /* ITCB_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_ViewController.swift; sourceTree = "<group>"; };
+		D4CFE80D23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_WindowController.swift; sourceTree = "<group>"; };
+		D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E05CE82407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_Central_ViewController.swift; sourceTree = "<group>"; };
+		D4E05CE92407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_Central_Device_ViewController.swift; sourceTree = "<group>"; };
+		D4E05CEC2407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_About_ViewController.swift; sourceTree = "<group>"; };
+		D4E05CED2407FF4F00AF6BCA /* ITCB_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_ViewController.swift; sourceTree = "<group>"; };
+		D4E6777423EEF4C40066B0C0 /* ITCB_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_AppDelegate.swift; sourceTree = "<group>"; };
+		D4E6777523EEF4C40066B0C0 /* ITCB_Mode_Selection_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Mode_Selection_ViewController.swift; sourceTree = "<group>"; };
+		D4E6777623EEF4C40066B0C0 /* IntroToCoreBluetooth.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = IntroToCoreBluetooth.entitlements; sourceTree = "<group>"; };
+		D4E6777723EEF4C40066B0C0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4E6777823EEF4C40066B0C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ITCB.xcodeproj; path = "../SDK-src/ITCB.xcodeproj"; sourceTree = "<group>"; };
+		D4FFD7572405B106003D418B /* ITCB_iOS_About_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_iOS_About_ViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4195F8423F4533E0031A99E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D40FF5DA2406A69800349E77 /* ITCB_SDK_TVOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D41DD5202401D94600A99087 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D41DD51E2401D94500A99087 /* ITCB_SDK_IOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D49AE30E2408421C0002D53C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49AE30C2408421B0002D53C /* ITCB_SDK_Watch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4FC12B023F734F600C3ED12 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D464CBF023FDCDD100229FAA /* ITCB_SDK_Mac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D40B436F23F382BF00CFE862 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				D40B437023F3832600CFE862 /* App */,
+				D40B437123F3832E00CFE862 /* Extension */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		D40B437023F3832600CFE862 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D4DBD5CC23F42073001C9DE5 /* Resources */,
+				D40B437823F3838E00CFE862 /* Meta */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		D40B437123F3832E00CFE862 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D40B438723F3848000CFE862 /* Source */,
+				D40B438223F3844F00CFE862 /* Meta */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		D40B437823F3838E00CFE862 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D40B437723F3838700CFE862 /* Info.plist */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D40B438223F3844F00CFE862 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D40B438323F3845F00CFE862 /* Info.plist */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D40B438723F3848000CFE862 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D49AE2EA24083CD50002D53C /* Application */,
+				D49AE2EC24083CD50002D53C /* View Controllers */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D40FF5BC2406A19D00349E77 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D40FF5BE2406A1C200349E77 /* ITCB_AppDelegate.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		D4195F8823F4533E0031A99E /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				D4195F9C23F454030031A99E /* Source */,
+				D4195F9B23F453F90031A99E /* Resources */,
+				D4195F9923F453DD0031A99E /* Meta */,
+			);
+			path = TV;
+			sourceTree = "<group>";
+		};
+		D4195F9923F453DD0031A99E /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4195F9A23F453EE0031A99E /* Info.plist */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D4195F9B23F453F90031A99E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4195FA123F454200031A99E /* Assets.xcassets */,
+				D4195F9D23F454200031A99E /* LaunchScreen.storyboard */,
+				D4195F9F23F454200031A99E /* Main.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D4195F9C23F454030031A99E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D40FF5BC2406A19D00349E77 /* Application */,
+				D4E05CE42407FF4F00AF6BCA /* View Controllers */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D41DD4F92401D14700A99087 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D4950AB62402E34700D9789B /* ITCB_AppDelegate.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		D41DD4FB2401D15400A99087 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D436293C24054F1500A10F6D /* Main */,
+				D436293E24054F3100A10F6D /* Central */,
+				D436293F24054F3B00A10F6D /* Peripheral */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D436293C24054F1500A10F6D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D4950AB82402E35500D9789B /* ITCB_Base_ViewController.swift */,
+				D4950AB92402E35500D9789B /* ITCB_Mode_Selection_ViewController.swift */,
+				D4FFD7572405B106003D418B /* ITCB_iOS_About_ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D436293E24054F3100A10F6D /* Central */ = {
+			isa = PBXGroup;
+			children = (
+				D4802537240306A700CF6AA0 /* ITCB_Central_ViewController.swift */,
+				D4AED470240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift */,
+			);
+			path = Central;
+			sourceTree = "<group>";
+		};
+		D436293F24054F3B00A10F6D /* Peripheral */ = {
+			isa = PBXGroup;
+			children = (
+				D4802535240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift */,
+			);
+			path = Peripheral;
+			sourceTree = "<group>";
+		};
+		D45D681723EEF5B30081EBF1 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */,
+				D4A7887F23F5D1C70087D78F /* README.md */,
+				D480010823F42C4500599729 /* .swiftlint.yml */,
+				D4B683E9246C3CE100FD400B /* Warnings.xcconfig */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D464CBED23FDCD2100229FAA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6777423EEF4C40066B0C0 /* ITCB_AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D464CBEF23FDCD3500229FAA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFE80B23FEBB78003D2BFA /* ITCB_Base_ViewController.swift */,
+				D4BA633323FDE12F0086EF9F /* ITCB_About_ViewController.swift */,
+				D4E6777523EEF4C40066B0C0 /* ITCB_Mode_Selection_ViewController.swift */,
+				D490947423FF2ABF00996B97 /* Central Handlers */,
+				D490947523FF2AC900996B97 /* Peripheral Handlers */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D48B4C3C23F0DC9A001CA0B5 /* Localized */ = {
+			isa = PBXGroup;
+			children = (
+				D452A2F023F0DB8500016D71 /* Main.storyboard */,
+			);
+			name = Localized;
+			sourceTree = "<group>";
+		};
+		D490947423FF2ABF00996B97 /* Central Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFE80723FEB505003D2BFA /* ITCB_CENTRAL_Initial_ViewController.swift */,
+				D4BEA54623FF0F5800664AF9 /* ITCB_Central_Peripheral_Device_ViewController.swift */,
+			);
+			path = "Central Handlers";
+			sourceTree = "<group>";
+		};
+		D490947523FF2AC900996B97 /* Peripheral Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFE80923FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift */,
+			);
+			path = "Peripheral Handlers";
+			sourceTree = "<group>";
+		};
+		D49AE2EA24083CD50002D53C /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D49AE2EB24083CD50002D53C /* ITCB_ExtensionDelegate.swift */,
+			);
+			name = Application;
+			path = Extension/Source/Application;
+			sourceTree = "<group>";
+		};
+		D49AE2EC24083CD50002D53C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D49AE2EF24083CD50002D53C /* Main */,
+				D49AE2EE24083CD50002D53C /* Central */,
+			);
+			name = "View Controllers";
+			path = "Extension/Source/View Controllers";
+			sourceTree = "<group>";
+		};
+		D49AE2EE24083CD50002D53C /* Central */ = {
+			isa = PBXGroup;
+			children = (
+				D49AE2F324083D070002D53C /* ITCB_Main_Central_InterfaceController.swift */,
+				D42099082409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift */,
+			);
+			path = Central;
+			sourceTree = "<group>";
+		};
+		D49AE2EF24083CD50002D53C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D49AE310240848680002D53C /* ITCB_Base_InterfaceController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D4BC057D23F34350008266BC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC059923F3461F008266BC /* Source */,
+				D4BC059A23F34629008266BC /* Resources */,
+				D4BC059B23F34631008266BC /* Meta */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		D4BC059623F345C1008266BC /* Localized */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC05A223F346B7008266BC /* Main.storyboard */,
+				D4BC05A823F346B7008266BC /* LaunchScreen.storyboard */,
+			);
+			name = Localized;
+			sourceTree = "<group>";
+		};
+		D4BC059723F345D9008266BC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC05B023F347B6008266BC /* Source */,
+				D4BC05B123F347BE008266BC /* Resources */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		D4BC059923F3461F008266BC /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D41DD4F92401D14700A99087 /* Application */,
+				D41DD4FB2401D15400A99087 /* View Controllers */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		D4BC059A23F34629008266BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC05A023F346AB008266BC /* Assets.xcassets */,
+				D4BC059623F345C1008266BC /* Localized */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D4BC059B23F34631008266BC /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC05AE23F346C4008266BC /* Info.plist */,
+			);
+			name = Meta;
+			sourceTree = "<group>";
+		};
+		D4BC05B023F347B6008266BC /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D417F2152419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift */,
+				D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D4BC05B123F347BE008266BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4950AB02402E08B00D9789B /* SharedAssets.xcassets */,
+				D4BC05B223F347FB008266BC /* Localizable.strings */,
+				D452A2EE23F0DB8500016D71 /* InfoPlist.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4BC05B623F34947008266BC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D4BC059723F345D9008266BC /* Shared */,
+				D4E6777323EEF48F0066B0C0 /* Mac */,
+				D4BC057D23F34350008266BC /* iOS */,
+				D4195F8823F4533E0031A99E /* TV */,
+				D40B436F23F382BF00CFE862 /* Watch */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		D4CFE80F23FEBE27003D2BFA /* Window Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFE80D23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift */,
+			);
+			path = "Window Controllers";
+			sourceTree = "<group>";
+		};
+		D4D5F5C023EEF33400E4F52B = {
+			isa = PBXGroup;
+			children = (
+				D45D681723EEF5B30081EBF1 /* Meta */,
+				D4BC05B623F34947008266BC /* src */,
+				D4D5F5CA23EEF33400E4F52B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4D5F5CA23EEF33400E4F52B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */,
+				D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */,
+				D40B433C23F381F100CFE862 /* Bluetooth 8-Ball On Watch.app */,
+				D40B433F23F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app */,
+				D40B434E23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension.appex */,
+				D4195F8723F4533E0031A99E /* Bluetooth 8-Ball On TV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4DBD5CC23F42073001C9DE5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D40B437423F3836900CFE862 /* Assets.xcassets */,
+				D40B437223F3836900CFE862 /* Interface.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D4E05CE42407FF4F00AF6BCA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4E05CEA2407FF4F00AF6BCA /* Main */,
+				D4E05CE72407FF4F00AF6BCA /* Central */,
+			);
+			name = "View Controllers";
+			path = "Source/View Controllers";
+			sourceTree = "<group>";
+		};
+		D4E05CE72407FF4F00AF6BCA /* Central */ = {
+			isa = PBXGroup;
+			children = (
+				D4E05CE82407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift */,
+				D4E05CE92407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift */,
+			);
+			path = Central;
+			sourceTree = "<group>";
+		};
+		D4E05CEA2407FF4F00AF6BCA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D4E05CEC2407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift */,
+				D4E05CED2407FF4F00AF6BCA /* ITCB_Base_ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D4E6777323EEF48F0066B0C0 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6778423EEF51E0066B0C0 /* Source */,
+				D4E6778323EEF5120066B0C0 /* Resources */,
+				D4E6778123EEF4E50066B0C0 /* Meta */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		D4E6778123EEF4E50066B0C0 /* Meta */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6777723EEF4C40066B0C0 /* Info.plist */,
+				D4E6777623EEF4C40066B0C0 /* IntroToCoreBluetooth.entitlements */,
+			);
+			path = Meta;
+			sourceTree = "<group>";
+		};
+		D4E6778323EEF5120066B0C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4E6777823EEF4C40066B0C0 /* Assets.xcassets */,
+				D48B4C3C23F0DC9A001CA0B5 /* Localized */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4E6778423EEF51E0066B0C0 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D464CBED23FDCD2100229FAA /* Application */,
+				D4CFE80F23FEBE27003D2BFA /* Window Controllers */,
+				D464CBEF23FDCD3500229FAA /* View Controllers */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D4FC12B623F7363A00C3ED12 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4FC12BB23F7363A00C3ED12 /* ITCB_SDK_Mac.framework */,
+				D41DD51D2401D94500A99087 /* ITCB_SDK_IOS.framework */,
+				D40FF5D92406A69800349E77 /* ITCB_SDK_TVOS.framework */,
+				D49AE30B2408420B0002D53C /* ITCB_SDK_Watch.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D40B433B23F381F100CFE862 /* Bluetooth 8-Ball On Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D40B436723F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch" */;
+			buildPhases = (
+				D40B435F23F381F300CFE862 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D40B434223F381F100CFE862 /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On Watch";
+			productName = Watch;
+			productReference = D40B433C23F381F100CFE862 /* Bluetooth 8-Ball On Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		D40B433E23F381F100CFE862 /* Bluetooth 8-Ball On Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D40B436623F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App" */;
+			buildPhases = (
+				D40B433D23F381F100CFE862 /* Resources */,
+				D49CABDA246B6426005ECD6B /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D49CABD9246B6426005ECD6B /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On Watch App";
+			productName = "Watch WatchKit App";
+			productReference = D40B433F23F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D40B434D23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D40B436523F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App Extension" */;
+			buildPhases = (
+				D40B438923F3856000CFE862 /* SwiftLint */,
+				D40B434A23F381F200CFE862 /* Sources */,
+				D40B434C23F381F200CFE862 /* Resources */,
+				D49AE30E2408421C0002D53C /* Frameworks */,
+				D49AE30F2408421C0002D53C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4B01267246D99FA0030EF15 /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On Watch App Extension";
+			productName = "Watch WatchKit Extension";
+			productReference = D40B434E23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		D4195F8623F4533E0031A99E /* Bluetooth 8-Ball On TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4195F9823F4533E0031A99E /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On TV" */;
+			buildPhases = (
+				D475F9B2246C398A008A2923 /* SwiftLint */,
+				D4195F8323F4533E0031A99E /* Sources */,
+				D4195F8423F4533E0031A99E /* Frameworks */,
+				D4195F8523F4533E0031A99E /* Resources */,
+				D40FF5DC2406A69800349E77 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4B01265246D99F00030EF15 /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On TV";
+			productName = "ITCB-TV";
+			productReference = D4195F8723F4533E0031A99E /* Bluetooth 8-Ball On TV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4BC057B23F34350008266BC /* Bluetooth 8-Ball On Mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4BC058F23F34351008266BC /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mobile" */;
+			buildPhases = (
+				D40B438823F3854900CFE862 /* SwiftLint */,
+				D4BC057823F34350008266BC /* Sources */,
+				D4BC057A23F34350008266BC /* Resources */,
+				D41DD5202401D94600A99087 /* Frameworks */,
+				D41DD5212401D94600A99087 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4B01263246D99E20030EF15 /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On Mobile";
+			productName = iOS;
+			productReference = D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball On Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mac" */;
+			buildPhases = (
+				D4E2709C23EF49120072DC05 /* SwiftLint */,
+				D4D5F5C523EEF33400E4F52B /* Sources */,
+				D4D5F5C723EEF33400E4F52B /* Resources */,
+				D4FC12B023F734F600C3ED12 /* Frameworks */,
+				D464CBF223FDCDD100229FAA /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4FC12BF23F7364400C3ED12 /* PBXTargetDependency */,
+			);
+			name = "Bluetooth 8-Ball On Mac";
+			productName = IntroToCoreBluetooth;
+			productReference = D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4D5F5C123EEF33400E4F52B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ITCB_;
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Little Green Viper Software Development LLC";
+				TargetAttributes = {
+					D40B433B23F381F100CFE862 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D40B433E23F381F100CFE862 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D40B434D23F381F200CFE862 = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+					};
+					D4195F8623F4533E0031A99E = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+					};
+					D4BC057B23F34350008266BC = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D4D5F5C823EEF33400E4F52B = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
+					};
+				};
+			};
+			buildConfigurationList = D4D5F5C423EEF33400E4F52B /* Build configuration list for PBXProject "ITCB-Apps" */;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D4D5F5C023EEF33400E4F52B;
+			productRefGroup = D4D5F5CA23EEF33400E4F52B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D4FC12B623F7363A00C3ED12 /* Products */;
+					ProjectRef = D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball On Mac */,
+				D4BC057B23F34350008266BC /* Bluetooth 8-Ball On Mobile */,
+				D4195F8623F4533E0031A99E /* Bluetooth 8-Ball On TV */,
+				D40B433B23F381F100CFE862 /* Bluetooth 8-Ball On Watch */,
+				D40B433E23F381F100CFE862 /* Bluetooth 8-Ball On Watch App */,
+				D40B434D23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D40FF5D92406A69800349E77 /* ITCB_SDK_TVOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ITCB_SDK_TVOS.framework;
+			remoteRef = D40FF5D82406A69800349E77 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D41DD51D2401D94500A99087 /* ITCB_SDK_IOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ITCB_SDK_IOS.framework;
+			remoteRef = D41DD51C2401D94500A99087 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D49AE30B2408420B0002D53C /* ITCB_SDK_Watch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ITCB_SDK_Watch.framework;
+			remoteRef = D49AE30A2408420B0002D53C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D4FC12BB23F7363A00C3ED12 /* ITCB_SDK_Mac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ITCB_SDK_Mac.framework;
+			remoteRef = D4FC12BA23F7363A00C3ED12 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D40B433D23F381F100CFE862 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4950AB52402E08B00D9789B /* SharedAssets.xcassets in Resources */,
+				D40B437623F3836900CFE862 /* Assets.xcassets in Resources */,
+				D4DBD5CB23F41F80001C9DE5 /* InfoPlist.strings in Resources */,
+				D40B437523F3836900CFE862 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D40B434C23F381F200CFE862 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D420990D2409BEE900C4CCE5 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4195F8523F4533E0031A99E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D40FF5C32406A5DB00349E77 /* Localizable.strings in Resources */,
+				D40FF5C42406A5DF00349E77 /* InfoPlist.strings in Resources */,
+				D4195FA223F454200031A99E /* LaunchScreen.storyboard in Resources */,
+				D4195FA423F454200031A99E /* Assets.xcassets in Resources */,
+				D4195FA323F454200031A99E /* Main.storyboard in Resources */,
+				D4950AB42402E08B00D9789B /* SharedAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4BC057A23F34350008266BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BC05B523F347FB008266BC /* Localizable.strings in Resources */,
+				D4DBD5C923F41F7B001C9DE5 /* InfoPlist.strings in Resources */,
+				D4BC05A123F346AB008266BC /* Assets.xcassets in Resources */,
+				D4950AB32402E08B00D9789B /* SharedAssets.xcassets in Resources */,
+				D4BC05AD23F346B7008266BC /* LaunchScreen.storyboard in Resources */,
+				D4BC05AA23F346B7008266BC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4D5F5C723EEF33400E4F52B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BC05B423F347FB008266BC /* Localizable.strings in Resources */,
+				D452A2F423F0DB8500016D71 /* Main.storyboard in Resources */,
+				D4950AB22402E08B00D9789B /* SharedAssets.xcassets in Resources */,
+				D452A2F323F0DB8500016D71 /* InfoPlist.strings in Resources */,
+				D4E6777F23EEF4C40066B0C0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D40B438823F3854900CFE862 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D40B438923F3856000CFE862 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D475F9B2246C398A008A2923 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D4E2709C23EF49120072DC05 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D40B434A23F381F200CFE862 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49AE311240848680002D53C /* ITCB_Base_InterfaceController.swift in Sources */,
+				D49AE2F424083D070002D53C /* ITCB_Main_Central_InterfaceController.swift in Sources */,
+				D420990C2409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift in Sources */,
+				D49AE2F124083CD50002D53C /* ITCB_ExtensionDelegate.swift in Sources */,
+				D4B7AE7923F38834006C9076 /* ITCB_Utilities.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4195F8323F4533E0031A99E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E05CEF2407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift in Sources */,
+				D40FF5C22406A4D300349E77 /* ITCB_Utilities.swift in Sources */,
+				D4E05CF32407FF4F00AF6BCA /* ITCB_Base_ViewController.swift in Sources */,
+				D40FF5BF2406A1C200349E77 /* ITCB_AppDelegate.swift in Sources */,
+				D4E05CF22407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift in Sources */,
+				D4E05CF02407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4BC057823F34350008266BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4802539240306A700CF6AA0 /* ITCB_Central_ViewController.swift in Sources */,
+				D4AED472240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift in Sources */,
+				D4950ABB2402E35500D9789B /* ITCB_Mode_Selection_ViewController.swift in Sources */,
+				D4950ABA2402E35500D9789B /* ITCB_Base_ViewController.swift in Sources */,
+				D417F2172419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift in Sources */,
+				D4FFD7582405B106003D418B /* ITCB_iOS_About_ViewController.swift in Sources */,
+				D4950AB72402E34700D9789B /* ITCB_AppDelegate.swift in Sources */,
+				D4BC059823F345ED008266BC /* ITCB_Utilities.swift in Sources */,
+				D4802538240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4D5F5C523EEF33400E4F52B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4BA633523FDE12F0086EF9F /* ITCB_About_ViewController.swift in Sources */,
+				D4CFE80A23FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift in Sources */,
+				D48CEDD823F2CB180083F1A4 /* ITCB_Utilities.swift in Sources */,
+				D4CFE80823FEB505003D2BFA /* ITCB_CENTRAL_Initial_ViewController.swift in Sources */,
+				D417F2162419C1EE006969DA /* ITCB_Peripheral_ViewController_Extension.swift in Sources */,
+				D4CFE80E23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift in Sources */,
+				D4BEA54823FF0F5800664AF9 /* ITCB_Central_Peripheral_Device_ViewController.swift in Sources */,
+				D4E6777D23EEF4C40066B0C0 /* ITCB_Mode_Selection_ViewController.swift in Sources */,
+				D4E6777C23EEF4C40066B0C0 /* ITCB_AppDelegate.swift in Sources */,
+				D4CFE80C23FEBB79003D2BFA /* ITCB_Base_ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D40B434223F381F100CFE862 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D40B433E23F381F100CFE862 /* Bluetooth 8-Ball On Watch App */;
+			targetProxy = D40B434123F381F100CFE862 /* PBXContainerItemProxy */;
+		};
+		D49CABD9246B6426005ECD6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D40B434D23F381F200CFE862 /* Bluetooth 8-Ball On Watch App Extension */;
+			targetProxy = D49CABD8246B6426005ECD6B /* PBXContainerItemProxy */;
+		};
+		D4B01263246D99E20030EF15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ITCB_SDK_IOS;
+			targetProxy = D4B01262246D99E20030EF15 /* PBXContainerItemProxy */;
+		};
+		D4B01265246D99F00030EF15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ITCB_SDK_TVOS;
+			targetProxy = D4B01264246D99F00030EF15 /* PBXContainerItemProxy */;
+		};
+		D4B01267246D99FA0030EF15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ITCB_SDK_Watch;
+			targetProxy = D4B01266246D99FA0030EF15 /* PBXContainerItemProxy */;
+		};
+		D4FC12BF23F7364400C3ED12 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ITCB-Mac";
+			targetProxy = D4FC12BE23F7364400C3ED12 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D40B437223F3836900CFE862 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D40B437323F3836900CFE862 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		D4195F9D23F454200031A99E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4195F9E23F454200031A99E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D4195F9F23F454200031A99E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4195FA023F454200031A99E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D452A2EE23F0DB8500016D71 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D452A2EF23F0DB8500016D71 /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D452A2F023F0DB8500016D71 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D452A2F123F0DB8500016D71 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D4BC05A223F346B7008266BC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4BC05A323F346B7008266BC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D4BC05A823F346B7008266BC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4BC05A923F346B7008266BC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D4BC05B223F347FB008266BC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4BC05B323F347FB008266BC /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D40B435D23F381F300CFE862 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D40B435E23F381F300CFE862 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D40B436023F381F300CFE862 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				IBSC_MODULE = Watch_WatchKit_Extension;
+				INFOPLIST_FILE = Watch/App/Meta/Info.plist;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D40B436123F381F300CFE862 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				IBSC_MODULE = Watch_WatchKit_Extension;
+				INFOPLIST_FILE = Watch/App/Meta/Info.plist;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		D40B436323F381F300CFE862 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = Watch/Extension/Meta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball.extension";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App Extension";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D40B436423F381F300CFE862 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3001;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = Watch/Extension/Meta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball.extension";
+				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App Extension";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		D4195F9623F4533E0031A99E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3003;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = TV/Meta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.TV.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On TV";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Debug;
+		};
+		D4195F9723F4533E0031A99E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3003;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = TV/Meta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.TV.8-ball";
+				PRODUCT_NAME = "Bluetooth 8-Ball On TV";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D4BC058D23F34351008266BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3002;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = iOS/Meta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.iOS.8-ball";
+				PRODUCT_MODULE_NAME = ITCB_iOS;
+				PRODUCT_NAME = "Bluetooth 8-Ball On Mobile";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D4BC058E23F34351008266BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3002;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				INFOPLIST_FILE = iOS/Meta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.iOS.8-ball";
+				PRODUCT_MODULE_NAME = ITCB_iOS;
+				PRODUCT_NAME = "Bluetooth 8-Ball On Mobile";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		D4D5F5D723EEF33500E4F52B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4B683E9246C3CE100FD400B /* Warnings.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D4D5F5D823EEF33500E4F52B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4B683E9246C3CE100FD400B /* Warnings.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D4D5F5DA23EEF33500E4F52B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Mac/Meta/IntroToCoreBluetooth.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3003;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Mac/Meta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "Mac.8-ball";
+				PRODUCT_MODULE_NAME = ITCB_Mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D4D5F5DB23EEF33500E4F52B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Mac/Meta/IntroToCoreBluetooth.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3003;
+				DEVELOPMENT_TEAM = P53V4JS928;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Mac/Meta/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "Mac.8-ball";
+				PRODUCT_MODULE_NAME = ITCB_Mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D40B436523F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40B436323F381F300CFE862 /* Debug */,
+				D40B436423F381F300CFE862 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D40B436623F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40B436023F381F300CFE862 /* Debug */,
+				D40B436123F381F300CFE862 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D40B436723F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40B435D23F381F300CFE862 /* Debug */,
+				D40B435E23F381F300CFE862 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4195F9823F4533E0031A99E /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4195F9623F4533E0031A99E /* Debug */,
+				D4195F9723F4533E0031A99E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4BC058F23F34351008266BC /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4BC058D23F34351008266BC /* Debug */,
+				D4BC058E23F34351008266BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4D5F5C423EEF33400E4F52B /* Build configuration list for PBXProject "ITCB-Apps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4D5F5D723EEF33500E4F52B /* Debug */,
+				D4D5F5D823EEF33500E4F52B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4D5F5DA23EEF33500E4F52B /* Debug */,
+				D4D5F5DB23EEF33500E4F52B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4D5F5C123EEF33400E4F52B /* Project object */;
+}
