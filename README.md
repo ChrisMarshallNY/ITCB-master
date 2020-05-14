@@ -54,3 +54,7 @@ The lesson will proceed in two major steps, which will have "sub-steps." These m
     
 - `Final-CompleteImplementation`
     This directory is a "ship-ready" implementation of the project, with full source code documentation and LINTing.
+    
+## LET'S GET STARTED
+
+To begin, simply open the `00-StartingPoint.xcworkspace` alias in this directory, and follow the steps in the `README.md` file.
