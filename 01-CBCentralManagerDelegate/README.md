@@ -167,7 +167,7 @@ Next, we use one of those constrained Array extensions that we mentioned earlier
 
 Next, we do the same for the "question" Characteristic (`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`).
 
-And lastly, we do the same for the "answer" Characteristic (`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`).
+And lastly, we do the same for the "answer" Characteristic (`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`).
 
 ##### We Need to Set Our Own Timeout
 
