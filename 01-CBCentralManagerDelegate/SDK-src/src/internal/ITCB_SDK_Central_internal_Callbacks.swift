@@ -31,9 +31,7 @@ internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37
 /// This is the UUID for the "Answer" String Characteristic
 internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
 
-/// This is the minimum signal strength for Peripheral discovery.
 internal let _static_ITCB_SDK_RSSI_Min = -60
-/// This is the maximum signal strength for Peripheral discovery.
 internal let _static_ITCB_SDK_RSSI_Max = -20
 
 extension ITCB_SDK_Central {
@@ -80,5 +78,5 @@ extension ITCB_SDK_Central: CBCentralManagerDelegate {
 }
 
 extension ITCB_SDK_Device_Peripheral {
-    func sendQuestion(_ question: String) { }
+    public func sendQuestion(_ inQuestion: String) { }
 }

@@ -153,9 +153,11 @@ extension Array where Element == CBService {
      - returns: The found Service, or nil, if not found.
      */
     public subscript(_ inUUIDString: String) -> Element! {
-        return reduce(nil) { (current, nextItem) in
-            return nil == current ? (nextItem.uuid.uuidString == inUUIDString ? nextItem : nil) : current
+        for element in self where element.uuid.uuidString == inUUIDString {
+            return element
         }
+        
+        return nil
     }
 }
 
@@ -174,9 +176,11 @@ extension Array where Element == CBCharacteristic {
      - returns: The found Characteristic, or nil, if not found.
      */
     public subscript(_ inUUIDString: String) -> Element! {
-        return reduce(nil) { (current, nextItem) in
-            return nil == current ? (nextItem.uuid.uuidString == inUUIDString ? nextItem : nil) : current
+        for element in self where element.uuid.uuidString == inUUIDString {
+            return element
         }
+        
+        return nil
     }
 }
 

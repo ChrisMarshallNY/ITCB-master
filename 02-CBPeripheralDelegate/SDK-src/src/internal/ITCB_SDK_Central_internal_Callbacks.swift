@@ -31,9 +31,7 @@ internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37
 /// This is the UUID for the "Answer" String Characteristic
 internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
 
-/// This is the minimum signal strength for Peripheral discovery.
 internal let _static_ITCB_SDK_RSSI_Min = -60
-/// This is the maximum signal strength for Peripheral discovery.
 internal let _static_ITCB_SDK_RSSI_Max = -20
 
 extension ITCB_SDK_Central {
@@ -54,7 +52,6 @@ extension ITCB_SDK_Central {
 
 extension ITCB_SDK_Central: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ centralManager: CBCentralManager) {
-        // Once we are powered on, we can start scanning.
         if .poweredOn == centralManager.state {
             print("Scanning for Peripherals")
             centralManager.scanForPeripherals(withServices: [_static_ITCB_SDK_8BallServiceUUID], options: nil)
@@ -62,21 +59,21 @@ extension ITCB_SDK_Central: CBCentralManagerDelegate {
     }
 
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-        if  !devices.contains(peripheral),            // Make sure that we don't already have this peripheral.
-            let peripheralName = peripheral.name,     // And that it is a legit Peripheral (has a name).
+        if  !devices.contains(peripheral),
+            let peripheralName = peripheral.name,
             !peripheralName.isEmpty,
-            (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) { // and that we have a signal within the acceptable range.
+            (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
             print("Peripheral Discovered: \(peripheralName), RSSI: \(rssi)")
-            devices.append(ITCB_SDK_Device_Peripheral(peripheral, owner: self))   // By creating this, we develop a strong reference, which will keep the CBPeripheral around.
+            devices.append(ITCB_SDK_Device_Peripheral(peripheral, owner: self))
             print("Connecting to \(peripheralName).")
-            centralManager.connect(peripheral, options: nil)    // We initiate a connection, which starts the voyage of discovery.
+            centralManager.connect(peripheral, options: nil)
         }
     }
     
     public func centralManager(_ centralManager: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Successfully Connected to \(peripheral.name ?? "ERROR").")
         print("Discovering Services for \(peripheral.name ?? "ERROR").")
-        peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])  // Start Service discovery on our new Peripheral.
+        peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
     }
 }
 
@@ -105,44 +102,39 @@ extension ITCB_SDK_Device_Peripheral {
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
+            _timeoutTimer?.invalidate()
             _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
         print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
-        // After discovering the Service, we ask it (even though we are using an Array visitor) to discover its three Characteristics.
         peripheral.services?.forEach {
-            // Having all 3 Characteristic UUIDs in this call, means that we should get one callback, with all 3 Characteristics set at once.
             peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
                                                 _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
+            _timeoutTimer?.invalidate()
             _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
         print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
-        if _characteristicInstances.isEmpty {   // Make sure that we didn't already pick up the Characteristics (This can be called multiple times).
+        if _characteristicInstances.isEmpty {
             _characteristicInstances = service.characteristics ?? []
             owner.peripheralServicesUpdated(self)
         }
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()  // Stop our timeout timer (Belt and suspenders -should never be required).
+            _timeoutTimer?.invalidate()
             _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
@@ -151,7 +143,7 @@ extension ITCB_SDK_Device_Peripheral {
         if  let answerData = characteristic.value,
             let answerString = String(data: answerData, encoding: .utf8),
             !answerString.isEmpty {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
+            _timeoutTimer?.invalidate()
             _timeoutTimer = nil
             peripheral.setNotifyValue(false, for: characteristic)
             answer = answerString
@@ -159,11 +151,11 @@ extension ITCB_SDK_Device_Peripheral {
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        _timeoutTimer?.invalidate()  // Stop our timeout timer (Belt and suspenders -should never be required).
+        _timeoutTimer?.invalidate()
         _timeoutTimer = nil
         if  nil == error {
             print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
-            if let questionString = _interimQuestion {  // We should have had an interim question queued up.
+            if let questionString = _interimQuestion {
                 question = questionString
             } else {
                 owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.peripheralError(nil)))
@@ -172,11 +164,9 @@ extension ITCB_SDK_Device_Peripheral {
             if let error = error as? CBATTError {
                 print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
                 switch error {
-                // We get an "unlikely" error only when there was no question mark, so we are safe in assuming that.
                 case CBATTError.unlikelyError:
                     owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
 
-                // For everything else, we simply send the error back, wrapped in the "sendFailed" error.
                 default:
                     owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
                 }

@@ -184,7 +184,9 @@ The last line (`(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains
 
 Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can add it to our collection.
 
-We execute a `print()` statement, so that our console will log the discovery, and append the new device to our [`devices`](https://github.com/LittleGreenViper/ITCB/blob/12b54e2b7d34672e4c72acb6058c196009a93876/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L141) Array.
+We do this by instantiating the "Peripheral wrapper" class ([`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L192)). When we instantiate that, it will establish itself as the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) for the discovered Peripheral, and will handle callbacks from here on out.
+
+We execute a `print()` statement, so that our console will log the discovery, and append the new device wrapper to our [`devices`](https://github.com/LittleGreenViper/ITCB/blob/12b54e2b7d34672e4c72acb6058c196009a93876/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L141) Array.
 
 We then execute another `print()` statement, reporting that we are about to connect to the device, and call the [`CBCentralManager.connect(_:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518766-connect) method to initiate a connection to the Peripheral.
 

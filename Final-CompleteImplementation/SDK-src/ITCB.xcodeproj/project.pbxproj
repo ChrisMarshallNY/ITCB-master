@@ -155,9 +155,9 @@
 		D4FC12C123F7368C00C3ED12 /* internal */ = {
 			isa = PBXGroup;
 			children = (
+				D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */,
 				D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */,
 				D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */,
-				D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */,
 				D4D01F99240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift */,
 			);
 			path = internal;
