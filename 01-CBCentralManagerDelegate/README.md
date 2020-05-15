@@ -98,7 +98,7 @@ Except we don't actually "set" the value. Instead, *we send the new value to the
 
 Another thing that we did before we got here, was [this little "hack"](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L162) (It's not actually a "hack." It's the way we do stuff in Swift):
 
-    extension Array where Element == CBCharacteristic {
+    extension Array where Element: CBAttribute {
         public subscript(_ inUUIDString: String) -> Element! {
             for element in self where element.uuid.uuidString == inUUIDString {
                 return element

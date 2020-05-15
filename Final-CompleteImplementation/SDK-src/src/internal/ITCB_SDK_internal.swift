@@ -139,41 +139,18 @@ extension Array where Element == ITCB_Device_Peripheral_Protocol {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Special Comparator for the Services Array -
+// MARK: - Special Comparator for the Services and Characteristics Arrays -
 /* ###################################################################################################################################### */
 /**
- This allows us to fetch Services by their UUID.
+ This allows us to fetch Attributes by their UUID.
  */
-extension Array where Element == CBService {
+extension Array where Element: CBAttribute {
     /* ################################################################## */
     /**
      Special String subscript that allows us to retrieve a Service, by its CBUUID
      
      - parameter inUUIDString: The String for the UUID we're looking to match.
-     - returns: The found Service, or nil, if not found.
-     */
-    public subscript(_ inUUIDString: String) -> Element! {
-        for element in self where element.uuid.uuidString == inUUIDString {
-            return element
-        }
-        
-        return nil
-    }
-}
-
-/* ###################################################################################################################################### */
-// MARK: - Special Comparator for the Characteristics Array -
-/* ###################################################################################################################################### */
-/**
- This allows us to fetch Characteristics by their UUID.
- */
-extension Array where Element == CBCharacteristic {
-    /* ################################################################## */
-    /**
-     Special String subscript that allows us to retrieve a Characteristic, by its CBUUID
-     
-     - parameter inUUIDString: The String for the UUID we're looking to match.
-     - returns: The found Characteristic, or nil, if not found.
+     - returns: The found Attribute, or nil, if not found.
      */
     public subscript(_ inUUIDString: String) -> Element! {
         for element in self where element.uuid.uuidString == inUUIDString {
