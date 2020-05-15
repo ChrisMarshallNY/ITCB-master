@@ -54,29 +54,28 @@ extension ITCB_SDK_Central {
 
 extension ITCB_SDK_Central: CBCentralManagerDelegate {
     public func centralManagerDidUpdateState(_ centralManager: CBCentralManager) {
-        // Once we are powered on, we can start scanning.
-        if .poweredOn == centralManager.state {
+        if centralManager.state == .poweredOn {
             print("Scanning for Peripherals")
             centralManager.scanForPeripherals(withServices: [_static_ITCB_SDK_8BallServiceUUID], options: nil)
         }
     }
 
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-        if  !devices.contains(peripheral),            // Make sure that we don't already have this peripheral.
-            let peripheralName = peripheral.name,     // And that it is a legit Peripheral (has a name).
+        if  !devices.contains(peripheral),
+            let peripheralName = peripheral.name,
             !peripheralName.isEmpty,
-            (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) { // and that we have a signal within the acceptable range.
+            (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
             print("Peripheral Discovered: \(peripheralName), RSSI: \(rssi)")
-            devices.append(ITCB_SDK_Device_Peripheral(peripheral, owner: self))   // By creating this, we develop a strong reference, which will keep the CBPeripheral around.
+            devices.append(ITCB_SDK_Device_Peripheral(peripheral, owner: self))
             print("Connecting to \(peripheralName).")
-            centralManager.connect(peripheral, options: nil)    // We initiate a connection, which starts the voyage of discovery.
+            centralManager.connect(peripheral, options: nil)
         }
     }
     
     public func centralManager(_ centralManager: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Successfully Connected to \(peripheral.name ?? "ERROR").")
         print("Discovering Services for \(peripheral.name ?? "ERROR").")
-        peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])  // Start Service discovery on our new Peripheral.
+        peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
     }
 }
 
