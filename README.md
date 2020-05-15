@@ -57,4 +57,4 @@ The lesson will proceed in two major steps, which will have "sub-steps." These m
     
 ## LET'S GET STARTED
 
-To begin, simply open the `00-StartingPoint.xcworkspace` alias in this directory, and follow the steps in the `README.md` file.
+To begin, simply open the `00-StartingPoint` directory, in this directory, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
