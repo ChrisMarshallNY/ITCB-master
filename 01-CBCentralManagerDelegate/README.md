@@ -108,19 +108,17 @@ Another thing that we did before we got here, was [this little "hack"](https://g
         }
     }
 
-That's [a constrained Array extension](https://littlegreenviper.com/miscellany/swiftwater/swift-extensions-part-three/), and we use it to look up Characteristics in an Array by their [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)
+That's [a constrained Array extension](https://littlegreenviper.com/miscellany/swiftwater/swift-extensions-part-three/), and we use it to look up Attributes (Characteristics and Services, in our case) in an Array by their [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)
 
 What we did, was add a subscript that accepts a String as its argument, and then scans the Array, comparing the IDs, until it finds the one for which we're searching.
 
-Basically, it treats the Array like a `[String: CBCharacteristic]` Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler.
-
-We do the same thing with Services, so that means that we can search the built-in Arrays by the `CBUUID` Strings.
+Basically, it treats the Array like a `[String: CBAttribute]` Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using `CBUUID` Strings.
 
 We also have a cached "[`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213)" property (I normally advise against caching Bluetooth values, but this is really the best way to do this, while keeping this code simple). This will hold our outgoing question String.
 
 And finally, we have a stored property called [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L198), which holds a strong reference to either a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) or a [`CBCentral`](https://developer.apple.com/documentation/corebluetooth/cbcentral) (when operating in Peripheral Mode).
 
-Note that this is a **strong** reference. We need it to be so, because this will eventually hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
+Note that this is a **strong** reference. We need it to be so, because this will hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
 
 #### NEXT, The Actual Code
 
@@ -154,6 +152,8 @@ with this:
     }
 
 That's quite a handful, eh? Let's walk through it.
+
+The first thing that we do, is clear the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property. It will only hold the question *after* it has been accepted by the Peripheral.
 
 ##### That Intricate `if... {}` Statement
 
