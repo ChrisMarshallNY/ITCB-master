@@ -8,6 +8,21 @@ This is a ***VERY*** quick introduction to Core Bluetooth.
 
 We only have a couple of hours, so the lesson will be highly constrained, and has been carefully designed to give a good idea of how to access the most useful parts of Core Bluetooth, and "prime the pump" for further exploration.
 
+## THIS LESSON IS A "KEEPER"
+
+The lesson has been designed as a "legacy." Once we're done, you will have a codebase of exceedingly well-documented Swift code at your disposal, so you can further explore Core Bluetooth.
+
+In your explorations, you'll discover that what we discuss today was "barely scratching the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation.
+
+It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS; each, implementing a common Bluetooth "SDK" framework.
+
+It is our hope that you can find great utility in this codebase in your own endeavors.
+
+*"A ship in harbor is safe, but that is not what ships are built for."*
+- John A. Shedd
+
+Go forth, and explore. Bluetooth is an enormous topic, and promises great adventures.
+
 ## MAGIC 8-BALL GAME
 
 The application that we will use as a learning platform will be a Bluetooth expression of the famous [Mattel Magic 8-Ball toy](https://en.wikipedia.org/wiki/Magic_8-Ball).
