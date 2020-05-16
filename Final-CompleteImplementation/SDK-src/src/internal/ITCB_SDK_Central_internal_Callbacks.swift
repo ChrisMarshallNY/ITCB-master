@@ -196,30 +196,32 @@ extension ITCB_SDK_Device_Peripheral {
      - parameter error: Any errors that may have occurred. It may be nil.
      */
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        if  nil == error {
-            if let questionString = _interimQuestion {  // We should have had an interim question queued up.
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
+        
+        guard let error = error else {
+            if let questionString = _interimQuestion {
+                _interimQuestion = nil
                 question = questionString
             } else {
-                _timeoutTimer?.invalidate()  // Stop our timeout timer.
-                _timeoutTimer = nil
                 owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.peripheralError(nil)))
             }
-        } else {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer. We only need the one error.
-            _timeoutTimer = nil
-            if let error = error as? CBATTError {
-                switch error {
-                // We get an "unlikely" error only when there was no question mark, so we are safe in assuming that.
-                case CBATTError.unlikelyError:
-                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
+            
+            return
+        }
 
-                // For everything else, we simply send the error back, wrapped in the "sendFailed" error.
-                default:
-                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
-                }
-            } else {
-                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
+        if let error = error as? CBATTError {
+            switch error {
+            // We get an "unlikely" error only when there was no question mark, so we are safe in assuming that.
+            case CBATTError.unlikelyError:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
+
+            // For everything else, we simply send the error back, wrapped in the "sendFailed" error.
+            default:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
             }
+        } else {
+            owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
         }
     }
 
@@ -233,18 +235,16 @@ extension ITCB_SDK_Device_Peripheral {
      - parameter error: Any errors that may have occurred. It may be nil.
      */
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        _timeoutTimer?.invalidate()  // Stop our timeout timer.
+        _timeoutTimer = nil
         // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
         if  let answerData = characteristic.value,
             let answerString = String(data: answerData, encoding: .utf8),
             !answerString.isEmpty {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
             peripheral.setNotifyValue(false, for: characteristic)
             answer = answerString
         }

@@ -160,7 +160,7 @@ extension ITCB_Central_Device_ViewController: ITCB_Observer_Central_Protocol {
      - parameter inDevice: The Peripheral device that provided the answer (this will have both the question and answer in its properties).
      */
     func questionAnsweredByDevice(_ inDevice: ITCB_Device_Peripheral_Protocol) {
-        let answer = inDevice.answer.localizedVariant
+        let answer = (inDevice.answer ?? "").localizedVariant
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             self.resultsTextView.text += "\n•\n\(answer)"
@@ -176,7 +176,7 @@ extension ITCB_Central_Device_ViewController: ITCB_Observer_Central_Protocol {
      - parameter inDevice: The Peripheral device that was asked the question (The question will be in the device properties).
      */
     func questionAskedOfDevice(_ inDevice: ITCB_Device_Peripheral_Protocol) {
-        let question = inDevice.question.localizedVariant
+        let question = (inDevice.question ?? "").localizedVariant
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             // We nuke the question from the edit box, and place it in the interaction space below the send button.

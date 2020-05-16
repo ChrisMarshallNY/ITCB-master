@@ -231,6 +231,7 @@
 		D42099082409B1F600C4CCE5 /* ITCB_Main_Central_Device_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Main_Central_Device_InterfaceController.swift; sourceTree = "<group>"; };
 		D452A2EF23F0DB8500016D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D452A2F123F0DB8500016D71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D480010823F42C4500599729 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D4802535240306A700CF6AA0 /* ITCB_Peripheral_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Peripheral_ViewController.swift; sourceTree = "<group>"; };
 		D4802537240306A700CF6AA0 /* ITCB_Central_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Central_ViewController.swift; sourceTree = "<group>"; };
 		D48CEDD723F2CB180083F1A4 /* ITCB_Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Utilities.swift; sourceTree = "<group>"; };
@@ -241,7 +242,9 @@
 		D49AE2EB24083CD50002D53C /* ITCB_ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_ExtensionDelegate.swift; sourceTree = "<group>"; };
 		D49AE2F324083D070002D53C /* ITCB_Main_Central_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Main_Central_InterfaceController.swift; sourceTree = "<group>"; };
 		D49AE310240848680002D53C /* ITCB_Base_InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_InterfaceController.swift; sourceTree = "<group>"; };
+		D4A7887F23F5D1C70087D78F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D4AED470240419CC00FE4542 /* ITCB_Central_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Central_Device_ViewController.swift; sourceTree = "<group>"; };
+		D4B683E9246C3CE100FD400B /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = "../Project-Meta/Warnings.xcconfig"; sourceTree = "<group>"; };
 		D4BA633323FDE12F0086EF9F /* ITCB_About_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_About_ViewController.swift; sourceTree = "<group>"; };
 		D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BC05A023F346AB008266BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
@@ -450,6 +453,9 @@
 			isa = PBXGroup;
 			children = (
 				D4FC12B523F7363A00C3ED12 /* ITCB.xcodeproj */,
+				D4A7887F23F5D1C70087D78F /* README.md */,
+				D480010823F42C4500599729 /* .swiftlint.yml */,
+				D4B683E9246C3CE100FD400B /* Warnings.xcconfig */,
 			);
 			name = Meta;
 			sourceTree = "<group>";
@@ -776,6 +782,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D40B436523F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App Extension" */;
 			buildPhases = (
+				D40B438923F3856000CFE862 /* SwiftLint */,
 				D40B434A23F381F200CFE862 /* Sources */,
 				D40B434C23F381F200CFE862 /* Resources */,
 				D49AE30E2408421C0002D53C /* Frameworks */,
@@ -795,6 +802,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4195F9823F4533E0031A99E /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On TV" */;
 			buildPhases = (
+				D475F9B2246C398A008A2923 /* SwiftLint */,
 				D4195F8323F4533E0031A99E /* Sources */,
 				D4195F8423F4533E0031A99E /* Frameworks */,
 				D4195F8523F4533E0031A99E /* Resources */,
@@ -814,6 +822,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4BC058F23F34351008266BC /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mobile" */;
 			buildPhases = (
+				D40B438823F3854900CFE862 /* SwiftLint */,
 				D4BC057823F34350008266BC /* Sources */,
 				D4BC057A23F34350008266BC /* Resources */,
 				D41DD5202401D94600A99087 /* Frameworks */,
@@ -833,6 +842,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mac" */;
 			buildPhases = (
+				D4E2709C23EF49120072DC05 /* SwiftLint */,
 				D4D5F5C523EEF33400E4F52B /* Sources */,
 				D4D5F5C723EEF33400E4F52B /* Resources */,
 				D4FC12B023F734F600C3ED12 /* Frameworks */,
@@ -1001,6 +1011,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D40B438823F3854900CFE862 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D40B438923F3856000CFE862 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D475F9B2246C398A008A2923 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+		D4E2709C23EF49120072DC05 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D40B434A23F381F200CFE862 /* Sources */ = {
@@ -1389,6 +1474,7 @@
 		};
 		D4D5F5D723EEF33500E4F52B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4B683E9246C3CE100FD400B /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1450,6 +1536,7 @@
 		};
 		D4D5F5D823EEF33500E4F52B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4B683E9246C3CE100FD400B /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

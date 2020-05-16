@@ -128,7 +128,7 @@ extension ITCB_Main_Central_Device_InterfaceController: ITCB_Observer_Central_Pr
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             if self.device.amIThisDevice(inDevice) {
-                self.resultsLabel.setText("\(inDevice.question.localizedVariant)\n•\n\(inDevice.answer.localizedVariant)")
+                self.resultsLabel.setText("\((inDevice.question ?? "").localizedVariant)\n•\n\((inDevice.answer ?? "").localizedVariant)")
             }
         }
     }
@@ -145,7 +145,7 @@ extension ITCB_Main_Central_Device_InterfaceController: ITCB_Observer_Central_Pr
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             if self.device.amIThisDevice(inDevice) {
-                self.resultsLabel.setText(inDevice.question.localizedVariant)
+                self.resultsLabel.setText((inDevice.question ?? "").localizedVariant)
             }
         }
     }

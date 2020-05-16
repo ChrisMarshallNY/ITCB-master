@@ -213,6 +213,8 @@ If we **really** wanted to get uptight about this, we would set up a [`CBPeriphe
 
 Finally, we actually ask the Peripheral to set the value of the "question" Characteristic to the question we are asking.
 
+***NOTE:*** *Note that the [`CBPeripheral.writeValue(_:,for:,type:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518747-writevalue) method is a **Peripheral** method; not a Characteristic method. As we will see, all Peripheral interactions, regardless of which attribute is being affected, go through the Peripheral object level.*
+
 #### Don't Forget Errors
 
 We do have a couple of quick tests for errors during this process. These are not likely to happen, but it's always a good idea to make sure we plan ahead.
@@ -302,4 +304,281 @@ The last two callbacks are the ones that are executed while the Central is askin
 
 ##### Write Confirmation
 
-Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`]()?
+Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L124)?
+
+In the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
+
+This sent the string (the question is a string) over to the Peripheral, telling it what Characteristic we wanted to modify.
+
+Assuming that went well, the Peripheral should respond* to our request, telling us that the write was successful. At that point, the question moves from an "interim" status to a "final" status (the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property is set).
+
+****NOTE:*** _There are two ways we can do a "write" with Bluetooth: [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse), and [`.withoutResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withoutresponse). These denote whether or not we can expect the Peripheral to acknowledge receipt of the write. **THIS CALLBACK WILL NOT HAPPEN UNLESS WE SEND THE WRITE AS [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse)**._
+
+We don't actually do much with this information. We'll show it to the user, when we display the results, but it is more of a demonstrative exercise.
+
+Below the Characteristic discovery callback, add the following code:
+
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
+        
+        guard let error = error else {
+            print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
+            if let questionString = _interimQuestion {
+                _interimQuestion = nil
+                question = questionString
+            } else {
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.peripheralError(nil)))
+            }
+            
+            return
+        }
+        
+        if let error = error as? CBATTError {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            switch error {
+            case CBATTError.unlikelyError:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
+
+            default:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
+            }
+        } else {
+            owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
+        }
+    }
+
+The first thing that we do, is invalidate the timeout. Remember that we set a timeout when we sent the question? Now that we are back, we don't need the timeout. There may be errors, but a timeout isn't one of them.
+
+The next thing we do, is look for the **absence** of an error. If there is none, then we can simply assume that the write was accepted, and set the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property to the interim question. We use a `guard` statement for this, with the `else { }` block being our "success" indicator.
+
+The rest of this method is looking for errors.
+
+***NOTE:*** *In device communications, error checking is vital! We are actually being quite "casual" about error checking, here, as I don't want to add too much "noise" to the lesson.*
+
+##### Receiving the Answer
+
+Finally, we need to get the answer from the Peripheral.
+
+I have chosen to use "Notify" as the method for the Peripheral to deliver its answer.
+
+There's two main ways to get the answer from the Peripheral: "Read" or "Notify".
+
+###### Read
+
+When we Read (using the [`CBPeripheral.readValue(for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518759-readvalue) method), the Central is in charge of the timing. It tells the Peripheral to update the Characteristic value *at the time the call is made*.
+
+###### Notify
+
+When we tell the Peripheral to set the Notify Flag on the Characteristic, we ask the Peripheral to let us know when it changes the value of that Characteristic.
+
+This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) method.
+
+**BOTH OF THESE METHODS WILL RESULT IN THE [`CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) CALLBACK BEING MADE**
+
+The difference is *when* the callback is made.
+
+I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above.
+
+So, finally, after the write confirmation callback, add the following code:
+
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
+        if let error = error {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        print("Characteristic \(characteristic.uuid.uuidString) Updated its value to \(String(describing: characteristic.value)).")
+        if  let answerData = characteristic.value,
+            let answerString = String(data: answerData, encoding: .utf8),
+            !answerString.isEmpty {
+            peripheral.setNotifyValue(false, for: characteristic)
+            answer = answerString
+        }
+    }
+
+As before, the first thing we do, is clear the timeout.
+
+Then, we check for errors, notifying the SDK user, and terminating the process if one is encountered.
+
+Finally, we get the new answer from the Characteristic.
+
+The answer will be in a [`Data`](https://developer.apple.com/documentation/foundation/data) format, so we need to convert that to a UTF-8 String, and set our ["`answer`"](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/Final-CompleteImplementation/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L136) variable to that. The ["`answer`"](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/Final-CompleteImplementation/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L136) property has a `didSet` observer that will notify the SDK user there is an answer:
+
+    public var answer: String! = nil {
+        didSet {
+            owner?._sendQuestionAnsweredMessageToAllObservers(device: self)
+        }
+    }
+
+
+So just setting the value is enough to let the SDK user know there is a new answer.
+
+## AND THAT'S IT
+
+We have now added all the code that was necessary to finalize the Central implementation of the Magic 8-Ball app.
+
+Try running an instance on the Mac, and run that as Peripheral Mode. Then, run the app on another device, and run that as Central Mode (in the case of Watch or TV, this will happen automatically. For iOS, you will need to select "Central").
+
+After a few seconds (sometimes, *quite* a few), you will see the name of your Mac show up in the Central list.
+
+If all has gone well, you can tap on that list row, and you can ask a question of the "Magic 8-Ball" device.
+
+## RECAP
+
+The `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file should now look more or less like this:
+
+    import CoreBluetooth
+
+    internal let _static_ITCB_SDK_8BallServiceUUID = CBUUID(string: "8E38140A-27BE-4090-8955-4FC4B5698D1E")
+    internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37D7A-F66A-47B9-A49C-FE29FD235A77")
+    internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
+
+    internal let _static_ITCB_SDK_RSSI_Min = -60
+    internal let _static_ITCB_SDK_RSSI_Max = -20
+
+    extension ITCB_SDK_Central {
+        override var _managerInstance: Any! {
+            get {
+                if super._managerInstance == nil {
+                    super._managerInstance = CBCentralManager(delegate: self, queue: nil)
+                }
+            
+                return super._managerInstance
+            }
+        
+            set {
+                super._managerInstance = newValue
+            }
+        }
+    }
+
+    extension ITCB_SDK_Central: CBCentralManagerDelegate {
+        public func centralManagerDidUpdateState(_ centralManager: CBCentralManager) {
+            if .poweredOn == centralManager.state {
+                print("Scanning for Peripherals")
+                centralManager.scanForPeripherals(withServices: [_static_ITCB_SDK_8BallServiceUUID], options: nil)
+            }
+        }
+
+        public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
+            if  !devices.contains(peripheral),
+                let peripheralName = peripheral.name,
+                !peripheralName.isEmpty,
+                (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
+                print("Peripheral Discovered: \(peripheralName), RSSI: \(rssi)")
+                devices.append(ITCB_SDK_Device_Peripheral(peripheral, owner: self))
+                print("Connecting to \(peripheralName).")
+                centralManager.connect(peripheral, options: nil)
+            }
+        }
+    
+        public func centralManager(_ centralManager: CBCentralManager, didConnect peripheral: CBPeripheral) {
+            print("Successfully Connected to \(peripheral.name ?? "ERROR").")
+            print("Discovering Services for \(peripheral.name ?? "ERROR").")
+            peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
+        }
+    }
+
+    extension ITCB_SDK_Device_Peripheral {
+        public func sendQuestion(_ inQuestion: String) {
+            question = nil
+            if  let data = inQuestion.data(using: .utf8),
+                let peripheral = _peerInstance as? CBPeripheral,
+                let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+                let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],
+                let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {
+                _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in
+                    self._timeoutTimer = nil
+                    self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
+                }
+                _interimQuestion = inQuestion
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            } else if inQuestion.data(using: .utf8) == nil {
+                print("Cannot send the question, because the question data is bad.")
+                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
+            } else {
+                print("Cannot send the question, because the Peripheral may be offline, or have other problems.")
+                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
+            }
+        }
+
+        public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+            if let error = error {
+                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+                _timeoutTimer?.invalidate()
+                _timeoutTimer = nil
+                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+                return
+            }
+            print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
+            peripheral.services?.forEach {
+                peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
+                                                    _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
+            }
+        }
+    
+        public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+            if let error = error {
+                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+                _timeoutTimer?.invalidate()
+                _timeoutTimer = nil
+                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+                return
+            }
+            print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
+            owner.peripheralServicesUpdated(self)
+        }
+    
+        public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+        
+            guard let error = error else {
+                print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
+                if let questionString = _interimQuestion {
+                    _interimQuestion = nil
+                    question = questionString
+                } else {
+                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.peripheralError(nil)))
+                }
+            
+                return
+            }
+        
+            if let error = error as? CBATTError {
+                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+                switch error {
+                case CBATTError.unlikelyError:
+                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
+
+                default:
+                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
+                }
+            } else {
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
+            }
+        }
+
+        public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            if let error = error {
+                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+                return
+            }
+            print("Characteristic \(characteristic.uuid.uuidString) Updated its value to \(String(describing: characteristic.value)).")
+            if  let answerData = characteristic.value,
+                let answerString = String(data: answerData, encoding: .utf8),
+                !answerString.isEmpty {
+                peripheral.setNotifyValue(false, for: characteristic)
+                answer = answerString
+            }
+        }
+    }
+
+Remember that we have removed comments, in order to reduce the vertical footprint of all this text.

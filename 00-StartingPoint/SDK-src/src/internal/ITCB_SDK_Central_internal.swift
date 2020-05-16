@@ -125,17 +125,15 @@ internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripher
     internal var _interimQuestion: String!
 
     /// The question property to conform to the protocol.
-    public var question: String! = nil {
+    public var question: String? = nil {
         didSet {
-            if nil != question {    // This is actually a little bit of a kludge. The app doesn't properly unchain the optional, but we don't want to make changes to the app.
-                owner?._sendSuccessInAskingMessageToAllObservers(device: self)
-            }
+            owner?._sendSuccessInAskingMessageToAllObservers(device: self)
         }
     }
 
     /// The answer property to conform to the protocol.
     /// We use this opportunity to let everyone know that the question has been answered.
-    public var answer: String! = nil {
+    public var answer: String? = nil {
         didSet {
             owner?._sendQuestionAnsweredMessageToAllObservers(device: self)
         }

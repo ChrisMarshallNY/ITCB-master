@@ -1,10 +1,24 @@
-//
-//  InterfaceController.swift
-//  Watch WatchKit Extension
-//
-//  Created by Chris Marshall on 2/11/20.
-//  Copyright © 2020 Little Green Viper Software Development LLC. All rights reserved.
-//
+/*
+© Copyright 2020, Little Green Viper Software Development LLC
+
+LICENSE:
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Little Green Viper Software Development LLC: https://littlegreenviper.com
+*/
 
 import WatchKit
 import Foundation
@@ -114,7 +128,7 @@ extension ITCB_Main_Central_Device_InterfaceController: ITCB_Observer_Central_Pr
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             if self.device.amIThisDevice(inDevice) {
-                self.resultsLabel.setText("\(inDevice.question.localizedVariant)\n•\n\(inDevice.answer.localizedVariant)")
+                self.resultsLabel.setText("\((inDevice.question ?? "").localizedVariant)\n•\n\((inDevice.answer ?? "").localizedVariant)")
             }
         }
     }
@@ -131,7 +145,7 @@ extension ITCB_Main_Central_Device_InterfaceController: ITCB_Observer_Central_Pr
         // Remember that the answer may come in on a non-main thread, so we need to make sure that all UI-touched code is accessed via the Main Thread.
         DispatchQueue.main.async {
             if self.device.amIThisDevice(inDevice) {
-                self.resultsLabel.setText(inDevice.question.localizedVariant)
+                self.resultsLabel.setText((inDevice.question ?? "").localizedVariant)
             }
         }
     }

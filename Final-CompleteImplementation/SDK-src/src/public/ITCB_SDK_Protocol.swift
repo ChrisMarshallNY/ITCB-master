@@ -214,13 +214,13 @@ public protocol ITCB_Device_Peripheral_Protocol: ITCB_Device_Protocol {
     /**
      This is any question that may have been asked. It can be nil.
      */
-    var question: String! { get }
+    var question: String? { get }
 
     /* ################################################################## */
     /**
      This is any answer that has been provided by this Peripheral. It can be nil.
      */
-    var answer: String! { get }
+    var answer: String? { get }
 
     /* ################################################################## */
     /**

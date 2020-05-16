@@ -131,34 +131,38 @@ extension ITCB_SDK_Device_Peripheral {
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
         _timeoutTimer = nil
-        if  nil == error {
+        
+        guard let error = error else {
             print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
             if let questionString = _interimQuestion {
+                _interimQuestion = nil
                 question = questionString
             } else {
                 owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.peripheralError(nil)))
             }
-        } else {
-            if let error = error as? CBATTError {
-                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-                switch error {
-                case CBATTError.unlikelyError:
-                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
+            
+            return
+        }
+        
+        if let error = error as? CBATTError {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            switch error {
+            case CBATTError.unlikelyError:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.questionPlease)))
 
-                default:
-                    owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
-                }
-            } else {
-                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
+            default:
+                owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_Errors.coreBluetooth(ITCB_RejectionReason.peripheralError(error))))
             }
+        } else {
+            owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
         }
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
@@ -166,8 +170,6 @@ extension ITCB_SDK_Device_Peripheral {
         if  let answerData = characteristic.value,
             let answerString = String(data: answerData, encoding: .utf8),
             !answerString.isEmpty {
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
             peripheral.setNotifyValue(false, for: characteristic)
             answer = answerString
         }
