@@ -174,13 +174,23 @@ It's also important to maintain **only one** reference to each of the instances.
 
 ##### The If Statement
 
-Now that **that** is out of the way, we see that the first line (`!devices.contains(peripheral)`) makes sure that we don't already know about the Peripheral. All Core Bluetooth classes derive from [`NSObject`](https://developer.apple.com/documentation/objectivec/nsobject), which means they are [`Equatable`](https://developer.apple.com/documentation/swift/equatable), and can be directly matched with a simple Array [`contains()`](https://developer.apple.com/documentation/swift/array/2945493-contains) method.
+Now that **that** is out of the way, let's walk through the `if...{}` statement, line by line.
 
-The second line (`let peripheralName = peripheral.name`) checks the name of the Peripheral, unwinds its optional, and sets that to a local context constant.
+###### `!devices.contains(peripheral)`
 
-The third line (`!peripheralName.isEmpty`) just makes sure that this name is valid (has a value). We need this name for display in our table.
+In the first line, we make sure that we don't already know about the Peripheral. All Core Bluetooth classes derive from [`NSObject`](https://developer.apple.com/documentation/objectivec/nsobject), which means they are [`Equatable`](https://developer.apple.com/documentation/swift/equatable), and can be directly matched with a simple Array [`contains()`](https://developer.apple.com/documentation/swift/array/2945493-contains) method.
 
-The last line (`(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue)`) makes sure that the signal strength of the Peripheral is within our acceptable range. Note that it is a "Closed" range, that includes the upper and lower bounds.
+###### `let peripheralName = peripheral.name`
+
+The second line checks the name of the Peripheral, unwinds its optional, and sets that to a local context constant.
+
+###### `!peripheralName.isEmpty`
+
+The third line just makes sure that this name is valid (has a value). We need this name for display in our table.
+
+###### `(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue)`
+
+The last line makes sure that the signal strength of the Peripheral is within our acceptable range. Note that it is a "Closed" range, that includes the upper and lower bounds.
 
 Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can add it to our collection.
 

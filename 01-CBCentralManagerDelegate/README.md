@@ -159,15 +159,25 @@ The first thing that we do, is clear the [`question`](https://github.com/LittleG
 
 We have another of our cascaded AND `if` statements. Let's go through it, line-by-line:
 
-First, we convert the String to a `Data` object (`let data = inQuestion.data(using: .utf8)`). If that fails, the whole shooting match goes down the tubes.
+###### `let data = inQuestion.data(using: .utf8)`
 
-Next, we unwind and cast the [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L198) property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance (`let peripheral = _peerInstance as? CBPeripheral`).
+First, we convert the String to a `Data` object If that fails, the whole shooting match goes down the tubes.
 
-Next, we use one of those constrained Array extensions that we mentioned earlier, to get the "Magic 8-Ball" Service from the Peripheral (`let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`).
+###### `let peripheral = _peerInstance as? CBPeripheral`
 
-Next, we do the same for the "question" Characteristic (`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`).
+Next, we unwind and cast the [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L198) property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance.
 
-And lastly, we do the same for the "answer" Characteristic (`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`).
+###### `let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`
+
+Next, we use one of those constrained Array extensions that we mentioned earlier, to get the "Magic 8-Ball" Service from the Peripheral.
+
+###### `let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`
+
+Next, we do the same for the "question" Characteristic.
+
+###### `let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`
+
+And lastly, we do the same for the "answer" Characteristic.
 
 ##### We Need to Set Our Own Timeout
 
