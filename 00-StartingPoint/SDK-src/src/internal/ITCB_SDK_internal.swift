@@ -180,7 +180,7 @@ internal class ITCB_SDK_Device: NSObject {
     internal var _peerInstance: CBPeer!
 
     /// This is a String, representing a unique UUID for this device.
-    public var uuid: String!
+    public var uuid: String?
     
     /* ################################################################## */
     /**

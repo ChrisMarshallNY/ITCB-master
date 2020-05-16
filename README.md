@@ -16,7 +16,7 @@ In your explorations, you'll discover that what we discuss today was "barely scr
 
 It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS. Each app will implement a common Bluetooth "SDK" framework.
 
-It is our hope that you can find great utility in this codebase in your own endeavors.
+It is our hope that this codebase can provide great utility in your own endeavors.
 
 *"A ship in harbor is safe, but that is not what ships are built for."*
 - John A. Shedd
@@ -27,7 +27,7 @@ Go forth, and explore. Bluetooth is an enormous topic, and promises great advent
 
 The application that we will use as a learning platform will be a Bluetooth expression of the famous [Mattel Magic 8-Ball toy](https://en.wikipedia.org/wiki/Magic_8-Ball).
 
-In order to understand the game completely, view the `README.md` file in the `Final-CompleteImplementation` directory, available in this directory. That file will have a detailed "walkthrough" of the app.
+In order to understand the game completely, view the `README.md` file in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
 
 At the start, we will have 4 applications that already function, but not completely. The goal of this exercise is to "fill in the blanks," and get the apps working properly.
 
@@ -49,13 +49,13 @@ All other files and directories will be left alone.
 
 ## REQUIREMENTS TO START
 
-Two Apple devices that we can access with Xcode, and run in debug mode.
+We should each have two Apple devices that we can access with Xcode, and run in debug mode.
 
 We will need to have at least one device that can act as a Peripheral. Since we are working on a Mac, we already have that. This means that the other device can be an iPhone, iPod, iPad, Watch or AppleTV, as long as the device is recent enough to support the current operating system. We can use another Mac, but double-Mac debugging can be a bit complex. We're probably best off having an iOS device as our other target (This also allows us to switch the roles of the devices).
 
 ## STEPS
 
-The lesson will proceed in two major steps, which will have "sub-steps." These major steps can be found in four directories:
+The lesson will proceed in two major steps, which will have "sub-steps." These major steps can be found in these directories:
 
 - `00-StartingPoint`
     This directory contains the "bald" starting point. No code has been added.
@@ -64,12 +64,14 @@ The lesson will proceed in two major steps, which will have "sub-steps." These m
 - `01-CBCentralManagerDelegate`
     This directory starts at the completion of the previous step, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
     
+These directories will contain the complete, running applications:
+    
 - `02-CBPeripheralDelegate`
-    This directory just contains the final implementation, including the Peripheral delegate callbacks.
+    This directory just contains the final implementation, including the Peripheral delegate callbacks. It is sparse, and not LINTed.
     
 - `Final-CompleteImplementation`
     This directory is a "ship-ready" implementation of the project, with full source code documentation and LINTing.
     
 ## LET'S GET STARTED
 
-To begin, simply open the `00-StartingPoint` directory, in this directory, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
+To begin, simply open the `00-StartingPoint` directory, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.

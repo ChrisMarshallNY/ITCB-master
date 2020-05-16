@@ -46,7 +46,7 @@ You should see something like this:
         }
 
         public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-            if  !devices.contains(peripheral),
+            if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
                 let peripheralName = peripheral.name,
                 !peripheralName.isEmpty,
                 (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
@@ -464,7 +464,7 @@ The `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file sh
         }
 
         public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-            if  !devices.contains(peripheral),
+            if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
                 let peripheralName = peripheral.name,
                 !peripheralName.isEmpty,
                 (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {

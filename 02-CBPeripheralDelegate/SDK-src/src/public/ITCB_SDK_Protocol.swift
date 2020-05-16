@@ -153,6 +153,12 @@ public protocol ITCB_SDK_Peripheral_Protocol: ITCB_SDK_Protocol {
 public protocol ITCB_Device_Protocol {
     /* ################################################################## */
     /**
+     This is a unique ID for the device.
+     */
+    var uuid: String? { get }
+    
+    /* ################################################################## */
+    /**
      This is the device name.
      */
     var name: String { get }

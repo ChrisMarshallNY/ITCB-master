@@ -1,10 +1,8 @@
 ## STARTING POINT (`00-StartingPoint`)
 
-The MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
+None of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
 
-None of the applications will operate correctly as Bluetooth Centrals ("Question Askers").
-
-We will add the Central functionality, and complete the "Magic 8-Ball" game.
+We will add the Central functionality to all the apps, and complete the "Magic 8-Ball" game. We will do this by completing the SDK, which is common to all the apps.
 
 In the first step, we will add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
 
@@ -14,7 +12,7 @@ By the end of this step, the apps will still not operate completely, but we will
 
 If you haven't already, open the `ITCB.xcworkspace` workspace with Xcode, and use the Project navigator to select the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file.
 
-This will be all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
+The following code is be all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
 
     import CoreBluetooth
 
@@ -31,14 +29,22 @@ These are the bare minimum to allow the SDK to compile and operate in Peripheral
 
 Those three [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)s are the unique identifiers that we are using to denote the special Service and the two Characteristics that we use for our "magic 8-ball" game. They were generated using the following technique:
 
+### Command Line
+
 Simply start Terminal, and enter "[`uuidgen`](https://www.freebsd.org/cgi/man.cgi?query=uuidgen&sektion=1&manpath=freebsd-release-ports)", followed by a carriage return.
 
     $ uuidgen
     8E38140A-27BE-4090-8955-4FC4B5698D1E
-    
+
+[`uuidgen`](https://www.freebsd.org/cgi/man.cgi?query=uuidgen&sektion=1&manpath=freebsd-release-ports) is a built-in UUID generator, and we can use it to create unique identifiers for our attributes. The devices, themselves, will already have their own UUIDs.
+
+### UUID-Generator Web Site
+
 You can also use a UUID-generator Web site, [like this one](https://www.uuidgenerator.net/).
 
-And then this code:
+### The Empty [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L35) Method
+
+This code:
 
     extension ITCB_SDK_Device_Peripheral {
         func sendQuestion(_ question: String) { }
@@ -60,7 +66,7 @@ This means that we'll be doing a couple of things:
 
     That property is "typeless," so it will need to be cast, in order to be useful in the future.
 
-    It is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing any Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
+    It is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
     
     It should also be noted that this is a **strong** reference. This is important. The `CB`*`XXX`*`Manager` instance needs to be kept around, after instantiation.
 
@@ -147,7 +153,7 @@ These define a signal strength "window," describing a range of signal strength t
 Now that we are scanning for devices, we need to be able to react to their discovery, so we will now add the following callback inside the extension we just made, and just after the [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method:
 
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-        if  !devices.contains(peripheral),
+        if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
             let peripheralName = peripheral.name,
             !peripheralName.isEmpty,
             (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
@@ -164,9 +170,9 @@ Let's walk through this vetting:
 
 ##### The [`devices`](https://github.com/LittleGreenViper/ITCB/blob/12b54e2b7d34672e4c72acb6058c196009a93876/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L141) Array
 
-This is an Array property of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/12b54e2b7d34672e4c72acb6058c196009a93876/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L124) class, and its job is to maintain references to discovered devices.
+This is an Array property of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/12b54e2b7d34672e4c72acb6058c196009a93876/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L124) class, and its job is to maintain references to discovered devices. We store the devices as instances of the [`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/13d16abd3d37d80a10675b7f93aecc379cb34f1f/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114) class, which is a "wrapper" for our devices.
 
-Like the [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L104) property, it's important for us to maintain **strong** references to discovered Peripherals. Otherwise, they will be deallocated immediately upon leaving this callback.
+Like the [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L104) property, it's important for us to maintain **strong** references to these wrappers (which, in turn, have their [own strong references](https://github.com/LittleGreenViper/ITCB/blob/13d16abd3d37d80a10675b7f93aecc379cb34f1f/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L142) to the Peripheral instance). Otherwise, they will be deallocated immediately upon leaving this callback.
 
 It's also important to maintain **only one** reference to each of the instances.
 
@@ -176,9 +182,9 @@ It's also important to maintain **only one** reference to each of the instances.
 
 Now that **that** is out of the way, let's walk through the `if...{}` statement, line by line.
 
-###### `!devices.contains(peripheral)`
+###### `!devices.contains(where: { $0.uuid == peripheral.identifier.uuidString })`
 
-In the first line, we make sure that we don't already know about the Peripheral. All Core Bluetooth classes derive from [`NSObject`](https://developer.apple.com/documentation/objectivec/nsobject), which means they are [`Equatable`](https://developer.apple.com/documentation/swift/equatable), and can be directly matched with a simple Array [`contains()`](https://developer.apple.com/documentation/swift/array/2945493-contains) method.
+In the first line, we make sure that we don't already know about the Peripheral. We use the closure-based version of the [`Array.contains(_:)`](https://developer.apple.com/documentation/swift/array/2297359-contains) method, because we need to extract the UUID of each device from its "wrapper" instance.
 
 ###### `let peripheralName = peripheral.name`
 
@@ -271,7 +277,7 @@ At this point, we have added the following code to the `ITCB/src/Shared/internal
         }
     
         public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
-            if  !devices.contains(peripheral),
+            if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
                 let peripheralName = peripheral.name,
                 !peripheralName.isEmpty,
                 (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) {
@@ -293,4 +299,4 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 ## NEXT STEP
 
-Open the `01-CBCentralManagerDelegate` directory in the parent directory, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
+Go back to the parent directory, and open the `01-CBCentralManagerDelegate` directory, then, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.

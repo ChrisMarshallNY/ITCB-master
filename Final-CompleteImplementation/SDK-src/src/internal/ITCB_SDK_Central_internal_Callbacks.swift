@@ -88,7 +88,7 @@ extension ITCB_SDK_Central: CBCentralManagerDelegate {
      */
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
         assert(centralManager === managerInstance)    // Make sure that we are who we say we are...
-        if  !devices.contains(peripheral),            // Make sure that we don't already have this peripheral.
+        if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),            // Make sure that we don't already have this peripheral.
             let peripheralName = peripheral.name,     // And that it is a legit Peripheral (has a name).
             !peripheralName.isEmpty,
             (_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue) { // and that we have a signal within the acceptable range.

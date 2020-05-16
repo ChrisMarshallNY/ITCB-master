@@ -145,7 +145,7 @@ internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripher
     }
     
     /// We override the uuid property in order to get the UUID from the peripheral.
-    internal override var uuid: String? {
+    public override var uuid: String? {
         get {
             if nil == super.uuid || (super.uuid?.isEmpty ?? false) {
                 super.uuid = peripheralDeviceInstance?.identifier.uuidString
