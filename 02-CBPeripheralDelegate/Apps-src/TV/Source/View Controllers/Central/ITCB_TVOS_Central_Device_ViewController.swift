@@ -169,7 +169,7 @@ extension ITCB_TVOS_Central_Device_ViewController: ITCB_Observer_Central_Protoco
      - parameter sdk: The SDK instance that experienced the error.
      */
     func errorOccurred(_ inError: ITCB_Errors, sdk inSDKInstance: ITCB_SDK_Protocol) {
-        displayAlert(header: "SLUG-ERROR", message: inError.localizedDescription)
+        displayAlert(header: "SLUG-ERROR".localizedVariant, message: (ITCB_AppDelegate.unwindErrorReport(inError) ?? inError.localizedDescription).localizedVariant)
         DispatchQueue.main.async {
             self.resultsTextView.text += "\n•\n\("SLUG-ERROR".localizedVariant)"
             self.questionTextChanged()  // Possibly re-enables the send button.
