@@ -125,31 +125,9 @@ extension ITCB_SDK_Device_Peripheral {
             return
         }
         print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
-        if _characteristicInstances.isEmpty {
-            _characteristicInstances = service.characteristics ?? []
-            owner.peripheralServicesUpdated(self)
-        }
+        owner.peripheralServicesUpdated(self)
     }
     
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let error = error {
-            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
-            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
-            return
-        }
-        print("Characteristic \(characteristic.uuid.uuidString) Updated its value to \(String(describing: characteristic.value)).")
-        if  let answerData = characteristic.value,
-            let answerString = String(data: answerData, encoding: .utf8),
-            !answerString.isEmpty {
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
-            peripheral.setNotifyValue(false, for: characteristic)
-            answer = answerString
-        }
-    }
-
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
         _timeoutTimer = nil
@@ -173,6 +151,25 @@ extension ITCB_SDK_Device_Peripheral {
             } else {
                 owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
             }
+        }
+    }
+
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let error = error {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        print("Characteristic \(characteristic.uuid.uuidString) Updated its value to \(String(describing: characteristic.value)).")
+        if  let answerData = characteristic.value,
+            let answerString = String(data: answerData, encoding: .utf8),
+            !answerString.isEmpty {
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            peripheral.setNotifyValue(false, for: characteristic)
+            answer = answerString
         }
     }
 }

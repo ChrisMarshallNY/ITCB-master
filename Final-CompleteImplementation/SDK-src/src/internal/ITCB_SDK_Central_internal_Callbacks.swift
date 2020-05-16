@@ -183,39 +183,9 @@ extension ITCB_SDK_Device_Peripheral {
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
-        if _characteristicInstances.isEmpty {   // Make sure that we didn't already pick up the Characteristics (This can be called multiple times).
-            _characteristicInstances = service.characteristics ?? []
-            owner.peripheralServicesUpdated(self)
-        }
+        owner.peripheralServicesUpdated(self)
     }
     
-    /* ################################################################## */
-    /**
-     Called when the Peripheral updates a Characteristic (the Answer).
-     The characteristic.value field can be considered valid.
-     
-     - parameter peripheral: The Peripheral object that discovered (and now contains) the Services.
-     - parameter didUpdateValueFor: The Characteristic that was updated.
-     - parameter error: Any errors that may have occurred. It may be nil.
-     */
-    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        // If we suffered an error, we simply report it, and stop caring.
-        if let error = error {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
-            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
-            return
-        }
-        if  let answerData = characteristic.value,
-            let answerString = String(data: answerData, encoding: .utf8),
-            !answerString.isEmpty {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
-            peripheral.setNotifyValue(false, for: characteristic)
-            answer = answerString
-        }
-    }
-
     /* ################################################################## */
     /**
      Called when the Peripheral updates a Characteristic that we wanted written (the Question).
@@ -250,6 +220,33 @@ extension ITCB_SDK_Device_Peripheral {
             } else {
                 owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
             }
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Called when the Peripheral updates a Characteristic (the Answer).
+     The characteristic.value field can be considered valid.
+     
+     - parameter peripheral: The Peripheral object that discovered (and now contains) the Services.
+     - parameter didUpdateValueFor: The Characteristic that was updated.
+     - parameter error: Any errors that may have occurred. It may be nil.
+     */
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        // If we suffered an error, we simply report it, and stop caring.
+        if let error = error {
+            _timeoutTimer?.invalidate()  // Stop our timeout timer.
+            _timeoutTimer = nil
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        if  let answerData = characteristic.value,
+            let answerString = String(data: answerData, encoding: .utf8),
+            !answerString.isEmpty {
+            _timeoutTimer?.invalidate()  // Stop our timeout timer.
+            _timeoutTimer = nil
+            peripheral.setNotifyValue(false, for: characteristic)
+            answer = answerString
         }
     }
 }

@@ -94,7 +94,7 @@ We "ask a question" by setting the value of one of the two Characteristics to th
 
 Except we don't actually "set" the value. Instead, *we send the new value to the Peripheral, and ask it to make it the new value of the Characteristic*. That's The Way of The Bluetooth. The Peripheral is always in charge of its state.
 
-##### An "Evil" Little Swift Trick
+##### A Cool Little Swift Trick
 
 Another thing that we did before we got here, was [this little "hack"](https://github.com/LittleGreenViper/ITCB/blob/af31419bea3f5dfb33ff4601aaffe4b719357f37/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L141) (It's not actually a "hack." It's the way we do stuff in Swift):
 
@@ -236,3 +236,70 @@ You didn't see it, but when we instantiated our internal [`ITCB_SDK_Device_Perip
 So that means that the last thing the Central did, was tell the Peripheral to discover its Services, and report the results to its delegate.
 
 ***NOTE:*** *We should be aware that a Peripheral won't automatically "know" which Services (and Characteristics, and so on) it has, until after it has "discovered" them, at the behest of the Central. Most Bluetooth entities are like this.*
+
+##### Service Discovery
+
+Once Services are discovered, they are reported as "discovered in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
+
+Services are reported as discovered *en masse*. One call to [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) is matched by a callback to [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral), and the Peripheral's [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array now has all the discovered Services. Prior to that, the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array was undefined (either `nil`, or with "stale" data).
+
+The original Service discovery request filtered for our "Magic 8-Ball" Service, so we should expect the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array to have just one member. Nevertheless, we treat it as if it has many members.
+
+So, at this point, we should add the following code, just below the `sendQuestion(-:)` method code:
+
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        if let error = error {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
+        peripheral.services?.forEach {
+            peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
+                                                _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
+        }
+    }
+
+The first thing that we do, is check for an error. If there was one, we report it, and terminate the discovery.
+
+If there was no error, we then apply a visitor to each of the discovered Services, and ask the Peripheral to discover its Characteristics, by calling the [`CBPeripheral.discoverCharacteristics(_:,for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518797-discovercharacteristics) method.
+
+In this discovery request, we filter for our two Characteristic types ("question" and "answer").
+
+***NOTE:*** *Take note that we are calling the **Peripheral** to discover the Characteristics, not the Service. This is where Core Bluetooth gets a bit "odd." It does not directly interact with the Services, Characteristics or Descriptors. Instead, it asks the Peripheral to do all the work, on behalf of its attributes.*
+
+##### Characteristic Discovery
+
+Now that we have discovered the Service and asked the Peripheral to perform a discovery on that Service for its two Characteristics, we should set up a callback to "catch" the Characteristic discovery.
+
+Like the Service discovery callback, the results are "atomic." All Characteristics will be discovered at once. The Characteristic discovery callback is very similar to the Service discovery callback.
+
+Just below the Service discovery callback, add the following code:
+
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if let error = error {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
+        owner.peripheralServicesUpdated(self)
+    }
+
+Like we did with the Service discovery callback, the first thing we do is check for errors.
+
+After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback), and we inform our "owner" (the Central Manager) that we have discovered everything, and that it can inform the SDK user that the Peripheral is ready to answer questions.
+
+At this point, the Peripheral is ready. It is connected to the Central, and is no longer advertising. The Peripheral knows about its "Magic 8-Ball" Service, and that Service knows about its two Characteristics ("question" and "answer").
+
+#### Interaction Callbacks
+
+The last two callbacks are the ones that are executed while the Central is asking questions, and the Peripheral is answering them.
+
+##### Write Confirmation
+
+Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`]()?

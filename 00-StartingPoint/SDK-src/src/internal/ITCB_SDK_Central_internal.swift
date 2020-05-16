@@ -121,9 +121,6 @@ internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripher
     /// The Timer instance that is created when we start an interaction. This will handle a timeout.
     internal var _timeoutTimer: Timer!
     
-    /// We use this to maintain strong references to discovered Characteristics.
-    internal var _characteristicInstances: [CBCharacteristic] = []
-    
     /// This is a "holding tank" for the question. We put it in here, until we get confirmation that it was delivered.
     internal var _interimQuestion: String!
 
