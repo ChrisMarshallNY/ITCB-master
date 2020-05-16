@@ -6,7 +6,7 @@ Welcome to try! Swift World!
 
 This is a ***VERY*** quick introduction to Core Bluetooth.
 
-We only have a couple of hours, so the lesson will be highly constrained, and has been carefully designed to give a good idea of how to access the most useful parts of Core Bluetooth, and "prime the pump" for further exploration.
+We only have a couple of hours, so the lesson will be highly constrained. It has been carefully designed to give a good idea of how to access the most useful parts of Core Bluetooth, and "prime the pump" for further exploration.
 
 ## THIS LESSON IS A "KEEPER"
 
@@ -14,7 +14,7 @@ The lesson has been designed as a "legacy." Once we're done, you will have a cod
 
 In your explorations, you'll discover that what we discuss today was "barely scratching the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation.
 
-It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS; each, implementing a common Bluetooth "SDK" framework.
+It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS. Each app will implement a common Bluetooth "SDK" framework.
 
 It is our hope that you can find great utility in this codebase in your own endeavors.
 
