@@ -50,7 +50,7 @@ Thse versions are:
 
 They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: Only Mac OS and iOS/iPadOS support "Peripheral Mode," so Watch and TV will not have this functionality.
 
-We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](); filling it in as we proceed.
+We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
 
 All other files and directories will be left alone.
 

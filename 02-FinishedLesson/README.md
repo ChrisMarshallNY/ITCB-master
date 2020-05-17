@@ -1,6 +1,6 @@
 ## EXERCISE COMPLETE (`02-FinishedLesson`)
 
-This step simply displays the completed [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`]() file.
+This step simply displays the completed [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
 
 At this point, you should be able to build and run any of the apps (remember that they need to be run **on the device**. Simulators won't work, for Bluetooth).
 
