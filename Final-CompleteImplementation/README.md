@@ -2,7 +2,6 @@
 
 # CORE BLUETOOTH EXAMPLE PROJECT
 
-
 This is a repo that will accompany a class on introduction to Core Bluetooth.
 
 ## STRUCTURE

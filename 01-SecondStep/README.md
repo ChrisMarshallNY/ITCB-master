@@ -1,4 +1,4 @@
-## CENTRAL DELEGATE COMPLETE (`01-InitialCentral`)
+## PERIPHERAL DELEGATE IMPLEMENTATION (`01-SecondStep`)
 
 At this point, we have completed the Central discovery and connection phases. Those were handled by [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate).
 
@@ -82,21 +82,19 @@ Just assume that we are between those two brackets, and we don't need to worry a
 
 ## ON TO CODING
 
-### STEP ONE: Fill Out the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L82) method.
+### STEP ONE: Fill Out the [`sendQuestion(_:)`]() method.
 
 #### FIRST, the Backstory
 
 Remember that local instances of [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) are *not actual one-to-one connections to remote devices*. They are a lot more akin to a "local directory" of the device, holding the "last known state" of the device, and information about its capabilities and data, along with directions for contacting the Peripheral.
 
-##### We Have to Remove Our Hat, and Politely Ask the Peripheral to Set A Value
+##### We Have to Politely Ask the Peripheral to Set A Value
 
-We "ask a question" by setting the value of one of the two Characteristics to the question (the value of the Characteristic is a simple string).
-
-Except we don't actually "set" the value. Instead, *we send the new value to the Peripheral, and ask it to make it the new value of the Characteristic*. That's The Way of The Bluetooth. The Peripheral is always in charge of its state.
+We don't actually "set" the value of the "question" Characteristic. Instead, *we send the new value to the Peripheral, and ask it to make it the new value of the Characteristic*. That's The Way of Bluetooth. The Peripheral is always in charge of its state.
 
 ##### A Cool Little Swift Trick
 
-Another thing that we did before we got here, was [this little "hack"](https://github.com/LittleGreenViper/ITCB/blob/af31419bea3f5dfb33ff4601aaffe4b719357f37/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L141) (It's not actually a "hack." It's the way we do stuff in Swift):
+Another thing that we did before we got here, was [this little "hack"]() (It's not actually a "hack." It's the way we do stuff in Swift):
 
     extension Array where Element: CBAttribute {
         public subscript(_ inUUIDString: String) -> Element! {
@@ -114,9 +112,11 @@ What we did, was add a subscript that accepts a String as its argument, and then
 
 Basically, it treats the Array like a `[String: CBAttribute]` Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using `CBUUID` Strings.
 
-We also have a cached "[`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213)" property (I normally advise against caching Bluetooth values, but this is really the best way to do this, while keeping this code simple). This will hold our outgoing question String.
+We also have a cached "[`question`]()" property (I normally advise against caching Bluetooth values, but this is really the best way to do this, while keeping this code simple). This will hold our outgoing question String.
 
-And finally, we have a stored property called [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L198), which holds a strong reference to either a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) or a [`CBCentral`](https://developer.apple.com/documentation/corebluetooth/cbcentral) (when operating in Peripheral Mode).
+***NOTE:*** *We don't actually set this until after the Peripheral has confirmed receipt of the string.*
+
+And finally, we have a stored property called [`_peerInstance`](), which holds a strong reference to either a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) or a [`CBCentral`](https://developer.apple.com/documentation/corebluetooth/cbcentral) (when operating in Peripheral Mode).
 
 Note that this is a **strong** reference. We need it to be so, because this will hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
 
@@ -156,7 +156,7 @@ with this:
 
 That's quite a handful, eh? Let's walk through it.
 
-The first thing that we do, is clear the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property. It will only hold the question *after* it has been accepted by the Peripheral.
+The first thing that we do, is clear the [`question`]() property. It will only hold the question *after* it has been accepted by the Peripheral.
 
 ##### That Intricate `if... {}` Statement
 
@@ -164,11 +164,11 @@ We have another of our cascaded AND `if` statements. Let's go through it, line-b
 
 ###### `let data = inQuestion.data(using: .utf8)`
 
-First, we convert the String to a `Data` object If that fails, the whole shooting match goes down the tubes.
+First, we convert the String to a `Data` object. If that fails, the whole shooting match goes down the tubes.
 
 ###### `let peripheral = _peerInstance as? CBPeripheral`
 
-Next, we unwind and cast the [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_internal.swift#L198) property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance.
+Next, we unwrap and cast the [`_peerInstance`]() property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance.
 
 ###### `let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`
 
@@ -190,21 +190,21 @@ In reality, we should have set a timeout for the connection, as well, but I want
 
 Our timeout is a very simple "one-shot" timer that notifies all the observers of the SDK (beyond the scope of this demo) that there's been a timeout.
 
-The timeout timer is maintained in the [`_timeoutTimer`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L121) property.
+The timeout timer is maintained in the [`_timeoutTimer`]() property.
 
-The timeout duration is defined in the [`_timeoutLengthInSeconds`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L115) constant.
+The timeout duration is defined in the [`_timeoutLengthInSeconds`]() constant.
 
 So the first thing that we do, when we send a question, is establish a 1-second timeout. When we are notified that the question was successfully asked, the timeout is invalidated, and set to `nil`.
 
 ##### We Need to Stash Our Question Until We Know It Was Asked, and the Peripheral is Ready to Answer
 
-Next, we set the question being asked into an instance property called [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L127).
+Next, we set the question being asked into an instance property called [`_interimQuestion`]().
 
 This is a "staging area" for the question.
 
 Remember how we don't actually change the value of a Characteristic; instead, asking the Peripheral to do it on our behalf?
 
-We can't change the actual [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) stored property, until we've been informed that the Peripheral has acceded to our demand, so we "stash" it here.
+We can't change the actual [`question`]() stored property, until we've been informed that the Peripheral has acceded to our demand, so we "stash" it here.
 
 Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", if it is not already notifying. If so, we need to hold off asking the question until then.
 
@@ -236,15 +236,15 @@ If you remember from the first step, the last thing that the Central Manager did
 
 That hands the baton over to the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate).
 
-You didn't see it, but when we instantiated our internal [`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114) instance, it set itself up as the delegate for the new Peripheral instance, which means that it will "catch" all the callbacks, going forward. It did that in the [`init()`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L192) initializer.
+You didn't see it, but when we instantiated our internal [`ITCB_SDK_Device_Peripheral`]() instance, it set itself up as the delegate for the new Peripheral instance, which means that it will "catch" all the callbacks, going forward. It did that in the [`init()`]() initializer.
 
-So that means that the last thing the Central did, was tell the Peripheral to discover its Services, and report the results to its delegate.
+So that means that the last thing the Central did, was tell the newly-created Peripheral to discover its Services, and report the results to its new delegate.
 
 ***NOTE:*** *We should be aware that a Peripheral won't automatically "know" which Services (and Characteristics, and so on) it has, until after it has "discovered" them, at the behest of the Central. Most Bluetooth entities are like this.*
 
 ##### Service Discovery
 
-Once Services are discovered, they are reported as "discovered in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
+Once Services are discovered, they are reported as "discovered" in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
 
 Services are reported as discovered *en masse*. One call to [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) is matched by a callback to [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral), and the Peripheral's [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array now has all the discovered Services. Prior to that, the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array was undefined (either `nil`, or with "stale" data).
 
@@ -266,6 +266,8 @@ So, at this point, we should add the following code, just below the `sendQuestio
                                                 _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
         }
     }
+
+This is [the Services discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral).
 
 The first thing that we do, is check for an error. If there was one, we report it, and terminate the discovery.
 
@@ -295,6 +297,8 @@ Just below the Service discovery callback, add the following code:
         owner.peripheralServicesUpdated(self)
     }
 
+This is [the Characteristics discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral).
+
 Like we did with the Service discovery callback, the first thing we do is check for errors.
 
 After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback). We then inform our "owner" (the Central Manager) that we have discovered everything, and that it can tell the SDK user that the Peripheral is ready to answer questions.
@@ -315,7 +319,7 @@ When we Read (using the [`CBPeripheral.readValue(for:)`](https://developer.apple
 
 ###### Notify
 
-When we tell the Peripheral to set the Notify Flag on the Characteristic, we ask the Peripheral to let us know when it changes the value of that Characteristic.
+If we tell the Peripheral to set the Notify Flag on the "answer" Characteristic, we are asking the Peripheral to let us know whenever the value of the "answer" Characteristic changes.
 
 This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) method.
 
@@ -323,7 +327,7 @@ This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://de
 
 The difference is *when* the callback is made.
 
-I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above.
+I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`]() method, above.
 
 ##### Notification
 
@@ -347,25 +351,27 @@ Below the Characteristic discovery callback, add the following code:
         }
     }
 
-This responds to the "answer" Characteristic having its notification state changed.
+This [callback responds to the "answer" Characteristic having its notification state changed](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518768-peripheral).
 
 As before, the first thing we do, is check for errors, and respond, if there are any.
 
-After that, we examine the "answer" Characteristic, and see if its notification is on.
+Then we extract the question from the interim question, and create a Data object from that.
 
-If so, we then make a write request, with the interim question, sending the request for the "question" Characteristic.
+After that, we examine the "answer" Characteristic, and see if its notification is already on.
+
+If so, we then just make a write request, with the interim question, sending the request for the "question" Characteristic.
 
 ##### Write Confirmation
 
 Now that the write has been made, we need to make sure it took.
 
-Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L124)?
+Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`]()?
 
-In the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
+In the [`sendQuestion(_:)`]() method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
 
 This sent the string (the question is a string) over to the Peripheral, telling it what Characteristic we wanted to modify.
 
-Assuming that went well, the Peripheral should respond* to our request, telling us that the write was successful. At that point, the question moves from an "interim" status to a "final" status (the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property is set).
+Assuming that went well, the Peripheral should respond* to our request, telling us that the write was successful. At that point, the question moves from an "interim" status to a "final" status (the [`question`]() property is set).
 
 ****NOTE:*** _There are two ways we can do a "write" with Bluetooth: [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse), and [`.withoutResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withoutresponse). These denote whether or not we can expect the Peripheral to acknowledge receipt of the write. **THIS CALLBACK WILL NOT HAPPEN UNLESS WE SEND THE WRITE AS [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse)**._
 
@@ -403,10 +409,13 @@ Below the Notification Change callback, add the following code:
         }
     }
 
+This is [the write confirmation callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518823-peripheral).
+
+***NOTE:*** *At this point, even though we have received confirmation of the write, **the [`CBCharacteristic.value`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/1518878-value) property is not valid!**. The only valid instance we have of the value that we sent is in [`_interimQuestion`](). If we want to have a valid value, then we need to [send a read request to the Peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518759-readvalue), and wait for it to set that property.*
 
 The first thing that we do, is invalidate the timeout. Remember that we set a timeout when we sent the question? Now that we are back, we don't need the timeout. There may be errors, but a timeout isn't one of them.
 
-The next thing we do, is look for the **absence** of an error. If there is none, then we can simply assume that the write was accepted, and set the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property to the interim question. We use a `guard` statement for this, with the `else { }` block being our "success" indicator.
+The next thing we do, is look for the **absence** of an error. If there is none, then we can simply assume that the write was accepted, and set the [`question`]() property to the interim question. We use a `guard` statement for this, with the `else { }` block being our "success" indicator.
 
 The rest of this method is looking for errors.
 
@@ -414,9 +423,9 @@ The rest of this method is looking for errors.
 
 ##### Receiving the Answer
 
-Finally, we need to get the answer from the Peripheral.
+Lastly, we need to get the answer from the Peripheral.
 
-So, finally, after the write confirmation callback, add the following code:
+After the write confirmation callback method, add the following code:
 
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
@@ -435,13 +444,15 @@ So, finally, after the write confirmation callback, add the following code:
         }
     }
 
+This is [the value updated callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) (made when the value of the "answer" Characteristic has been updated).
+
 As before, the first thing we do, is clear the timeout.
 
 Then, we check for errors, notifying the SDK user, and terminating the process if one is encountered.
 
 Finally, we get the new answer from the Characteristic.
 
-The answer will be in a [`Data`](https://developer.apple.com/documentation/foundation/data) format, so we need to convert that to a UTF-8 String, and set our ["`answer`"](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/Final-CompleteImplementation/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L136) variable to that. The ["`answer`"](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/Final-CompleteImplementation/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L136) property has a `didSet` observer that will notify the SDK user there is an answer:
+The answer will be in a [`Data`](https://developer.apple.com/documentation/foundation/data) format, so we need to convert that to a UTF-8 String, and set our ["`answer`"]() variable to that. The ["`answer`"]() property has a `didSet` observer that will notify the SDK user there is an answer:
 
     public var answer: String! = nil {
         didSet {
@@ -460,11 +471,11 @@ Try running an instance on the Mac, and run that as Peripheral Mode. Then, run t
 
 After a few seconds (sometimes, *quite* a few), you will see the name of your Mac show up in the Central list.
 
-If all has gone well, you can tap on that list row, and you can ask a question of the "Magic 8-Ball" device.
+If all has gone well, you can tap on that list row, ask a question of the "Magic 8-Ball" device, and get a randomly-selected answer. The Mac will display the question that it received, and the answer it sent, in a modal alert.
 
 ## RECAP
 
-The `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file should now look more or less like this:
+The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`]() file should now look more or less like this:
 
     import CoreBluetooth
 
