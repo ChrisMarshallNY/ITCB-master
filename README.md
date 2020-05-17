@@ -68,12 +68,12 @@ The lesson will proceed in two major steps, which will have "sub-steps." These m
     This directory contains the "bald" starting point. No code has been added.
     It walks through the process of adding [CBCentralManagerDelegate](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and starting the process by discovering devices and their Services and Peripherals.
     
-- `01-CBCentralManagerDelegate`
+- `01-SecondStep`
     This directory starts at the completion of the previous step, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
     
 These directories will contain the complete, running applications:
     
-- `02-CBPeripheralDelegate`
+- `02-FinishedLesson`
     This directory just contains the final implementation, including the Peripheral delegate callbacks. It is sparse, and not LINTed.
     
 - `Final-CompleteImplementation`

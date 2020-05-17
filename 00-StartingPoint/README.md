@@ -301,4 +301,4 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 ## NEXT STEP
 
-Go back to the main lesson, and open the `01-CBCentralManagerDelegate` directory, then, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
+Go back to the main lesson, and open the `01-SecondStep` directory, then, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
