@@ -12,7 +12,7 @@ We only have a couple of hours, so the lesson will be highly constrained. It has
 
 The lesson has been designed as a "legacy." Once we're done, you will have a codebase of exceedingly well-documented Swift code at your disposal, so you can further explore Core Bluetooth.
 
-In your explorations, you'll discover that what we discuss today was "barely scratching the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation.
+In your explorations, you'll discover that what we discuss today "barely scratches the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation.
 
 It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS. Each app will implement a common Bluetooth "SDK" framework.
 
@@ -41,9 +41,16 @@ The apps are fully operational, and at "release quality." They are not "casual s
 
 Each app imports its own expression of [the Cocoa Application Layer](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/CocoaApplicationLayer/CocoaApplicationLayer.html), and is a fairly simple "basic" application that relies on [Interface Builder](https://developer.apple.com/xcode/interface-builder/). They are each aimed at the current major revision of the operating system to which they are targeted.
 
+Thse versions are:
+
+- [Mac OS X](https://apple.com/macos): 10.15 (Catalina), or above
+- [iOS](https://apple.com/ios)/[iPadOS](https://apple.com/ipados): 13.0, or above
+- [tvOS](https://apple.com/tvos): 13.0, or above
+- [WatchOS](https://apple.com/watchos): 6.0, or above
+
 They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: Only Mac OS and iOS/iPadOS support "Peripheral Mode," so Watch and TV will not have this functionality.
 
-We will work with one single SDK file throughout the entire exercise, `SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`; filling it in as we proceed.
+We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](); filling it in as we proceed.
 
 All other files and directories will be left alone.
 
