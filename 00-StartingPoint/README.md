@@ -1,18 +1,20 @@
-## STARTING POINT (`00-StartingPoint`)
+## CREATING A CENTRAL MANAGER/DELEGATE (`00-StartingPoint`)
 
-None of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
+At this point, none of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
 
-We will add the Central functionality to all the apps, and complete the "Magic 8-Ball" game. We will do this by completing the SDK, which is common to all the apps.
+In this exercise, we'll add the Central functionality to all the apps, and complete the "Magic 8-Ball" game. We'll do this by completing the SDK, which is common to all the apps.
 
-In the first step, we will add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
+In the first step, we'll create the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
 
-By the end of this step, the apps will still not operate completely, but we will be able to observe Core Bluetooth, operating "under the hood," through `print()` statements.
+In the second step, we'll add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
+
+By the end of this exercise, the apps will still not operate completely, but we'll be able to observe Core Bluetooth operating "under the hood," through `print()` statements.
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
-If you haven't already, open the `ITCB.xcworkspace` workspace with Xcode, and use the Project navigator to select the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file.
+If you haven't already done so, open the `ITCB.xcworkspace` workspace with Xcode, and use the Project navigator to select the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file.
 
-The following code is be all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
+The following code is all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
 
     import CoreBluetooth
 
@@ -25,7 +27,7 @@ The following code is be all that you'll see (***NOTE:*** *We are removing comme
     }
 
 
-These are the bare minimum to allow the SDK to compile and operate in Peripheral Mode for the apps.
+This is the bare minimum to allow the SDK to compile and operate in Peripheral Mode for the apps.
 
 Those three [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)s are the unique identifiers that we are using to denote the special Service and the two Characteristics that we use for our "magic 8-ball" game. They were generated using the following technique:
 
@@ -56,27 +58,21 @@ For the moment, we're leaving [`sendQuestion(_:)`](https://github.com/LittleGree
 
 ## ON TO CODING
 
-Now, we will start to add code. While we do that, we'll examine what is happening, step-by-step.
+Now, we'll start to add code. While we do that, we'll examine what is happening, step-by-step.
 
-### We Will Be Implementing the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) Protocol
+### We'll Be Implementing the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) Protocol
 
 This means that we'll be doing a couple of things:
 
-1. We will create a computed override of a [stored property](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L104) that stores an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and assign it to the superclass stored property (already prepared for it).
+1. We'll create a computed override of a [stored property](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L104) that stores an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and assign it to the superclass stored property (already prepared for it).
 
-    That property is "typeless," so it will need to be cast, in order to be useful in the future.
-
-    It is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
-    
-    It should also be noted that this is a **strong** reference. This is important. The `CB`*`XXX`*`Manager` instance needs to be kept around, after instantiation.
-
-2. We will create an extension of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class, adding several methods to provide conformance to the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) protocol.
+2. We'll create an extension of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class, adding several methods to provide conformance to the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) protocol.
 
     What this means, is that the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class will be set up to "catch" messages from our instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and act on them.
 
 ### STEP ONE: Instantiating the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager)
 
-The first thing that we will do, is add the following code, just below the static variables:
+The first thing that we'll do, is add the following code, just below the static variables:
 
     extension ITCB_SDK_Central {
         override var _managerInstance: Any! {
@@ -96,7 +92,13 @@ The first thing that we will do, is add the following code, just below the stati
 
 What this does, is override the stored property [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/e911848003141b8d5f5a0702285b1c84d7ef16b5/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L104) with [a computed property](https://docs.swift.org/swift-book/LanguageGuide/Properties.html#ID259), so we intercept access to the stored property.
 
-Our getter method will check the superclass instance of `_managerInstance` before returning it. If that instance is `nil`, then we will actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
+That property is "typeless," so it will need to be cast, in order to be useful in the future.
+
+It is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
+
+It should also be noted that this is a **strong** reference. This is important. The `CB`*`XXX`*`Manager` instance needs to be kept around, after instantiation.
+
+Our getter method will check the superclass instance of `_managerInstance` before returning it. If that instance is `nil`, then we'll actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
 
 The setter is a simple straight-up passthrough.
 
@@ -113,7 +115,7 @@ Below the code we just added, we should now add this code:
 
 Nothing will change, but the compiler will stop complaining.
 
-That [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method is the only required method for [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) Conformance. We added an empty "placeholder" method there (for now), in order to satisfy the conformance requirement.
+That [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method is the only required method for [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) conformance. We added an empty "placeholder" method there (for now), in order to satisfy the conformance requirement.
 
 
 #### Examining the State
@@ -122,9 +124,9 @@ It should be noted at this point that it's *really important* to not make any as
 
 We should not proceed until Core Bluetooth reports that it is ready to go. It does this by setting the [`CBCentralManager.state`](https://developer.apple.com/documentation/corebluetooth/cbmanager/1648600-state) property to [`.poweredOn`](https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/poweredon).
 
-In our app, we will assume that scanning is enabled at startup. What this means to us, is that when the Bluetooth subsystem is ready, we can immediately start scanning for peripherals.
+In our app, we'll assume that scanning is enabled at startup. What this means to us, is that when the Bluetooth subsystem is ready, we can immediately start scanning for peripherals.
 
-We will add the following code inside the empty [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method body:
+We'll add the following code inside the empty [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method body:
 
     public func centralManagerDidUpdateState(_ centralManager: CBCentralManager) {
         if centralManager.state == .poweredOn {
@@ -148,9 +150,9 @@ before we proceed further, we'll need to add two more static constants, just bel
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20
 
-These define a signal strength "window," describing a range of signal strength that we will consider valid for connection. The lowest bound is -60dBm, and the upper bound is -20dBm.
+These define a signal strength "window," describing a range of signal strength that we will consider valid for connection. The lower bound is -60dBm, and the upper bound is -20dBm.
 
-Now that we are scanning for devices, we need to be able to react to their discovery, so we will now add the following callback inside the extension we just made, and just after the [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method:
+Now that we are scanning for devices, we need to be able to react to their discovery, so we'll now add the following callback inside the extension we just made, and just after the [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method:
 
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
         if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
@@ -232,7 +234,7 @@ All the rest of the action will happen in the [`CBPeripheralDelegate`](https://d
 
 **IT STILL DOESN'T WORK**
 
-However, there's now a lot more happening under the hood. The app still doesn't work, but if we run it in Central Mode, and run another device in Peripheral Mode, we should see something like this in the debugger console:
+Despite the apps stil not working, there's now a lot more happening under the hood. If we run the app in Central Mode, and run another device in Peripheral Mode, we should see something like this in the debugger console:
 
     Scanning for Peripherals
     Peripheral Discovered: iPhone Xs Max, RSSI: -34
@@ -247,7 +249,7 @@ Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for pe
 
 ## WHERE WE ARE NOW
 
-At this point, we have added the following code to the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file, between the original static constants, and the `ITCB_SDK_Device_Peripheral` extension:
+At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`]() file, between the original static constants, and the `ITCB_SDK_Device_Peripheral` extension:
 
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20
@@ -299,4 +301,4 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 ## NEXT STEP
 
-Go back to the parent directory, and open the `01-CBCentralManagerDelegate` directory, then, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
+Go back to the main lesson, and open the `01-CBCentralManagerDelegate` directory, then, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
