@@ -140,8 +140,11 @@ with this:
                 self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
             }
             _interimQuestion = inQuestion
-            peripheral.setNotifyValue(true, for: answerCharacteristic)
-            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            if answerCharacteristic.isNotifying {
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            } else {
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
+            }
         } else if inQuestion.data(using: .utf8) == nil {
             print("Cannot send the question, because the question data is bad.")
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
@@ -193,7 +196,7 @@ The timeout duration is defined in the [`_timeoutLengthInSeconds`](https://githu
 
 So the first thing that we do, when we send a question, is establish a 1-second timeout. When we are notified that the question was successfully asked, the timeout is invalidated, and set to `nil`.
 
-##### We Need to Stash Our Question Until We Know It Was Asked
+##### We Need to Stash Our Question Until We Know It Was Asked, and the Peripheral is Ready to Answer
 
 Next, we set the question being asked into an instance property called [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L127).
 
@@ -203,15 +206,15 @@ Remember how we don't actually change the value of a Characteristic; instead, as
 
 We can't change the actual [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) stored property, until we've been informed that the Peripheral has acceded to our demand, so we "stash" it here.
 
-##### We Need to Set Up Notification for the Answer
+Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", if it is not already notifying. If so, we need to hold off asking the question until then.
 
-Next, we tell the "answer" Characteristic to notify us when it changes. We do that by setting its [`notify`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) value (again, we are asking the Peripheral to do this on our behalf).
+##### If the Answer Characteristic is Not Already Notifying, We Need to Set Up Notification for the Answer
 
-If we **really** wanted to get uptight about this, we would set up a [`CBPeripheralDelegate.peripheral(_:, didUpdateNotificationStateFor:,error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518768-peripheral) callback, and do the next step, there. However, this is complicated enough as it is, so we'll do both of them at once, and I'll show how I deal with this below -it's possible for the notify to be set *after* the question was asked, and we have to anticipate that.
+If the Characteristic is not already notifying, we tell the "answer" Characteristic to notify us when it changes. We do that by setting its [`notify`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) value (again, we are asking the Peripheral to do this on our behalf).
 
-##### We Ask the Peripheral to Set the Question Characteristic to the Question We Are Asking
+##### Otherwise, We Ask the Peripheral to Set the Question Characteristic to the Question We Are Asking
 
-Finally, we actually ask the Peripheral to set the value of the "question" Characteristic to the question we are asking.
+If the "answer" Characteristic was already set to Notify, we actually ask the Peripheral to set the value of the "question" Characteristic to the question we are asking.
 
 ***NOTE:*** *Note that the [`CBPeripheral.writeValue(_:,for:,type:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518747-writevalue) method is a **Peripheral** method; not a Characteristic method. As we will see, all Peripheral interactions, regardless of which attribute is being affected, go through the Peripheral object level.*
 
@@ -221,7 +224,7 @@ We do have a couple of quick tests for errors during this process. These are not
 
 ### STEP TWO: Establish Our [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) Conformance
 
-We will need to establish four callbacks to manage the process of asking a question, and receiving the answer.
+We will need to establish five callbacks to manage the process of asking a question, and receiving the answer.
 
 #### Discovery Callbacks
 
@@ -294,15 +297,67 @@ Just below the Service discovery callback, add the following code:
 
 Like we did with the Service discovery callback, the first thing we do is check for errors.
 
-After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback), and we inform our "owner" (the Central Manager) that we have discovered everything, and that it can inform the SDK user that the Peripheral is ready to answer questions.
+After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback). We then inform our "owner" (the Central Manager) that we have discovered everything, and that it can tell the SDK user that the Peripheral is ready to answer questions.
 
 At this point, the Peripheral is ready. It is connected to the Central, and is no longer advertising. The Peripheral knows about its "Magic 8-Ball" Service, and that Service knows about its two Characteristics ("question" and "answer").
 
 #### Interaction Callbacks
 
-The last two callbacks are the ones that are executed while the Central is asking questions, and the Peripheral is answering them.
+The last three callbacks are the ones that are executed while the Central is asking questions, and the Peripheral is answering them.
+
+##### Getting the Answer
+
+There's two main ways to get the answer from the Peripheral: "Read" or "Notify".
+
+###### Read
+
+When we Read (using the [`CBPeripheral.readValue(for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518759-readvalue) method), the Central is in charge of the timing. It tells the Peripheral to update the Characteristic value *at the time the call is made*.
+
+###### Notify
+
+When we tell the Peripheral to set the Notify Flag on the Characteristic, we ask the Peripheral to let us know when it changes the value of that Characteristic.
+
+This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) method.
+
+**BOTH** of these methods will result in the [`CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) callback being executed.
+
+The difference is *when* the callback is made.
+
+I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above.
+
+##### Notification
+
+Before we go to the write, we may need to respond to notifications being enabled.
+
+Below the Characteristic discovery callback, add the following code:
+
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+
+        if let error = error {
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+
+        if  let question = _interimQuestion,
+            let data = question.data(using: .utf8),
+            characteristic.isNotifying,
+            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
+            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+        }
+    }
+
+This responds to the "answer" Characteristic having its notification state changed.
+
+As before, the first thing we do, is check for errors, and respond, if there are any.
+
+After that, we examine the "answer" Characteristic, and see if its notification is on.
+
+If so, we then make a write request, with the interim question, sending the request for the "question" Characteristic.
 
 ##### Write Confirmation
+
+Now that the write has been made, we need to make sure it took.
 
 Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/01-CBCentralManagerDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L124)?
 
@@ -316,7 +371,7 @@ Assuming that went well, the Peripheral should respond* to our request, telling 
 
 We don't actually do much with this information. We'll show it to the user, when we display the results, but it is more of a demonstrative exercise.
 
-Below the Characteristic discovery callback, add the following code:
+Below the Notification Change callback, add the following code:
 
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
@@ -348,6 +403,7 @@ Below the Characteristic discovery callback, add the following code:
         }
     }
 
+
 The first thing that we do, is invalidate the timeout. Remember that we set a timeout when we sent the question? Now that we are back, we don't need the timeout. There may be errors, but a timeout isn't one of them.
 
 The next thing we do, is look for the **absence** of an error. If there is none, then we can simply assume that the write was accepted, and set the [`question`](https://github.com/LittleGreenViper/ITCB/blob/66e3e076b0bd616f340e47b76a97d0a7f9b6ab86/01-CBCentralManagerDelegate/SDK-src/src/public/ITCB_SDK_Protocol.swift#L213) property to the interim question. We use a `guard` statement for this, with the `else { }` block being our "success" indicator.
@@ -359,26 +415,6 @@ The rest of this method is looking for errors.
 ##### Receiving the Answer
 
 Finally, we need to get the answer from the Peripheral.
-
-I have chosen to use "Notify" as the method for the Peripheral to deliver its answer.
-
-There's two main ways to get the answer from the Peripheral: "Read" or "Notify".
-
-###### Read
-
-When we Read (using the [`CBPeripheral.readValue(for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518759-readvalue) method), the Central is in charge of the timing. It tells the Peripheral to update the Characteristic value *at the time the call is made*.
-
-###### Notify
-
-When we tell the Peripheral to set the Notify Flag on the Characteristic, we ask the Peripheral to let us know when it changes the value of that Characteristic.
-
-This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) method.
-
-**BOTH OF THESE METHODS WILL RESULT IN THE [`CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) CALLBACK BEING MADE**
-
-The difference is *when* the callback is made.
-
-I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/17ce8ea46e54761a0602e20a2749a8558740ff0f/02-CBPeripheralDelegate/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above.
 
 So, finally, after the write confirmation callback, add the following code:
 
@@ -495,8 +531,11 @@ The `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file sh
                     self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
                 }
                 _interimQuestion = inQuestion
-                peripheral.setNotifyValue(true, for: answerCharacteristic)
-                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+                if answerCharacteristic.isNotifying {
+                    peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+                } else {
+                    peripheral.setNotifyValue(true, for: answerCharacteristic)
+                }
             } else if inQuestion.data(using: .utf8) == nil {
                 print("Cannot send the question, because the question data is bad.")
                 self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
@@ -533,6 +572,22 @@ The `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file sh
             owner.peripheralServicesUpdated(self)
         }
     
+        public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+
+            if let error = error {
+                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+                return
+            }
+
+            if  let question = _interimQuestion,
+                let data = question.data(using: .utf8),
+                characteristic.isNotifying,
+                let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+                let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            }
+        }
+
         public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
             _timeoutTimer?.invalidate()
             _timeoutTimer = nil

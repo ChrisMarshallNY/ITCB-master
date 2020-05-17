@@ -135,8 +135,13 @@ extension ITCB_SDK_Device_Peripheral {
                 self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
             }
             _interimQuestion = inQuestion
-            peripheral.setNotifyValue(true, for: answerCharacteristic)
-            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            
+            // If we are already notifying, then we simply send the question. Otherwise we first turn on answer notification.
+            if answerCharacteristic.isNotifying {
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            } else {
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
+            }
         } else if inQuestion.data(using: .utf8) == nil {
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
         } else {
@@ -154,8 +159,6 @@ extension ITCB_SDK_Device_Peripheral {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
@@ -176,14 +179,40 @@ extension ITCB_SDK_Device_Peripheral {
      - parameter error: Any errors that may have occurred. It may be nil.
      */
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+
         // If we suffered an error, we simply report it, and stop caring.
         if let error = error {
-            _timeoutTimer?.invalidate()  // Stop our timeout timer.
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
+        
         owner.peripheralServicesUpdated(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when a Characteristic with the HOTIFY property has its notification state changed.
+     
+     - parameter peripheral: The Peripheral object that discovered (and now contains) the Services (ignored).
+     - parameter didUpdateNotificationStateFor: The Characteristic that had its notification state updated.
+     - parameter error: Any errors that may have occurred. It may be nil.
+     */
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+
+        // If we suffered an error, we simply report it, and stop caring.
+        if let error = error {
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+
+        // If we are notifying, and we have an interim question, we send the question.
+        if  let question = _interimQuestion,
+            let data = question.data(using: .utf8),
+            characteristic.isNotifying,
+            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
+            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+        }
     }
     
     /* ################################################################## */

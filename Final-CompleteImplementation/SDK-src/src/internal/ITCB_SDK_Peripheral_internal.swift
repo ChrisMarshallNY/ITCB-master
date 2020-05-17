@@ -188,15 +188,7 @@ extension ITCB_SDK_Peripheral: CBPeripheralManagerDelegate {
         // Let the Central know that we got the question.
         inPeripheralManager.respond(to: inWriteRequests[0], withResult: .success)
         
-        // We do this, because you can get a subscription before the write.
-        if nil == central {
-            // The reason that we instantiate this as an interim value, is because the base class property is the untyped one, and we want the type. This is the easiest way to do that.
-            let tempCentral = ITCB_SDK_Device_Central(inWriteRequests[0].central, owner: self)
-            tempCentral._question = stringVal    // We add the question to the Central's stored property, so it will know what to send back to the Central.
-            central = tempCentral
-        } else {    // If the Central subscription has already happened, then we simply do the send now.
-            _sendRandomAnswerToThisQuestion(stringVal)
-        }
+        _sendRandomAnswerToThisQuestion(stringVal)
     }
     
     /* ################################################################## */

@@ -90,8 +90,11 @@ extension ITCB_SDK_Device_Peripheral {
                 self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
             }
             _interimQuestion = inQuestion
-            peripheral.setNotifyValue(true, for: answerCharacteristic)
-            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            if answerCharacteristic.isNotifying {
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+            } else {
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
+            }
         } else if inQuestion.data(using: .utf8) == nil {
             print("Cannot send the question, because the question data is bad.")
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
@@ -128,6 +131,22 @@ extension ITCB_SDK_Device_Peripheral {
         owner.peripheralServicesUpdated(self)
     }
     
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+
+        if let error = error {
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+
+        if  let question = _interimQuestion,
+            let data = question.data(using: .utf8),
+            characteristic.isNotifying,
+            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
+            peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
+        }
+    }
+
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
         _timeoutTimer = nil
