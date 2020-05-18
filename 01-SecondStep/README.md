@@ -8,7 +8,7 @@ In this step, we will implement the [`CBPeripheralDelegate`](https://developer.a
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
-If you haven't already, open the `ITCB.xcworkspace` workspace with Xcode, and use the Project navigator to select the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file.
+If you haven't already, open the [`ITCB.xcworkspace` workspace](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep/ITCB.xcworkspace) with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
 
 You should see something like this:
 
@@ -110,13 +110,15 @@ That's [a constrained Array extension](https://littlegreenviper.com/miscellany/s
 
 What we did, was add a subscript that accepts a String as its argument, and then scans the Array, comparing the IDs, until it finds the one for which we're searching.
 
-Basically, it treats the Array like a `[String: CBAttribute]` Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using `CBUUID` Strings.
+Note that we use the "colon" (":") qualifier. That means "[`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute)" *or any subclass of [`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute).* Since [`CBService`](https://developer.apple.com/documentation/corebluetooth/cbservice) and [`CBCharacteristic`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic) are both subclasses of [`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute), this will apply to either one of them.
+
+Basically, it treats the Array like a `[String: `[`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute)] Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid) Strings.
 
 We also have a cached "[`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128)" property (I normally advise against caching Bluetooth values, but this is really the best way to do this, while keeping this code simple). This will hold our outgoing question String.
 
 ***NOTE:*** *We don't actually set this until after the Peripheral has confirmed receipt of the string.*
 
-And finally, we have a stored property called [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_internal.swift#L180), which holds a strong reference to either a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) or a [`CBCentral`](https://developer.apple.com/documentation/corebluetooth/cbcentral) (when operating in Peripheral Mode).
+And finally, we have a stored property called [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_internal.swift#L180), which holds a strong reference to either a [`CBCentral`](https://developer.apple.com/documentation/corebluetooth/cbcentral) or a  [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) (when operating in Peripheral Mode).
 
 Note that this is a **strong** reference. We need it to be so, because this will hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
 
@@ -127,6 +129,8 @@ We should replace this:
     func sendQuestion(_ question: String) { }
 
 with this:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
 
     public func sendQuestion(_ inQuestion: String) {
         question = nil
@@ -156,41 +160,41 @@ with this:
 
 That's quite a handful, eh? Let's walk through it.
 
-The first thing that we do, is clear the [`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128) property. It will only hold the question *after* it has been accepted by the Peripheral.
+[The first thing that we do](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L2), is clear the [`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128) property. It will only hold the question *after* it has been accepted by the Peripheral.
 
 ##### That Intricate `if... {}` Statement
 
 We have another of our cascaded AND `if` statements. Let's go through it, line-by-line:
 
-###### `let data = inQuestion.data(using: .utf8)`
+###### [`let data = inQuestion.data(using: .utf8)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L3)
 
 First, we convert the String to a `Data` object. If that fails, the whole shooting match goes down the tubes.
 
-###### `let peripheral = _peerInstance as? CBPeripheral`
+###### [`let peripheral = _peerInstance as? CBPeripheral`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L4)
 
 Next, we unwrap and cast the [`_peerInstance`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_internal.swift#L180) property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance.
 
-###### `let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`
+###### [`let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L5)
 
 Next, we use one of those constrained Array extensions that we mentioned earlier, to get the "Magic 8-Ball" Service from the Peripheral.
 
-###### `let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`
+###### [`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L6)
 
 Next, we do the same for the "question" Characteristic.
 
-###### `let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`
+###### [`let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L7)
 
 And lastly, we do the same for the "answer" Characteristic.
 
 ##### We Need to Set Our Own Timeout
 
-Core Bluetooth doesn't have a real timeout (in reality, operations will fail, after a certain time, but it can take quite a while). We need to set our own timeout.
+Core Bluetooth doesn't have a real timeout (actually, operations will fail, after a certain time, but it can take quite a while). We need to set our own timeout.
 
 In reality, we should have set a timeout for the connection, as well, but I wanted to keep this demonstration as simple as possible.
 
 Our timeout is a very simple "one-shot" timer that notifies all the observers of the SDK (beyond the scope of this demo) that there's been a timeout.
 
-The timeout timer is maintained in the [`_timeoutTimer`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L122) property.
+The timeout timer is maintained in the [`_timeoutTimer`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L122) property. We keep this, so we can invalidate the timer upon successful completion of the operation.
 
 The timeout duration is defined in the [`_timeoutLengthInSeconds`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L116) constant.
 
@@ -252,6 +256,8 @@ The original Service discovery request filtered for our "Magic 8-Ball" Service, 
 
 So, at this point, we should add the following code, just below the `sendQuestion(-:)` method code:
 
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)
+
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
@@ -284,6 +290,8 @@ Now that we have discovered the Service and asked the Peripheral to perform a di
 Like the Service discovery callback, the results are "atomic." All Characteristics will be discovered at once. The Characteristic discovery callback is very similar to the Service discovery callback.
 
 Just below the Service discovery callback, add the following code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
 
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if let error = error {
@@ -327,13 +335,15 @@ This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://de
 
 The difference is *when* the callback is made.
 
-I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/3ecf804a2a87ad5a4fad114028c50a754ed369a6/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above.
+I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L16) method, above.
 
 ##### Notification
 
 Before we go to the write, we may need to respond to notifications being enabled.
 
 Below the Characteristic discovery callback, add the following code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-03-swift)
 
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
 
@@ -367,7 +377,7 @@ Now that the write has been made, we need to make sure it took.
 
 Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L125)?
 
-In the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/3ecf804a2a87ad5a4fad114028c50a754ed369a6/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
+In the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L14) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
 
 This sent the string (the question is a string) over to the Peripheral, telling it what Characteristic we wanted to modify.
 
@@ -378,6 +388,8 @@ Assuming that went well, the Peripheral should respond* to our request, telling 
 We don't actually do much with this information. We'll show it to the user, when we display the results, but it is more of a demonstrative exercise.
 
 Below the Notification Change callback, add the following code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-04-swift)
 
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
@@ -426,6 +438,8 @@ The rest of this method is looking for errors.
 Lastly, we need to get the answer from the Peripheral.
 
 After the write confirmation callback method, add the following code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-05-swift)
 
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
