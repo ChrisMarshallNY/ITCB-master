@@ -302,3 +302,17 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 ## NEXT STEP
 
 Go back to the main lesson, and open the `01-SecondStep` directory, then, open the [`ITCB.xcworkspace` workspace](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep/ITCB.xcworkspace) file with Xcode, and follow the steps in the `README.md` file.
+
+# REFERENCES
+
+- [The Git Repo Branch for This Step](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint)
+- [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
+- [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
+- [Apple CBCentralManager Documentation](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager)
+- [Apple CBCentralManagerDelegate Documentation](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate)
+- [Apple CBPeripheral Documentation](https://developer.apple.com/documentation/corebluetooth/cbperipheral)
+- [Online UUID Generator Site](https://www.uuidgenerator.net)
+- [Another Online UUD Generator](https://www.guidgenerator.com)
+- [This Online Generator is Good for Generation of Groups of UUIDs](https://onlinerandomtools.com/generate-random-uuid)
+- [The Main Bluetooth Site](https://www.bluetooth.com/)
+- [Bluetooth Core Specifications](https://www.bluetooth.com/specifications/bluetooth-core-specification/)

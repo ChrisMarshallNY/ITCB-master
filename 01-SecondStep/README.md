@@ -648,3 +648,11 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
     }
 
 Remember that we have removed comments, in order to reduce the vertical footprint of all this text.
+
+# REFERENCES
+
+- [The Git Repo Branch for This Step](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep)
+- [Apple CBPeripheral Documentation](https://developer.apple.com/documentation/corebluetooth/cbperipheral)
+- [Apple CBPeripheralDelegate Documentation](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate)
+- [Apple CBService Documentation](https://developer.apple.com/documentation/corebluetooth/cbservice)
+- [Apple CBCharacteristic Documentation](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic)
