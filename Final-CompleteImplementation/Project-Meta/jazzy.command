@@ -1,18 +1,37 @@
 #!/bin/sh
 CWD="$(pwd)"
 MY_SCRIPT_PATH=`dirname "${BASH_SOURCE[0]}"`
-cd "${MY_SCRIPT_PATH}/../"
-rm -drf docs/*
+cd "${MY_SCRIPT_PATH}/../SDK-src"
 
-echo "Creating API Docs for the SDK"
+echo "Creating Public API Docs for the SDK"
+
+rm -drf ../docs/api
+rm -drf ../docs/app
+rm -drf ../docs/img
+mkdir ../docs/img
 
 jazzy   --readme ./README.md \
-        --github_url https://github.com/LittleGreenViper/Magic8Ball \
+        --github_url https://github.com/LittleGreenViper/ITCB \
         --title Magic8Ball\ Public\ API\ Doumentation \
         --theme fullwidth \
         --exclude=/*/internal* \
         --min_acl public \
-        --build-tool-arguments -scheme,"ITCB_SDK_Mac (Framework)"
-cp img/*.* docs/img/
+        --output ../docs/api \
+        --build-tool-arguments -scheme,"Final-ITCB_SDK_Mac (Framework)"
+
+echo "Creating Internal Docs for the App"
+
+cd "${MY_SCRIPT_PATH}/../Apps-src"
+
+echo "Mac App"
+
+jazzy   --readme ./README.md \
+        --github_url https://github.com/LittleGreenViper/ITCB \
+        --title Magic8Ball\ Internal\ App\ Doumentation \(Mac\) \
+        --theme fullwidth \
+        --min_acl private \
+        --output ../docs/app \
+        --build-tool-arguments -scheme,"Final-Bluetooth 8-Ball On Mac (App)"
+cp ../img/*.* ../docs/img/
 
 cd "${CWD}"

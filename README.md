@@ -27,7 +27,7 @@ Go forth, and explore. Bluetooth is an enormous topic, and promises great advent
 
 The application that we will use as a learning platform will be a Bluetooth expression of the famous [Mattel Magic 8-Ball toy](https://en.wikipedia.org/wiki/Magic_8-Ball).
 
-In order to understand the game completely, view the `README.md` file in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
+In order to understand the game completely, view [the `README.md` file](https://github.com/LittleGreenViper/ITCB/blob/master/README.md) in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
 
 At the start, we will have 4 applications that already function, but not completely. The goal of this exercise is to "fill in the blanks," and get the apps working properly.
 
@@ -81,4 +81,6 @@ These directories will contain the complete, running applications:
     
 ## LET'S GET STARTED
 
-To begin, simply open the `00-StartingPoint` directory, open the `ITCB.xcworkspace` workspace with Xcode, and follow the steps in the `README.md` file.
+1. [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/6af12df8158e03ac1daef90fda7537c362e010ee.zip)
+
+2. [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part Two).](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894/archive/850355629168d0224b04b30ae373ff501392636c.zip)

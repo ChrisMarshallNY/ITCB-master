@@ -13,12 +13,38 @@
       <FileRef
          location = "group:00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
       </FileRef>
-      <FileRef
-         location = "group:00-StartingPoint/Apps-src/ITCB-Apps.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:00-StartingPoint/SDK-src/ITCB.xcodeproj">
-      </FileRef>
+      <Group
+         location = "container:"
+         name = "Snippets">
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-00.swift">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-01.swift">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-02.swift">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-03.swift">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-04.swift">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/Snippets/00-StartingPoint-05.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "Projects">
+         <FileRef
+            location = "group:00-StartingPoint/Apps-src/ITCB-Apps.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:00-StartingPoint/SDK-src/ITCB.xcodeproj">
+         </FileRef>
+      </Group>
    </Group>
    <Group
       location = "container:"
@@ -29,12 +55,38 @@
       <FileRef
          location = "group:01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
       </FileRef>
-      <FileRef
-         location = "group:01-SecondStep/Apps-src/ITCB-Apps.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:01-SecondStep/SDK-src/ITCB.xcodeproj">
-      </FileRef>
+      <Group
+         location = "container:"
+         name = "Snippets">
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-00.swift">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-01.swift">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-02.swift">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-03.swift">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-04.swift">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-05.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "Projects">
+         <FileRef
+            location = "group:01-SecondStep/Apps-src/ITCB-Apps.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:01-SecondStep/SDK-src/ITCB.xcodeproj">
+         </FileRef>
+      </Group>
    </Group>
    <Group
       location = "container:"
@@ -45,12 +97,16 @@
       <FileRef
          location = "group:02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
       </FileRef>
-      <FileRef
-         location = "group:02-FinishedLesson/Apps-src/ITCB-Apps.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:02-FinishedLesson/SDK-src/ITCB.xcodeproj">
-      </FileRef>
+      <Group
+         location = "container:"
+         name = "Projects">
+         <FileRef
+            location = "group:02-FinishedLesson/Apps-src/ITCB-Apps.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:02-FinishedLesson/SDK-src/ITCB.xcodeproj">
+         </FileRef>
+      </Group>
    </Group>
    <Group
       location = "container:"
@@ -58,11 +114,15 @@
       <FileRef
          location = "group:Final-CompleteImplementation/README.md">
       </FileRef>
-      <FileRef
-         location = "group:Final-CompleteImplementation/Apps-src/ITCB-Apps.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Final-CompleteImplementation/SDK-src/ITCB.xcodeproj">
-      </FileRef>
+      <Group
+         location = "container:"
+         name = "Projects">
+         <FileRef
+            location = "group:Final-CompleteImplementation/Apps-src/ITCB-Apps.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:Final-CompleteImplementation/SDK-src/ITCB.xcodeproj">
+         </FileRef>
+      </Group>
    </Group>
 </Workspace>

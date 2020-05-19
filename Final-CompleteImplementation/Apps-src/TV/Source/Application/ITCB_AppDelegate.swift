@@ -32,6 +32,7 @@ import ITCB_SDK_TVOS
  Don't try this at home, kids. This will work for us, because we have a simple, direct view controller setup. This is not flexible enough to handle anything more complicated.
  */
 extension UIViewController {
+    /// This will supply our top view controller (for the alert).
     var topViewController: UIViewController? {
         let presented = presentedViewController
         return nil != presented ? presented : self
