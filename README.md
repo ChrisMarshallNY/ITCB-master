@@ -12,14 +12,17 @@ We only have a couple of hours, so the lesson will be highly constrained. It has
 
 The lesson has been designed as a "legacy." Once we're done, you will have a codebase of exceedingly well-documented Swift code at your disposal, so you can further explore Core Bluetooth.
 
-In your explorations, you'll discover that what we discuss today "barely scratches the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation.
+The code is accompanied by extensive Markdown README files that walk through each exercise, in great detail.
 
-It will also have complete, App-Store-ready applications for MacOS, iOS/iPadOS, WatchOS and tvOS. Each app will implement a common Bluetooth "SDK" framework.
+In your explorations, you'll discover that what we discuss today "barely scratches the surface." The codebase will have complete implementation of **BOTH** a Central implementation (what we will cover), *and* a Peripheral implementation (what we don't cover, but pretty cool).
+
+It will also have complete, App-Store-ready applications for [Mac OS X](https://apple.com/macos), [iOS](https://apple.com/ios)/[iPadOS](https://apple.com/ipados), [tvOS](https://apple.com/tvos), and [WatchOS](https://apple.com/watchos). Each app will implement a common Bluetooth "SDK" framework.
 
 It is our hope that this codebase can provide great utility in your own endeavors.
 
 *"A ship in harbor is safe, but that is not what ships are built for."*
-- John A. Shedd
+
+– John A. Shedd
 
 Go forth, and explore. Bluetooth is an enormous topic, and promises great adventures.
 
@@ -35,7 +38,7 @@ As we do this, we'll strive to understand what is happening at each step.
 
 ## SDK VS. APPS
 
-The Magic 8-Ball game has been designed as a cross-platform "SDK," that abstracts Core Bluetooth, and four relatively independent apps that will be focused on each of the Apple platforms: [Mac OS X](https://apple.com/macos), [iOS](https://apple.com/ios)/[iPadOS](https://apple.com/ipados), [tvOS](https://apple.com/tvos), and [WatchOS](https://apple.com/watchos).
+The Magic 8-Ball game has been designed as a cross-platform "SDK," that abstracts Core Bluetooth, along with four relatively independent apps that will be focused on each of the Apple platforms: [Mac OS X](https://apple.com/macos), [iOS](https://apple.com/ios)/[iPadOS](https://apple.com/ipados), [tvOS](https://apple.com/tvos), and [WatchOS](https://apple.com/watchos).
 
 The apps are fully operational, and at "release quality." They are not "casual samples." They could (arguably) be submitted to the Apple App Store right now.
 
@@ -48,7 +51,7 @@ Thse versions are:
 - [tvOS](https://apple.com/tvos): 13.0, or above
 - [WatchOS](https://apple.com/watchos): 6.0, or above
 
-They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: Only Mac OS and iOS/iPadOS support "Peripheral Mode," so Watch and TV will not have this functionality.
+They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: ***Only Mac OS and iOS/iPadOS support "Peripheral Mode,"** so Watch and TV will not have this functionality.*
 
 We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
 
@@ -81,6 +84,56 @@ These directories will contain the complete, running applications:
     
 ## LET'S GET STARTED
 
-1. [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/6af12df8158e03ac1daef90fda7537c362e010ee.zip)
+If you are reading this in the "`TheOneRing.xcworkspace`" file, then it's easy. Simply look at the Project Navigator pane on the left side of the screen, and choose the "`00-StartingPoint/ITCB_SDK_Central_internal_Callbacks.swift`" source file.
 
-2. [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part Two).](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894/archive/850355629168d0224b04b30ae373ff501392636c.zip)
+This is an alias to the actual file that we'll be working on in the project.
+
+At the top, in the Scheme Menu, you will note that there are sixteen schemes:
+
+- "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`"
+- "`00-StartingPoint-Bluetooth 8-Ball On iOS (App)`"
+- "`00-StartingPoint-Bluetooth 8-Ball On Watch (App)`"
+- "`00-StartingPoint-Bluetooth 8-Ball On TV (App)`"
+- "`01-SecondStep-Bluetooth 8-Ball On Mac (App)`"
+- "`01-SecondStep-Bluetooth 8-Ball On iOS (App)`"
+- "`01-SecondStep-Bluetooth 8-Ball On Watch (App)`"
+- "`01-SecondStep-Bluetooth 8-Ball On TV (App)`"
+- "`02-FinishedLesson-Bluetooth 8-Ball On Mac (App)`"
+- "`02-FinishedLesson-Bluetooth 8-Ball On iOS (App)`"
+- "`02-FinishedLesson-Bluetooth 8-Ball On Watch (App)`"
+- "`02-FinishedLesson-Bluetooth 8-Ball On TV (App)`"
+- "`Final-Bluetooth 8-Ball On Mac (App)`"
+- "`Final-Bluetooth 8-Ball On iOS (App)`"
+- "`Final-Bluetooth 8-Ball On Watch (App)`"
+- "`Final-Bluetooth 8-Ball On TV (App)`"
+
+Each of these will build the app (and the SDK) for the indicated platform.
+
+> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth.***
+
+The "`00-StartingPoint`" schemes will run, but the Central Mode won't work. Peripheral Mode will work fine (on Mac and iOS). You can use this to test as we proceed.
+
+The "`01-SecondStep`" schemes will run, but the Central Mode still won't work. However, at this point, running the app, and locating a Peripheral will result in some debug prints in the Debugger Console.
+
+The "`02-FinishedLesson`" schemes will run properly, but you will also see debug strings in the Console.
+
+The "`Final`" schemes will run properly, without debug strings.
+
+Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`" as the target, for the first part. Build and run, just to make sure that all is good. There should be no errors, and you should get the Mode Selection Screen on the Mac.
+
+## REFERENCES
+
+- [This is the Git Repo for This Exercise (The Final Implementation)](https://github.com/LittleGreenViper/ITCB)
+- [The Git Repo Branch for the First Step](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint)
+- [The Git Repo Branch for the Second Step](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep)
+- [The Git Repo Branch for the Finished Lesson](https://github.com/LittleGreenViper/ITCB/tree/02-FinishedLesson)
+- [This is a GitHub Gist, with the Snippets for the First Phase](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32)
+- [This is a GitHub Gist, with the Snippets for the Second Phase](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894)
+- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/6af12df8158e03ac1daef90fda7537c362e010ee.zip)
+- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part Two).](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894/archive/850355629168d0224b04b30ae373ff501392636c.zip)
+- [The "Genesis" of This Lesson: A Series That Walks Through Development of a Core Bluetooth App](https://littlegreenviper.com/series/bluetooth/)
+- [A "Sequel" to That Series](https://littlegreenviper.com/series/bluetooth-2/)
+- [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
+- [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
+- [The Main Bluetooth Site](https://www.bluetooth.com/)
+- [Bluetooth Core Specifications](https://www.bluetooth.com/specifications/bluetooth-core-specification/)
