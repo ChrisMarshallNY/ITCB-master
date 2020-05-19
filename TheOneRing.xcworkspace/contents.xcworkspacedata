@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "00-StartingPoint">
+      <FileRef
+         location = "group:00-StartingPoint/README.md">
+      </FileRef>
+      <FileRef
+         location = "group:00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
+      </FileRef>
+      <FileRef
+         location = "group:00-StartingPoint/Apps-src/ITCB-Apps.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:00-StartingPoint/SDK-src/ITCB.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "01-SecondStep">
+      <FileRef
+         location = "group:01-SecondStep/README.md">
+      </FileRef>
+      <FileRef
+         location = "group:01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
+      </FileRef>
+      <FileRef
+         location = "group:01-SecondStep/Apps-src/ITCB-Apps.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:01-SecondStep/SDK-src/ITCB.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "02-FinishedLesson">
+      <FileRef
+         location = "group:02-FinishedLesson/README.md">
+      </FileRef>
+      <FileRef
+         location = "group:02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
+      </FileRef>
+      <FileRef
+         location = "group:02-FinishedLesson/Apps-src/ITCB-Apps.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:02-FinishedLesson/SDK-src/ITCB.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Final-CompleteImplementation">
+      <FileRef
+         location = "group:Final-CompleteImplementation/README.md">
+      </FileRef>
+      <FileRef
+         location = "group:Final-CompleteImplementation/Apps-src/ITCB-Apps.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Final-CompleteImplementation/SDK-src/ITCB.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>
