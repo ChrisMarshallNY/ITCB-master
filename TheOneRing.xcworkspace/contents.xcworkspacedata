@@ -37,6 +37,13 @@
       </Group>
       <Group
          location = "container:"
+         name = "Aftermath">
+         <FileRef
+            location = "group:01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
          name = "Projects">
          <FileRef
             location = "group:00-StartingPoint/Apps-src/ITCB-Apps.xcodeproj">
@@ -52,12 +59,12 @@
       <FileRef
          location = "group:01-SecondStep/README.md">
       </FileRef>
-      <FileRef
-         location = "group:01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
-      </FileRef>
       <Group
          location = "container:"
          name = "Snippets">
+         <FileRef
+            location = "group:01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
+         </FileRef>
          <FileRef
             location = "group:01-SecondStep/Snippets/01-SecondStep-00.swift">
          </FileRef>
@@ -75,6 +82,13 @@
          </FileRef>
          <FileRef
             location = "group:01-SecondStep/Snippets/01-SecondStep-05.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "Aftermath">
+         <FileRef
+            location = "group:02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift">
          </FileRef>
       </Group>
       <Group
