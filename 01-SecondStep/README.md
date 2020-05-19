@@ -108,11 +108,11 @@ Another thing that we did before we got here, was [this little "hack"](https://g
 
 That's [a constrained Array extension](https://littlegreenviper.com/miscellany/swiftwater/swift-extensions-part-three/), and we use it to look up Attributes (Characteristics and Services, in our case) in an Array by their [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)
 
-What we did, was add a subscript that accepts a String as its argument, and then scans the Array, comparing the IDs, until it finds the one for which we're searching.
+What we did, was add a subscript that accepts a [`String`](https://developer.apple.com/documentation/swift/string) as its argument, and then scans the Array, comparing the IDs, until it finds the one for which we're searching.
 
 Note that we use the "colon" (":") qualifier. That means "[`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute)" *or any subclass of [`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute).* Since [`CBService`](https://developer.apple.com/documentation/corebluetooth/cbservice) and [`CBCharacteristic`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic) are both subclasses of [`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute), this will apply to either one of them.
 
-Basically, it treats the Array like a `[String: `[`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute)] Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid) Strings.
+Basically, it treats the Array like a `[`[`String`](https://developer.apple.com/documentation/swift/string)`: `[`CBAttribute`](https://developer.apple.com/documentation/corebluetooth/cbattribute)`]` Dictionary. Not super-efficient, but we don't need it to be. It will make the code we're about to write a lot simpler, by allowing us to search the built-in Arrays using [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid) Strings.
 
 We also have a cached "[`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128)" property (I normally advise against caching Bluetooth values, but this is really the best way to do this, while keeping this code simple). This will hold our outgoing question String.
 
@@ -168,7 +168,7 @@ We have another of our cascaded AND `if` statements. Let's go through it, line-b
 
 ###### [`let data = inQuestion.data(using: .utf8)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L3)
 
-First, we convert the String to a `Data` object. If that fails, the whole shooting match goes down the tubes.
+First, we convert the String to a [`Data`](https://developer.apple.com/documentation/foundation/data) object. If that fails, the whole shooting match goes down the tubes.
 
 ###### [`let peripheral = _peerInstance as? CBPeripheral`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L4)
 
@@ -365,7 +365,7 @@ This [callback responds to the "answer" Characteristic having its notification s
 
 As before, the first thing we do, is check for errors, and respond, if there are any.
 
-Then we extract the question from the interim question, and create a Data object from that.
+Then we extract the question from the interim question, and create a [`Data`](https://developer.apple.com/documentation/foundation/data) object from that.
 
 After that, we examine the "answer" Characteristic, and see if its notification is already on.
 
