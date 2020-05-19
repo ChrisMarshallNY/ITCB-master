@@ -123,6 +123,7 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 
 ## REFERENCES
 
+- [This is a Downloadable ZIP File, With the Entire Lesson ***(Warning: Not A Small File)***](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip)
 - [This is the Git Repo for This Exercise (The Final Implementation)](https://github.com/LittleGreenViper/ITCB)
 - [The Git Repo Branch for the First Step](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint)
 - [The Git Repo Branch for the Second Step](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep)
