@@ -130,7 +130,7 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [The Git Repo Branch for the Finished Lesson](https://github.com/LittleGreenViper/ITCB/tree/02-FinishedLesson)
 - [This is a GitHub Gist, with the Snippets for the First Phase](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32)
 - [This is a GitHub Gist, with the Snippets for the Second Phase](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894)
-- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/6af12df8158e03ac1daef90fda7537c362e010ee.zip)
+- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/fc204268648b5bbee482a40607cfa9243761100b.zip)
 - [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part Two).](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894/archive/850355629168d0224b04b30ae373ff501392636c.zip)
 - [The "Genesis" of This Lesson: A Series That Walks Through Development of a Core Bluetooth App](https://littlegreenviper.com/series/bluetooth/)
 - [A "Sequel" to That Series](https://littlegreenviper.com/series/bluetooth-2/)
