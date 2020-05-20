@@ -1,4 +1,3 @@
-
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {  
         if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),  
             let peripheralName = peripheral.name,  
