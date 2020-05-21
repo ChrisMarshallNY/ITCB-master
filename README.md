@@ -59,9 +59,12 @@ All other files and directories will be left alone.
 
 ## REQUIREMENTS TO START
 
-We should each have two Apple devices that we can access with Xcode, and run in debug mode.
+- We should each have the latest version of Xcode, installed and ready to go.
+- We should each have two Apple devices that we can access with Xcode, and run in debug mode.
+- These devices should be [registered](https://help.apple.com/developer-account/#/dev40df0d9fa) and prepared for debugging. We will run all our code on-device.
+- We should all have Apple Developer accounts. **THEY NO LONGER NEED TO BE PAID ACCOUNTS (ADP).** Apple now [allows free accounts to run on-device](https://help.apple.com/xcode/mac/current/#/dev60b6fbbc7).
 
-We will need to have at least one device that can act as a Peripheral. Since we are working on a Mac, we already have that. This means that the other device can be an iPhone, iPod, iPad, Watch or AppleTV, as long as the device is recent enough to support the current operating system. We can use another Mac, but double-Mac debugging can be a bit complex. We're probably best off having an iOS device as our other target (This also allows us to switch the roles of the devices).
+> ***NOTE:*** *We will need to have at least one device that can act as a Peripheral. Since we are working on a Mac, we already have that. This means that the other device can be an iPhone, iPod, iPad, Watch or AppleTV, as long as the device is recent enough to support the current operating system. We can use another Mac, but two-machine debugging can be a bit complex. We're probably best off having an iOS device as our other target (This also allows us to switch the roles of the devices).*
 
 ## STEPS
 
