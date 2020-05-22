@@ -136,7 +136,13 @@ extension ITCB_Central_Peripheral_Device_ViewController {
 // MARK: - Text Field Delegate Methods -
 /* ################################################################################################################################## */
 extension ITCB_Central_Peripheral_Device_ViewController: NSTextFieldDelegate {
-    func controlTextDidChange(_ obj: Notification) {
+    /* ################################################################## */
+    /**
+     Called when text changes in the Text Field.
+     
+     - parameter: ignored
+     */
+    func controlTextDidChange(_: Notification) {
         sendButton.isEnabled = !enterQuestionText.stringValue.isEmpty
     }
 }

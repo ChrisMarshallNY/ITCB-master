@@ -66,9 +66,15 @@ extension Bundle {
 class ITCB_AppDelegate: NSObject, NSApplicationDelegate {
     /* ################################################################## */
     /**
-     The About Menu. We access it, so we can change the name.
+     The About Menu Item. We access it, so we can change the name.
      */
     @IBOutlet weak var aboutMenuItem: NSMenuItem!
+    
+    /* ################################################################## */
+    /**
+     The Quit Menu Item. We access it, so we can change the name.
+     */
+    @IBOutlet weak var quitMenuItem: NSMenuItem!
     
     /* ################################################################## */
     /**
@@ -148,6 +154,7 @@ class ITCB_AppDelegate: NSObject, NSApplicationDelegate {
      - parameter: ignored
      */
     func applicationDidFinishLaunching(_: Notification) {
-        aboutMenuItem.title = String(format: aboutMenuItem.title.localizedVariant, Bundle.main.appDisplayName)
+        aboutMenuItem?.title = String(format: aboutMenuItem.title.localizedVariant, Bundle.main.appDisplayName)
+        quitMenuItem?.title = String(format: quitMenuItem.title.localizedVariant, Bundle.main.appDisplayName)
     }
 }
