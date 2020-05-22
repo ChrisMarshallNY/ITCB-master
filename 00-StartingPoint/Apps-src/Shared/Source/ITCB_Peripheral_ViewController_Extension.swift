@@ -81,6 +81,6 @@ extension ITCB_Peripheral_ViewController: ITCB_Observer_Peripheral_Protocol {
      */
     public func errorOccurred(_ inError: ITCB_Errors, sdk inSDKInstance: ITCB_SDK_Protocol) {
         workingWithQuestion = false
-        displayAlert(header: "SLUG-ERROR".localizedVariant, message: (ITCB_AppDelegate.unwindErrorReport(inError) ?? inError.localizedDescription).localizedVariant)
+        displayAlert(header: "SLUG-ERROR", message: inError.localizedDescription)
     }
 }

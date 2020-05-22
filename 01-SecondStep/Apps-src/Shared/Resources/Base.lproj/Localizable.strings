@@ -84,6 +84,7 @@ These declarations are shared between all the apps.
 "SLUG-ERROR"                        =   "ERROR!";
 "SLUG-ABOUT"                        =   "ABOUT THIS APP";
 "SLUG-ABOUT-MENU-ITEM-FORMAT"       =   "About %@";
+"SLUG-QUIT-MENU-ITEM-FORMAT"        =   "Quit %@";
 "SLUG-SELECT-MODE"                  =   "SELECT THE MODE";
 "SLUG-CENTRAL"                      =   "CENTRAL";
 "SLUG-PERIPHERAL"                   =   "PERIPHERAL";
