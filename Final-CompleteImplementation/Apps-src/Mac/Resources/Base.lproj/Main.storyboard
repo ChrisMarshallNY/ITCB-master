@@ -651,8 +651,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="ITCB_AppDelegate" customModule="ITCB_Mac" customModuleProvider="target">
                     <connections>
-                        <outlet property="aboutMenu" destination="1Xt-HY-uBw" id="Cvr-WT-e2k"/>
-                        <outlet property="aboutMenuItem" destination="5kV-Vb-QxS" id="sKy-nG-wfa"/>
+                        <outlet property="aboutMenuItem" destination="5kV-Vb-QxS" id="5V2-ed-YtG"/>
                         <outlet property="quitMenuItem" destination="4sb-4s-VLi" id="vSV-nt-GPd"/>
                     </connections>
                 </customObject>
