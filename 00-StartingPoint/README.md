@@ -22,10 +22,6 @@ The following code is all that you'll see (***NOTE:*** *We are removing comments
     internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37D7A-F66A-47B9-A49C-FE29FD235A77")
     internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
 
-    extension ITCB_SDK_Device_Peripheral {
-        func sendQuestion(_ question: String) { }
-    }
-
 
 This is the bare minimum to allow the SDK to compile and operate in Peripheral Mode for the apps.
 
@@ -43,18 +39,6 @@ Simply start Terminal, and enter "[`uuidgen`](https://www.freebsd.org/cgi/man.cg
 ### UUID-Generator Web Site
 
 You can also use a UUID-generator Web site, [like this one](https://www.uuidgenerator.net/).
-
-### The Empty [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L35) Method
-
-This code:
-
-    extension ITCB_SDK_Device_Peripheral {
-        func sendQuestion(_ question: String) { }
-    }
-
-simply gives us just enough code to satisfy the requirement of the [`ITCB_Device_Peripheral_Protocol` protocol](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK_Protocol.swift#L218) (that [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK_Protocol.swift#L239) method is required).
-
-For the moment, we're leaving [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L35) empty, but it won't stay that way.
 
 ## ON TO CODING
 
@@ -259,7 +243,7 @@ Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for pe
 
 ## WHERE WE ARE NOW
 
-At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file, between the original static constants, and the `ITCB_SDK_Device_Peripheral` extension:
+At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file, after the original static constants:
 
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20

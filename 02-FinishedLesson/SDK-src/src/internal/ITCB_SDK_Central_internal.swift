@@ -23,6 +23,17 @@ Little Green Viper Software Development LLC: https://littlegreenviper.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
+// MARK: - This is the Peripheral Device Protocol Specialization for the Main SDK -
+/* ###################################################################################################################################### */
+extension ITCB_Device_Peripheral_Protocol {
+    /* ################################################################## */
+    /**
+     The default does nothing. We declare it here, so we can walk through the lesson.
+     */
+    func sendQuestion(_ question: String) { }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main SDK Central Variant Interface Class -
 /* ###################################################################################################################################### */
 /**
@@ -193,7 +204,7 @@ internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripher
      */
     init(_ inCBPeripheral: CBPeripheral, owner inOwner: ITCB_SDK_Central) {
         super.init()
-        inCBPeripheral.delegate = self
+        inCBPeripheral.delegate = self as? CBPeripheralDelegate // The cast, is because we aren't conformant until step 2.
         owner = inOwner
         _peerInstance = inCBPeripheral
     }

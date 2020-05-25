@@ -114,7 +114,7 @@ extension ITCB_SDK_Central: CBCentralManagerDelegate {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - CBPeripheralDelegate Conformance, and sendQuestion Method -
+// MARK: - The sendQuestion Method -
 /* ###################################################################################################################################### */
 extension ITCB_SDK_Device_Peripheral {
     /* ################################################################## */
@@ -148,7 +148,12 @@ extension ITCB_SDK_Device_Peripheral {
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
         }
     }
+}
 
+/* ###################################################################################################################################### */
+// MARK: - CBPeripheralDelegate Conformance -
+/* ###################################################################################################################################### */
+extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
     /* ################################################################## */
     /**
      Called after the Peripheral has discovered Services.

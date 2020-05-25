@@ -30,7 +30,3 @@ internal let _static_ITCB_SDK_8BallServiceUUID = CBUUID(string: "8E38140A-27BE-4
 internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37D7A-F66A-47B9-A49C-FE29FD235A77")
 /// This is the UUID for the "Answer" String Characteristic
 internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
-
-extension ITCB_SDK_Device_Peripheral {
-    func sendQuestion(_ question: String) { }
-}

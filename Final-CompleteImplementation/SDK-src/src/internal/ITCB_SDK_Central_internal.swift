@@ -23,6 +23,17 @@ Little Green Viper Software Development LLC: https://littlegreenviper.com
 import CoreBluetooth
 
 /* ###################################################################################################################################### */
+// MARK: - This is the Peripheral Device Protocol Specialization for the Main SDK -
+/* ###################################################################################################################################### */
+extension ITCB_Device_Peripheral_Protocol {
+    /* ################################################################## */
+    /**
+     The default does nothing. We declare it here, so we can walk through the lesson.
+     */
+    func sendQuestion(_ question: String) { }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Main SDK Central Variant Interface Class -
 /* ###################################################################################################################################### */
 /**
@@ -111,7 +122,7 @@ internal protocol ITCB_SDK_Device_PeripheralDelegate: class {
 /**
  We need to keep in mind that Peripheral objects are actually owned by Central SDK instances.
  */
-internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripheral_Protocol, CBPeripheralDelegate {
+internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripheral_Protocol {
     /// This is how long we have for a timeout, in seconds.
     internal let _timeoutLengthInSeconds: TimeInterval = 1.0
     

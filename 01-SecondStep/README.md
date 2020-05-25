@@ -64,25 +64,104 @@ You should see something like this:
         }
     }
 
-    extension ITCB_SDK_Device_Peripheral {
-        func sendQuestion(_ question: String) { }
-    }
-
 Remember that we've removed comments, in order to reduce the size of these code listings.
-
-All of our work from here, on, will happen inside this context:
-
-    extension ITCB_SDK_Device_Peripheral {
-                    •
-                    •
-                    •
-    }
-    
-Just assume that we are between those two brackets, and we don't need to worry about the rest of the file.
 
 ## ON TO CODING
 
-### STEP ONE: Fill Out the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method.
+#### NEXT, The Actual Code
+
+### STEP ONE: Establish Our [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) Conformance
+
+We will need to establish five callbacks to manage the process of asking a question, and receiving the answer.
+
+#### Discovery Callbacks
+
+The first two callbacks are for the discovery phase, and are only executed when the device has been first discovered by the Central Manager.
+
+If you remember from the first step, the last thing that the Central Manager did, was make the following call:
+
+    peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
+
+That hands the baton over to the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate).
+
+You didn't see it, but when we instantiated our internal [`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114) instance, it set itself up as the delegate for the new Peripheral instance, which means that it will "catch" all the callbacks, going forward. It did that in the [`init(_:,owner:)`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L194) initializer.
+
+So that means that the last thing the Central did, was tell the newly-created Peripheral to discover its Services, and report the results to its new delegate.
+
+> ***NOTE:*** *We should be aware that a Peripheral won't automatically "know" which Services (and Characteristics, and so on) it has, until after it has "discovered" them, at the behest of the Central. Most Bluetooth entities are like this.*
+
+##### Service Discovery
+
+Once Services are discovered, they are reported as "discovered" in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
+
+Services are reported as discovered *en masse*. One call to [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) is matched by a callback to [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral), and the Peripheral's [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array now has all the discovered Services. Prior to that, the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array was undefined (either `nil`, or with "stale" data).
+
+The original Service discovery request filtered for our "Magic 8-Ball" Service, so we should expect the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array to have just one member. Nevertheless, we treat it as if it has many members.
+
+So, at this point, we should add the following code, just below the `sendQuestion(-:)` method code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
+
+    extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
+        public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+            if let error = error {
+                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+                _timeoutTimer?.invalidate()
+                _timeoutTimer = nil
+                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+                return
+            }
+            print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
+            peripheral.services?.forEach {
+                peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
+                                                    _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
+            }
+        }
+    }
+
+This is [the Services discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral).
+
+The first thing that we do, is check for an error. If there was one, we report it, and terminate the discovery.
+
+If there was no error, we then apply a visitor to each of the discovered Services, and ask the Peripheral to discover its Characteristics, by calling the [`CBPeripheral.discoverCharacteristics(_:,for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518797-discovercharacteristics) method.
+
+In this discovery request, we filter for our two Characteristic types ("question" and "answer").
+
+> ***NOTE:*** *Take note that we are calling the **Peripheral** to discover the Characteristics, not the Service. This is where Core Bluetooth gets a bit "odd." It does not directly interact with the Services, Characteristics or Descriptors. Instead, it asks the Peripheral to do all the work, on behalf of its attributes.*
+
+##### Characteristic Discovery
+
+Now that we have discovered the Service and asked the Peripheral to perform a discovery on that Service for its two Characteristics, we should set up a callback to "catch" the Characteristic discovery.
+
+Like the Service discovery callback, the results are "atomic." All Characteristics will be discovered at once. The Characteristic discovery callback is very similar to the Service discovery callback.
+
+Just below the Service discovery callback, add the following code:
+
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)
+
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if let error = error {
+            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
+            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
+            return
+        }
+        print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
+        owner.peripheralServicesUpdated(self)
+    }
+
+This is [the Characteristics discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral).
+
+Like we did with the Service discovery callback, the first thing we do is check for errors.
+
+After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback). We then inform our "owner" (the Central Manager) that we have discovered everything, and that it can tell the SDK user that the Peripheral is ready to answer questions.
+
+At this point, the Peripheral is ready. It is connected to the Central, and is no longer advertising. The Peripheral knows about its "Magic 8-Ball" Service, and that Service knows about its two Characteristics ("question" and "answer").
+
+#### Interaction Callbacks And Send Question Method
+
+### STEP TWO: Fill Out the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method.
 
 #### FIRST, the Backstory
 
@@ -122,15 +201,13 @@ And finally, we have a stored property called [`_peerInstance`](https://github.c
 
 Note that this is a **strong** reference. We need it to be so, because this will hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
 
-#### NEXT, The Actual Code
-
 We should replace this:
 
     func sendQuestion(_ question: String) { }
 
 with this:
 
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
+[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
 
     public func sendQuestion(_ inQuestion: String) {
         question = nil
@@ -225,95 +302,6 @@ If the "answer" Characteristic was already set to Notify, we actually ask the Pe
 #### Don't Forget Errors
 
 We do have a couple of quick tests for errors during this process. These are not likely to happen, but it's always a good idea to make sure we plan ahead.
-
-### STEP TWO: Establish Our [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) Conformance
-
-We will need to establish five callbacks to manage the process of asking a question, and receiving the answer.
-
-#### Discovery Callbacks
-
-The first two callbacks are for the discovery phase, and are only executed when the device has been first discovered by the Central Manager.
-
-If you remember from the first step, the last thing that the Central Manager did, was make the following call:
-
-    peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
-
-That hands the baton over to the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate).
-
-You didn't see it, but when we instantiated our internal [`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114) instance, it set itself up as the delegate for the new Peripheral instance, which means that it will "catch" all the callbacks, going forward. It did that in the [`init(_:,owner:)`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L194) initializer.
-
-So that means that the last thing the Central did, was tell the newly-created Peripheral to discover its Services, and report the results to its new delegate.
-
-> ***NOTE:*** *We should be aware that a Peripheral won't automatically "know" which Services (and Characteristics, and so on) it has, until after it has "discovered" them, at the behest of the Central. Most Bluetooth entities are like this.*
-
-##### Service Discovery
-
-Once Services are discovered, they are reported as "discovered" in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
-
-Services are reported as discovered *en masse*. One call to [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) is matched by a callback to [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral), and the Peripheral's [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array now has all the discovered Services. Prior to that, the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array was undefined (either `nil`, or with "stale" data).
-
-The original Service discovery request filtered for our "Magic 8-Ball" Service, so we should expect the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array to have just one member. Nevertheless, we treat it as if it has many members.
-
-So, at this point, we should add the following code, just below the `sendQuestion(-:)` method code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)
-
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        if let error = error {
-            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
-            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
-            return
-        }
-        print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
-        peripheral.services?.forEach {
-            peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
-                                                _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
-        }
-    }
-
-This is [the Services discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral).
-
-The first thing that we do, is check for an error. If there was one, we report it, and terminate the discovery.
-
-If there was no error, we then apply a visitor to each of the discovered Services, and ask the Peripheral to discover its Characteristics, by calling the [`CBPeripheral.discoverCharacteristics(_:,for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518797-discovercharacteristics) method.
-
-In this discovery request, we filter for our two Characteristic types ("question" and "answer").
-
-> ***NOTE:*** *Take note that we are calling the **Peripheral** to discover the Characteristics, not the Service. This is where Core Bluetooth gets a bit "odd." It does not directly interact with the Services, Characteristics or Descriptors. Instead, it asks the Peripheral to do all the work, on behalf of its attributes.*
-
-##### Characteristic Discovery
-
-Now that we have discovered the Service and asked the Peripheral to perform a discovery on that Service for its two Characteristics, we should set up a callback to "catch" the Characteristic discovery.
-
-Like the Service discovery callback, the results are "atomic." All Characteristics will be discovered at once. The Characteristic discovery callback is very similar to the Service discovery callback.
-
-Just below the Service discovery callback, add the following code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
-
-    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        if let error = error {
-            print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
-            owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
-            return
-        }
-        print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
-        owner.peripheralServicesUpdated(self)
-    }
-
-This is [the Characteristics discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral).
-
-Like we did with the Service discovery callback, the first thing we do is check for errors.
-
-After that, we assume that we're done with this Peripheral (we only have one Service, and two Characteristics, so this is the last callback). We then inform our "owner" (the Central Manager) that we have discovered everything, and that it can tell the SDK user that the Peripheral is ready to answer questions.
-
-At this point, the Peripheral is ready. It is connected to the Central, and is no longer advertising. The Peripheral knows about its "Magic 8-Ball" Service, and that Service knows about its two Characteristics ("question" and "answer").
-
-#### Interaction Callbacks
 
 The last three callbacks are the ones that are executed while the Central is asking questions, and the Peripheral is answering them.
 

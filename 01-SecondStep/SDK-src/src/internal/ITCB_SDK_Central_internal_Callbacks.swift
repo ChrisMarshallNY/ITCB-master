@@ -76,7 +76,3 @@ extension ITCB_SDK_Central: CBCentralManagerDelegate {
         peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
     }
 }
-
-extension ITCB_SDK_Device_Peripheral {
-    public func sendQuestion(_ inQuestion: String) { }
-}
