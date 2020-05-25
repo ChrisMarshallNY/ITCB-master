@@ -122,7 +122,7 @@ internal protocol ITCB_SDK_Device_PeripheralDelegate: class {
 /**
  We need to keep in mind that Peripheral objects are actually owned by Central SDK instances.
  */
-internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripheral_Protocol, CBPeripheralDelegate {
+internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripheral_Protocol {
     /// This is how long we have for a timeout, in seconds.
     internal let _timeoutLengthInSeconds: TimeInterval = 1.0
     
