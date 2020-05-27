@@ -175,6 +175,8 @@ We don't actually "set" the value of the "question" Characteristic. Instead, *we
 
 Another thing that we did before we got here, was [this little "hack"](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_internal.swift#L147) (It's not actually a "hack." It's the way we do stuff in Swift):
 
+[This is a link to a gist, with the code sample.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-arrayextension-swift)
+
     extension Array where Element: CBAttribute {
         public subscript(_ inUUIDString: String) -> Element! {
             for element in self where element.uuid.uuidString == inUUIDString {
