@@ -2,13 +2,15 @@
 
 At this point, none of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
 
-In this exercise, we'll add the Central functionality to all the apps, and complete the "Magic 8-Ball" game. We'll do this by completing the SDK, which is common to all the apps.
+In this exercise, we'll add the Central functionality to all the apps. We'll do this by working on the SDK, which is common to all the apps.
 
-In the first step, we'll create the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
+In the first part of this step, we'll create the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
 
-In the second step, we'll add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
+In the second part, we'll add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
 
 By the end of this exercise, the apps will still not operate completely, but we'll be able to observe Core Bluetooth operating "under the hood," through `print()` statements.
+
+We will see that the app initializes the Core Bluetooth subsystem, creates a Central Manager instance, then uses that instance to search for advertising devices, and initiate connections to them.
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
