@@ -2,8 +2,6 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }

@@ -98,7 +98,7 @@ Services are reported as discovered *en masse*. One call to [`CBPeripheral.disco
 
 The original Service discovery request filtered for our "Magic 8-Ball" Service, so we should expect the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array to have just one member. Nevertheless, we treat it as if it has many members.
 
-So, at this point, we should add the following code, just below the `sendQuestion(-:)` method code:
+So, at this point, we should add the following code, just below the `discoverServices(_:)` method code:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
 
@@ -106,13 +106,12 @@ So, at this point, we should add the following code, just below the `sendQuestio
         public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
             if let error = error {
                 print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-                _timeoutTimer?.invalidate()
-                _timeoutTimer = nil
                 owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
                 return
             }
             print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
             peripheral.services?.forEach {
+                print("Discovered Service: \($0.uuid.uuidString)")
                 peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
                                                     _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
             }
@@ -142,12 +141,13 @@ Just below the Service discovery callback, add the following code:
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
         print("Successfully Discovered \(service.characteristics?.count ?? 0) Characteristics for the Service \(service.uuid.uuidString), on the Peripheral \(peripheral.name ?? "ERROR").")
+        service.characteristics?.forEach {
+            print("Discovered Characteristic: \($0.uuid.uuidString)")
+        }
         owner.peripheralServicesUpdated(self)
     }
 
@@ -243,7 +243,7 @@ That's quite a handful, eh? Let's walk through it.
 
 ##### That Intricate `if... {}` Statement
 
-We have another of our cascaded AND `if` statements. Let's go through it, line-by-line:
+Let's go through it, line-by-line:
 
 ###### [`let data = inQuestion.data(using: .utf8)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L3)
 
@@ -277,7 +277,7 @@ The timeout timer is maintained in the [`_timeoutTimer`](https://github.com/Litt
 
 The timeout duration is defined in the [`_timeoutLengthInSeconds`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L116) constant.
 
-So the first thing that we do, when we send a question, is establish a 1-second timeout. When we are notified that the question was successfully asked, the timeout is invalidated, and set to `nil`.
+So the first thing that we do, when we send a question, is establish a 1-second, "one-shot" timeout. When we are notified that the question was successfully asked, the timeout is invalidated, and set to `nil`.
 
 ##### We Need to Stash Our Question Until We Know It Was Asked, and the Peripheral is Ready to Answer
 
@@ -289,7 +289,7 @@ Remember how we don't actually change the value of a Characteristic; instead, as
 
 We can't change the actual [`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128) stored property, until we've been informed that the Peripheral has acceded to our demand, so we "stash" it here.
 
-Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", if it is not already notifying. If so, we need to hold off asking the question until then.
+Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", if it is not already notifying. If so, we then need to hold off asking the question until the Peripheral reports that the Characteristic has its "Notify" attribute set.
 
 ##### If the Answer Characteristic is Not Already Notifying, We Need to Set Up Notification for the Answer
 
@@ -323,7 +323,7 @@ This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://de
 
 **BOTH** of these methods will result in the [`CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) callback being executed.
 
-The difference is *when* the callback is made.
+The difference is *when* the callback is made. If it is a response to the `readValue(for:)` method, it's predictable. What goes up, must come down. Not so, for the `setNotifyValue(_:, for:)` method.
 
 I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L16) method, above.
 
@@ -338,6 +338,8 @@ Below the Characteristic discovery callback, add the following code:
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
 
         if let error = error {
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
@@ -373,7 +375,7 @@ This sent the string (the question is a string) over to the Peripheral, telling 
 
 Assuming that went well, the Peripheral should respond* to our request, telling us that the write was successful. At that point, the question moves from an "interim" status to a "final" status (the [`question`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L128) property is set).
 
-> ***NOTE:*** _There are two ways we can do a "write" with Bluetooth: [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse), and [`.withoutResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withoutresponse). These denote whether or not we can expect the Peripheral to acknowledge receipt of the write. **THIS CALLBACK WILL NOT HAPPEN UNLESS WE SEND THE WRITE AS [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse)**._
+> ****NOTE:*** _There are two ways we can do a "write" with Bluetooth: [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse), and [`.withoutResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withoutresponse). These denote whether or not we can expect the Peripheral to acknowledge receipt of the write. **THIS CALLBACK WILL NOT HAPPEN UNLESS WE SEND THE WRITE AS [`.withResponse`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristicwritetype/withresponse)**._
 
 We don't actually do much with this information. We'll show it to the user, when we display the results, but it is more of a demonstrative exercise.
 
