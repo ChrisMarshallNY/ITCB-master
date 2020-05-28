@@ -152,9 +152,6 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        _timeoutTimer?.invalidate()
-        _timeoutTimer = nil
-        
         guard let error = error else {
             print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
             if let questionString = _interimQuestion {
@@ -166,6 +163,9 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
             
             return
         }
+        
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
         
         if let error = error as? CBATTError {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")

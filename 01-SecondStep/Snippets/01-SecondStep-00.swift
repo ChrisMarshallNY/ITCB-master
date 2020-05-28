@@ -7,6 +7,7 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
         }
         print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
         peripheral.services?.forEach {
+            print("Discovered Service: \($0.uuid.uuidString)")
             peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
                                                 _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
         }

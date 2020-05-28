@@ -384,9 +384,6 @@ Below the Notification Change callback, add the following code:
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-04-swift)
 
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        _timeoutTimer?.invalidate()
-        _timeoutTimer = nil
-        
         guard let error = error else {
             print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
             if let questionString = _interimQuestion {
@@ -398,6 +395,9 @@ Below the Notification Change callback, add the following code:
             
             return
         }
+        
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
         
         if let error = error as? CBATTError {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
@@ -606,9 +606,6 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
         }
 
         public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
-        
             guard let error = error else {
                 print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
                 if let questionString = _interimQuestion {
@@ -620,6 +617,9 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
             
                 return
             }
+        
+            _timeoutTimer?.invalidate()
+            _timeoutTimer = nil
         
             if let error = error as? CBATTError {
                 print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")

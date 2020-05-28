@@ -230,9 +230,6 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
      - parameter error: Any errors that may have occurred. It may be nil.
      */
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        _timeoutTimer?.invalidate()
-        _timeoutTimer = nil
-        
         guard let error = error else {
             if let questionString = _interimQuestion {
                 _interimQuestion = nil
@@ -244,6 +241,9 @@ extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
             return
         }
 
+        _timeoutTimer?.invalidate()
+        _timeoutTimer = nil
+        
         if let error = error as? CBATTError {
             switch error {
             // We get an "unlikely" error only when there was no question mark, so we are safe in assuming that.
