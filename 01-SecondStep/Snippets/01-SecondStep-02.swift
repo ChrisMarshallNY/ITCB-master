@@ -12,9 +12,11 @@ extension ITCB_SDK_Device_Peripheral {
             }
             _interimQuestion = inQuestion  
             if answerCharacteristic.isNotifying {  
-                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)  
+                print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
             } else {  
-                peripheral.setNotifyValue(true, for: answerCharacteristic)  
+                print("Not yet asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\", as we need to first set the answer Characteristic to notify.")
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
             }
         } else if inQuestion.data(using: .utf8) == nil {  
             print("Cannot send the question, because the question data is bad.")  
