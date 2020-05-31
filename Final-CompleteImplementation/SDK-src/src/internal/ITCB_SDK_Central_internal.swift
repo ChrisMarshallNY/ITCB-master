@@ -124,8 +124,7 @@ internal protocol ITCB_SDK_Device_PeripheralDelegate: class {
  */
 internal class ITCB_SDK_Device_Peripheral: ITCB_SDK_Device, ITCB_Device_Peripheral_Protocol {
     /// This is how long we have for a timeout, in seconds.
-    internal let _timeoutLengthInSeconds: TimeInterval = 1.0
-    
+    internal let _timeoutLengthInSeconds: TimeInterval = 2.0    
     /// This is the Central SDK that "owns" this device.
     internal var owner: ITCB_SDK_Central!
     
