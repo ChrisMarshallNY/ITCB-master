@@ -211,31 +211,31 @@ with this:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
 
-    public func sendQuestion(_ inQuestion: String) {
-        question = nil
-        if  let data = inQuestion.data(using: .utf8),
-            let peripheral = _peerInstance as? CBPeripheral,
-            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
-            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],
-            let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {
-            _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in
-                self._timeoutTimer = nil
-                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
+    public func sendQuestion(_ inQuestion: String) {  
+        question = nil  
+        if  let data = inQuestion.data(using: .utf8),  
+            let peripheral = _peerInstance as? CBPeripheral,  
+            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],  
+            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],  
+            let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {  
+            _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in  
+                self._timeoutTimer = nil  
+                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))  
             }
-            _interimQuestion = inQuestion
+            _interimQuestion = inQuestion  
             if answerCharacteristic.isNotifying {  
-                print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+                print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
                 peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
             } else {  
-                print("Not yet asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\", as we need to first set the answer Characteristic to notify.")
+                print("Not yet asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\", as we need to first set the answer Characteristic to notify.")
                 peripheral.setNotifyValue(true, for: answerCharacteristic)
             }
-        } else if inQuestion.data(using: .utf8) == nil {
-            print("Cannot send the question, because the question data is bad.")
-            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
-        } else {
-            print("Cannot send the question, because the Peripheral may be offline, or have other problems.")
-            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
+        } else if inQuestion.data(using: .utf8) == nil {  
+            print("Cannot send the question, because the question data is bad.")  
+            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))  
+        } else {  
+            print("Cannot send the question, because the Peripheral may be offline, or have other problems.")  
+            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))  
         }
     }
 
@@ -340,8 +340,6 @@ Below the Characteristic discovery callback, add the following code:
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
 
         if let error = error {
-            _timeoutTimer?.invalidate()
-            _timeoutTimer = nil
             owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
             return
         }
@@ -352,7 +350,7 @@ Below the Characteristic discovery callback, add the following code:
             let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
             let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
             print("The Peripheral's answer Characteristic is now notifying.")
-            print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+            print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
             peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
         }
     }
@@ -553,10 +551,10 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
                 }
                 _interimQuestion = inQuestion
                 if answerCharacteristic.isNotifying {  
-                    print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+                    print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
                     peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
                 } else {  
-                    print("Not yet asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\", as we need to first set the answer Characteristic to notify.")
+                    print("Not yet asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\", as we need to first set the answer Characteristic to notify.")
                     peripheral.setNotifyValue(true, for: answerCharacteristic)
                 }
             } else if inQuestion.data(using: .utf8) == nil {
@@ -607,8 +605,7 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
                 characteristic.isNotifying,
                 let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
                 let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
-                print("The Peripheral's answer Characteristic is now notifying.")
-                print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+                print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
                 peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
             }
         }

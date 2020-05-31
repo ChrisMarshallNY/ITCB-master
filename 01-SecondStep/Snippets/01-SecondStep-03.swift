@@ -13,7 +13,7 @@
             let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
             let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString] {
             print("The Peripheral's answer Characteristic is now notifying.")
-            print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+            print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
             peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
         }
     }

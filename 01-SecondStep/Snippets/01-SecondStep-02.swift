@@ -12,10 +12,10 @@ extension ITCB_SDK_Device_Peripheral {
             }
             _interimQuestion = inQuestion  
             if answerCharacteristic.isNotifying {  
-                print("Asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\".")
+                print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
                 peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
             } else {  
-                print("Not yet asking the Peripheral \(peripheral.name) the question \"\(_interimQuestion)\", as we need to first set the answer Characteristic to notify.")
+                print("Not yet asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\", as we need to first set the answer Characteristic to notify.")
                 peripheral.setNotifyValue(true, for: answerCharacteristic)
             }
         } else if inQuestion.data(using: .utf8) == nil {  
