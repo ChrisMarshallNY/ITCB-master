@@ -147,6 +147,8 @@ extension ITCB_SDK_Peripheral: CBPeripheralManagerDelegate {
                 assert(manager === inPeripheralManager)
                 // We create an instance of a mutable Service. This is our primary Service.
                 let mutableServiceInstance = CBMutableService(type: _static_ITCB_SDK_8BallServiceUUID, primary: true)
+                // Make sure that we "clear the decks," in case of a cache.
+                inPeripheralManager.removeAllServices()
                 // We set up empty Characteristics.
                 _setCharacteristicsForThisService(mutableServiceInstance)
                 // Add it to our manager instance.

@@ -75,6 +75,9 @@
             location = "group:/Users/chrismarshall/Desktop/Lesson/IntroductionToCoreBluetooth-trySwiftWorld/01-SecondStep/Snippets/01-SecondStep-02.swift">
          </FileRef>
          <FileRef
+            location = "group:01-SecondStep/Snippets/01-SecondStep-ArrayExtension.swift">
+         </FileRef>
+         <FileRef
             location = "group:01-SecondStep/Snippets/01-SecondStep-03.swift">
          </FileRef>
          <FileRef
@@ -82,9 +85,6 @@
          </FileRef>
          <FileRef
             location = "group:01-SecondStep/Snippets/01-SecondStep-05.swift">
-         </FileRef>
-         <FileRef
-            location = "group:01-SecondStep/Snippets/01-SecondStep-ArrayExtension.swift">
          </FileRef>
       </Group>
       <Group
