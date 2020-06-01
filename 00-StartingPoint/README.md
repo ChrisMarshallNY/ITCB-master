@@ -42,6 +42,23 @@ Simply start Terminal, and enter "[`uuidgen`](https://www.freebsd.org/cgi/man.cg
 
 You can also use a UUID-generator Web site, [like this one](https://www.uuidgenerator.net/).
 
+## A TIMELINE OF EVENTS
+![Timeline Doagram](01-Timeline-CBManager.png)
+
+1. App Creates Instance of SDK
+2. SDK Creates Instance of CBCentralManager
+3. CBCentralManager Calls CBCentralManagerDelegate.centralManagerDidUpdateState(_:)
+4. SDK calls CBCentralManager.scanForPeripherals(withServices:,options:)
+5. Core Bluetooth Starts Scanning for Advertising Peripherals
+6. Peripheral is Discovered by Core Bluetooth
+7. Core Bluetooth CBCentralManager calls CBCentralManagerDelegate.centralManager(_:,didDiscover:,advertisementData:,rssi:)
+8. SDK Calls CBCentralManager.connect(_:,options:)
+9. Core Bluetooth Connects to Peripheral
+10. Peripheral Accepts Connection
+11. CBCentralManager Calls CBCentralManagerDelegate.centralManager(_:,didConnect:)
+12. SDK Calls CBPeripheral.discoverServices(_:)
+
+
 ## ON TO CODING
 
 Now, we'll start to add code. While we do that, we'll examine what is happening, step-by-step.

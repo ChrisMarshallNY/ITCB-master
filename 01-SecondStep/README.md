@@ -90,6 +90,19 @@ So that means that the last thing the Central did, was tell the newly-created Pe
 
 > ***NOTE:*** *We should be aware that a Peripheral won't automatically "know" which Services (and Characteristics, and so on) it has, until after it has "discovered" them, at the behest of the Central. Most Bluetooth entities are like this.*
 
+##### Timeline of Discovery
+
+![Disovery Timeline](02-Timeline-Discovery.png)
+
+1. Core Bluetooth Asks Peripheral To Discover Services
+2. Peripheral Responds With Discovered Services
+3. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didDiscoverServices:,error:)
+4. The SDK Calls CBPeripheral.discoverCharacteristics(_:,for:)
+5. Core Bluetooth Asks Peripheral To Discover Characteristics for Service
+6. Peripheral responds With Discovered Characteristics
+7. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didDiscoverCharacteristicsFor:,error:)
+8. The SDK Informs the App That the Peripheral Is Ready For A Question
+
 ##### Service Discovery
 
 Once Services are discovered, they are reported as "discovered" in the [`CBPeripheralDelegate.peripheral(_:, didDiscoverServices:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral) callback.
@@ -162,6 +175,23 @@ At this point, the Peripheral is ready. It is connected to the Central, and is n
 #### Interaction Callbacks And Send Question Method
 
 ### STEP TWO: Fill Out the [`sendQuestion(_:)`](https://github.com/LittleGreenViper/ITCB/blob/9237ba70ba2cc074fdc19bca52aecf44176e66b6/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L81) method.
+
+##### Timeline of Question/Answer
+
+![Disovery Timeline](03-Timeline-Question.png)
+
+1. App calls SDK ITCB_SDK_Device_Peripheral.sendQuestion(_:)
+2. SDK Calls CBPeripheral.setNotifyValue(_:,for:)
+3. Core Bluetooth Asks Peripheral to Set the Notify Value for the Answer Characteristic
+4. Peripheral Reports Characteristic Notify is On.
+5. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didUpdateNotificationStateFor:,error:)
+6. SDK Calls CBPeripheral.writeValue(_:,for:)
+7. Core Bluetooth Asks peripheral to Set Value for Answer Characteristic, and Return Acknowledgment
+8. Peripheral Acknowledges Question Value Set
+9. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didWriteValueFor:,error:)
+10. Peripheral Changes Value of Answer Characteristic and Notifies Core Bluetooth
+11. Core Bluetooth Calls CBPeripheral.peripheral(_:,didUpdateValueFor:,error:)
+12. The SDK notifies App that the Answer is Available
 
 #### FIRST, the Backstory
 
