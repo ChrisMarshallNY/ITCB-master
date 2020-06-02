@@ -14,7 +14,7 @@ We will see that the app initializes the Core Bluetooth subsystem, creates a Cen
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
-If you haven't already done so, open the [`ITCB.xcworkspace`](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint/ITCB.xcworkspace) workspace with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
+If you haven't already done so, open the [`ITCB.xcworkspace`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint/ITCB.xcworkspace) workspace with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
 
 The following code is all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
 
@@ -67,13 +67,13 @@ Now, we'll start to add code. While we do that, we'll examine what is happening,
 
 This means that we'll be doing a couple of things:
 
-1. We'll create an _unconstrained_ extension of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L130) class to hold the first step (overriding the stored prperty).
+1. We'll create an _unconstrained_ extension of the [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class to hold the first step (overriding the stored prperty).
 
-2. Inside that extension, we'll create [a computed override](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift-L2) of a [stored property](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L113) that stores an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and assign it to [the superclass stored property](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L113) (already prepared for it).
+2. Inside that extension, we'll create [a computed override](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift-L2) of a [stored property](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) that stores an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and assign it to [the superclass stored property](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) (already prepared for it).
 
-3. We'll create a _constrained_ extension of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L130) class, adding several methods to provide conformance to the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) protocol. The rest of the exercise will happen inside that extension.
+3. We'll create a _constrained_ extension of the [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class, adding several methods to provide conformance to the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) protocol. The rest of the exercise will happen inside that extension.
 
-    What this means, is that the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L130) class will be set up to "catch" messages from our instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and act on them.
+    What this means, is that the [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class will be set up to "catch" messages from our instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and act on them.
 
 ### STEP ONE: Instantiating the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) Instance, and Assigning it to a Strong Reference
 
@@ -97,13 +97,13 @@ The first thing that we'll do, is add the following code, just below the static 
         }
     }
 
-What this does, is override the stored property [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_internal.swift#L46) with [a computed property](https://docs.swift.org/swift-book/LanguageGuide/Properties.html#ID259), so we intercept access to the stored property.
+What this does, is override the stored property [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) with [a computed property](https://docs.swift.org/swift-book/LanguageGuide/Properties.html#ID259), so we intercept access to the stored property.
 
-The [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_internal.swift#L46) property is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
+The [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) property is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
 
 It should also be noted that this is a **strong** reference. This is important. The `CB`*`XXX`*`Manager` instance needs to be kept around, after instantiation.
 
-Our getter method will check [the superclass instance of `_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L113) before returning it. If that instance is `nil`, then we'll actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
+Our getter method will check [the superclass instance of `_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) before returning it. If that instance is `nil`, then we'll actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
 
 The setter is a simple straight-up passthrough.
 
@@ -144,7 +144,7 @@ We'll add the following code inside the empty [`CBCentralManagerDelegate.central
 
 What we just did, was tell the app that, upon the Bluetooth system becoming powered-up and ready (the [`.poweredOn`](https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/poweredon) state), we are to immediately [begin scanning for Peripherals](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipherals).
 
-Note the [`_static_ITCB_SDK_8BallServiceUUID`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L28) that we send into the [`CBCentralManager.scanForPeripherals(withServices:,options:)`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-02-swift-L3) method. That tells the Central to filter advertisements from Peripherals, and only pay attention to ones that claim that they provide the "Magic 8-Ball" Service. You can scan for multiple Services, here, with the filtering done on an "OR" basis (a device that advertises any one of the Services will result in a "hit").
+Note the [`_static_ITCB_SDK_8BallServiceUUID`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L28) that we send into the [`CBCentralManager.scanForPeripherals(withServices:,options:)`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-02-swift-L3) method. That tells the Central to filter advertisements from Peripherals, and only pay attention to ones that claim that they provide the "Magic 8-Ball" Service. You can scan for multiple Services, here, with the filtering done on an "OR" basis (a device that advertises any one of the Services will result in a "hit").
 
 In our app, we are only interested in the one custom Service that we created to run the magic 8-ball functionality. This ensures that only "Magic 8-Ball" Peripherals will be found.
 
@@ -181,11 +181,11 @@ Note the rather convoluted `if {}` statement. We do a bit of checking up on the 
 
 Let's walk through this vetting:
 
-##### The [`devices`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L145) Array
+##### The [`devices`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L145) Array
 
-This is an Array property of the [`ITCB_SDK_Central`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L130) class, and its job is to maintain references to discovered devices. We store the devices as instances of the [`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114) class, which is a "wrapper" for our devices.
+This is an Array property of the [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class, and its job is to maintain references to discovered devices. We store the devices as instances of the [`ITCB_SDK_Device_Peripheral`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L125) class, which is a "wrapper" for our devices.
 
-Like the [`_managerInstance`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L113) property, it's important for us to maintain **strong** references to these wrappers (which, in turn, have their [own strong references](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_internal.swift#L180) to the Peripheral instance). Otherwise, they will be deallocated immediately upon leaving this callback.
+Like the [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) property, it's important for us to maintain **strong** references to these wrappers (which, in turn, have their [own strong references](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_internal.swift#L180) to the Peripheral instance). Otherwise, they will be deallocated immediately upon leaving this callback.
 
 It's also important to maintain **only one** reference to each of the instances.
 
@@ -213,13 +213,13 @@ The last line makes sure that the signal strength of the Peripheral is within ou
 
 Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can [add it to our collection](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L8).
 
-We do this by instantiating the "Peripheral wrapper" class ([`ITCB_SDK_Device_Peripheral`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L114)). When we instantiate that, [it will establish itself](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L196) as the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) for the discovered Peripheral, and will handle callbacks from here on out.
+We do this by instantiating the "Peripheral wrapper" class ([`ITCB_SDK_Device_Peripheral`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L125)). When we instantiate that, [it will establish itself](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L207) as the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) for the discovered Peripheral, and will handle callbacks from here on out.
 
-[We execute a `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7), so that our console will log the discovery, and [append the new device wrapper](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L8) to our [`devices`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L145) Array.
+[We execute a `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7), so that our console will log the discovery, and [append the new device wrapper](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L8) to our [`devices`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L145) Array.
 
 [We then execute another `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L9), reporting that we are about to connect to the device, and call the [`CBCentralManager.connect(_:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518766-connect) method to initiate a connection to the Peripheral.
 
-> ***NOTE:*** *If we had not just added the newly discovered Peripheral to our [`devices`](https://github.com/LittleGreenViper/ITCB/blob/effafee41e354b7654ba777a6301e0cd45150b51/SDK-src/src/public/ITCB_SDK.swift#L145) Array (which creates a strong reference), this connection would never happen, as the Peripheral would disappear as soon as this callback was exited. This can be a difficult bug to figure out, as the symptom is simply that the [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) method is never called, and the [`CBCentralManagerDelegate.centralManager(_:,didFailToConnect:,error:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518988-centralmanager) method is also never called.*
+> ***NOTE:*** *If we had not just added the newly discovered Peripheral to our [`devices`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L145) Array (which creates a strong reference), this connection would never happen, as the Peripheral would disappear as soon as this callback was exited. This can be a difficult bug to figure out, as the symptom is simply that the [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) method is never called, and the [`CBCentralManagerDelegate.centralManager(_:,didFailToConnect:,error:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518988-centralmanager) method is also never called.*
 
 #### Responding to A Device Connection
 
@@ -262,7 +262,7 @@ Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for pe
 
 ## WHERE WE ARE NOW
 
-At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file, after the original static constants:
+At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift) file, after the original static constants:
 
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20
@@ -314,11 +314,11 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 ## NEXT STEP
 
-Go back to the main lesson, and open the `01-SecondStep` directory, then, open the [`ITCB.xcworkspace` workspace](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep/ITCB.xcworkspace) file with Xcode, and follow the steps in the [`README.md` file](https://github.com/LittleGreenViper/ITCB/blob/01-SecondStep/README.md).
+Go back to the main lesson, and open the `01-SecondStep` directory, then, open the [`ITCB.xcworkspace` workspace](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep/ITCB.xcworkspace) file with Xcode, and follow the steps in the [`README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/README.md).
 
 # REFERENCES
 
-- [The Git Repo Branch for This Step](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint)
+- [The Git Repo Location for This Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
 - [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
 - [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
 - [Apple CBCentralManager Documentation](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager)
