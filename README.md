@@ -127,10 +127,10 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 ## REFERENCES
 
 - [This is a Downloadable ZIP File, With the Entire Lesson ***(Warning: Not A Small File)***](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip)
-- [This is the Git Repo for This Exercise (The Final Implementation)](https://github.com/LittleGreenViper/ITCB)
-- [The Git Repo Branch for the First Step](https://github.com/LittleGreenViper/ITCB/tree/00-StartingPoint)
-- [The Git Repo Branch for the Second Step](https://github.com/LittleGreenViper/ITCB/tree/01-SecondStep)
-- [The Git Repo Branch for the Finished Lesson](https://github.com/LittleGreenViper/ITCB/tree/02-FinishedLesson)
+- [This is the Git Repo for This Exercise (The Final Implementation)](https://github.com/ChrisMarshallNY/ITCB-master)
+- [The Git Repo Branch for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
+- [The Git Repo Branch for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
+- [The Git Repo Branch for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
 - [This is a GitHub Gist, with the Snippets for the First Phase](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32)
 - [This is a GitHub Gist, with the Snippets for the Second Phase](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894)
 - [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/fc204268648b5bbee482a40607cfa9243761100b.zip)
