@@ -142,5 +142,7 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [The Source Repo for the BlueThoth Bluetooth SDK Project (WIP)](https://github.com/RiftValleySoftware/RVS_BlueThoth)
 - [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
 - [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
+- [Apple WWDC 2017 "What's New In Core Bluetooth" Session (Video)](https://developer.apple.com/videos/play/wwdc2017/712/)
+- [Apple WWDC 2019 "What's New In Core Bluetooth" Session (Video)](https://developer.apple.com/videos/play/wwdc2019/901/)
 - [The Main Bluetooth Site](https://www.bluetooth.com/)
 - [Bluetooth Core Specifications](https://www.bluetooth.com/specifications/bluetooth-core-specification/)
