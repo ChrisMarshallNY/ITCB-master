@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		4D9lfJNtyJNL2eCMMqFRbDgfMWo=
+		5ZL6rNy2yF8byo3V/rZMYQSkyl4=
 		</data>
 		<key>Resources/Base.lproj/InfoPlist.strings</key>
 		<data>
@@ -18,55 +18,55 @@
 		</data>
 		<key>Resources/Base.lproj/Localizable.strings</key>
 		<data>
-		iNhZW4UGaapsfzUhTFigrjzdWb8=
+		ISBi+mNjRDQ6nzoiLCo9uAN0C2Y=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/6gt-lw-eDQ-view-7XZ-3S-iyW.nib</key>
 		<data>
-		G739e5/iTnOtcW/Skpm36QI3PGA=
+		bB6ZBh0ug7c4Jt5h2dRqFDk4C1A=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		RRs+4DCOS/jcGNvCH4I+mCiFelk=
+		fqyQ1sCjJ56VExXYbfTfScswxQg=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		7T6tHEAr2FcDHfGek+QlQpjsu2U=
+		SlRW0imQ6BdNGaO6LX/mIoIXLZ8=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<data>
-		2TUzYtom0VUOKUDkEl0xbmv8yNI=
+		Jggmgz6EYwDSS4vVrm+GrIklNNw=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-Xfz-LK-QeZ.nib</key>
 		<data>
-		SjOqj+tidePyT0dkqqaaCeC5aMc=
+		FEHtETsrdg3EptMbAHLQmB3aS5c=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<data>
-		2NDGnkOR3A3j9g4pdQ//1pH3R1c=
+		KJ7iH+BuNX0cTjt4az5VzymJPRY=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/a3D-N2-eqe-view-XFB-mx-VLf.nib</key>
 		<data>
-		eUK5KUMzsPOixu9NE1f2Vh4mYpM=
+		5Q2DPxSTe3u4k4BKn1qvRYs5zPM=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/bYO-nF-DND-view-X5P-Ur-voQ.nib</key>
 		<data>
-		dEzqTZ0uAkXI0drzG6aDnZCywHY=
+		zhKpe5LdjtvHHvnqZyvUTiCBUKg=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/central-initial-view-controller.nib</key>
 		<data>
-		OcCb36GLxQNTHaHTr7XcUB0ozug=
+		nv73dQm9GaLQKZZNhaOnsUuwEUQ=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/central-peripheral-initial-view-controller.nib</key>
 		<data>
-		8vPEGBJr0BMoRg9NswrnI7Iz6Q8=
+		d6qf00cjnqgcEd3rAKAZY+z6OFY=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/dw0-N0-fnG-view-UkL-hh-QAU.nib</key>
 		<data>
-		wd3YJHajAyf81G76V8sX+XpwrX4=
+		1/mn3IycxJ5FVUVYGCiffPuxIqQ=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/peripheral-initial-view-controller.nib</key>
 		<data>
-		WWoPR/SGQ7lplzyeDCESXzai7jA=
+		lurjJnXOcR5dthIa/EeKZe1r+kc=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -75,7 +75,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			vXCHKAJNopFVLCaA/lodC7HYFro=
+			44fOeCYXLSv1QOSNjQ82o2whXvs=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.littlegreenviper.ITCB-Mac" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Chris Marshall (2D279UYGKU)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -91,7 +91,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PF97XXOWAggbEw7flzjGkf6tPu+wmNhRTd68zbfM99k=
+			ncXMXfHIQhsJ82bAkW49Q6t3jVvJi8iVMO8Fwh30Qnw=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/InfoPlist.strings</key>
@@ -105,91 +105,91 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			A9zqubOhvXwIDGgRWPmYby40asmuPTzhG4798ufuaJw=
+			YG2ASWWyZQYnFeexeUZvNSIy/v6uU5rNQTs65Pzmb28=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/6gt-lw-eDQ-view-7XZ-3S-iyW.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+2VX8PUhSqrvd4Pw60FiqKWKM/Z8eqpVnNxqMAM72vI=
+			rnE1u+H6WrVIh4Ne3mZpE4HP/ZunnFnehXuvxZZMmww=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TYsYUkd1+F4TI9gdPB7/Wb+3yVy9VoDof7ypaDxfgos=
+			ln7cyPrbgFU+p+A1jw5ApEvt4X70vgyyEiSfqNek9Aw=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			u3CizWCUlBKsfxkPMHgltr5uHNh4Ob4qHxM4d3uRCjw=
+			4xoDkV4G28TfDKbXzzwgMWhxS9Y/rdCkji8o9CO14Ko=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SFs5m3K5mOz1EkaFfW7eQQWkydyIV7d5ymc45B6WMy4=
+			FDTD5fsDNvcLfNKY/NnAknDcefy/cvzMyaekpJVNz+Q=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-Xfz-LK-QeZ.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			tE3o2PpuCNogmmV6YnzVMUgnRJm1Q6Boee9xLstDI5g=
+			HlLWU+CiU2bj/QM7IPoiRNtrvLms9n1bmQt2qY02Ylc=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sx5HMc2zgpbLRa1Qkos8kkEphBitX1E5A9C7XT4Q+80=
+			dlMA9wz6B0tMamLWc4+bUlrxo49hOp5BPyGlp2Hlz9s=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/a3D-N2-eqe-view-XFB-mx-VLf.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			oHiJf0M0lt8LjsvhATkULXZj4Kh0x2sbmU1IhrKHwmE=
+			CnLZk5ksqAMYDk3NXuf1UmMQG0YsOvbYbtKvI44YjoA=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/bYO-nF-DND-view-X5P-Ur-voQ.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1rENiaX5VInbVpWJLY70LYVgo7kiOv9oRvrJhIhF8fU=
+			SHbi446/J5MFVhVx8Xg8jCVQbHN00+mmIE8qFNo842U=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/central-initial-view-controller.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xVNdPyjuAG35hZX1iTGHksqY9gzRqcLd7zC+pNvGmak=
+			LwEzZsZgePGyDSI1Cd76078CJXU9acZODJU2wfJv5+c=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/central-peripheral-initial-view-controller.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nJTkvB/TVX84pufAKoSqq7wm6ygL8I9LxEpBfzAvCMc=
+			z1TNGejpusyLtGnq8qDLbQEpBQ8UmcrIutpj73f+wXE=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/dw0-N0-fnG-view-UkL-hh-QAU.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			I/g2pA3SQzMqzG/MOkx067p5dJsSbOl8Txlfqla5Gp0=
+			GPHV1y8PyVZ5h0tOLgw1tNNUmWZWSLrmLEid5V8n7IQ=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/peripheral-initial-view-controller.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QmP5f4S5M6M4r0cC00fe3TghSis1glec/MPCWr+42eE=
+			7UjlLAFHH1PNbpH9b5ZQIJ8e2hYaTd7tvkyqQyDGMyM=
 			</data>
 		</dict>
 	</dict>
