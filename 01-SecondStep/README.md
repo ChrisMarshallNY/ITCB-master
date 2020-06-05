@@ -189,9 +189,10 @@ At this point, the Peripheral is ready. It is connected to the Central, and is n
 7. Core Bluetooth Asks peripheral to Set Value for Answer Characteristic, and Return Acknowledgment
 8. Peripheral Acknowledges Question Value Set
 9. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didWriteValueFor:,error:)
-10. Peripheral Changes Value of Answer Characteristic and Notifies Core Bluetooth
-11. Core Bluetooth Calls CBPeripheral.peripheral(_:,didUpdateValueFor:,error:)
-12. The SDK notifies App that the Answer is Available
+10. The SDK Notifies the App That The Question Was Asked
+11. Peripheral Changes Value of Answer Characteristic and Notifies Core Bluetooth
+12. Core Bluetooth Calls CBPeripheral.peripheral(_:,didUpdateValueFor:,error:)
+13. The SDK notifies App that the Answer is Available
 
 #### FIRST, the Backstory
 
