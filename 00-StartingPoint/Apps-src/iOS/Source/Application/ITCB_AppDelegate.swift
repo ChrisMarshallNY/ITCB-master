@@ -85,6 +85,10 @@ class ITCB_AppDelegate: UIResponder, UIApplicationDelegate {
                 presentedBy = (UIApplication.shared.windows.filter { $0.isKeyWindow }.first)?.rootViewController
             }
             
+            if nil == presentedBy {
+                presentedBy = UIApplication.shared.delegate?.window??.rootViewController
+            }
+
             if nil != presentedBy {
                 let style: UIAlertController.Style = ((.pad == presentedBy?.traitCollection.userInterfaceIdiom) || false) ? .alert : .actionSheet
                 let alertController = UIAlertController(title: inHeader, message: inMessage, preferredStyle: style)
