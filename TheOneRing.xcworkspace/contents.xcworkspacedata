@@ -66,13 +66,13 @@
          location = "container:"
          name = "Snippets">
          <FileRef
-            location = "group:/Users/chrismarshall/Desktop/Lesson/IntroductionToCoreBluetooth-trySwiftWorld/01-SecondStep/Snippets/01-SecondStep-00.swift">
+            location = "group:01-SecondStep/Snippets/01-SecondStep-00.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/chrismarshall/Desktop/Lesson/IntroductionToCoreBluetooth-trySwiftWorld/01-SecondStep/Snippets/01-SecondStep-01.swift">
+            location = "group:01-SecondStep/Snippets/01-SecondStep-01.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/chrismarshall/Desktop/Lesson/IntroductionToCoreBluetooth-trySwiftWorld/01-SecondStep/Snippets/01-SecondStep-02.swift">
+            location = "group:01-SecondStep/Snippets/01-SecondStep-02.swift">
          </FileRef>
          <FileRef
             location = "group:01-SecondStep/Snippets/01-SecondStep-ArrayExtension.swift">
