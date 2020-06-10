@@ -112,7 +112,7 @@ At the top, in the Scheme Menu, you will note that there are sixteen schemes:
 
 Each of these will build the app (and the SDK) for the indicated platform.
 
-> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth.***
+> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only oiperating systems that support Peripheral Mode.***
 
 The "`00-StartingPoint`" schemes will run, but the Central Mode won't work. Peripheral Mode will work fine (on Mac and iOS). You can use this to test as we proceed.
 
@@ -138,7 +138,8 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [The "Genesis" of This Lesson: A Series That Walks Through Development of a Core Bluetooth App](https://littlegreenviper.com/series/bluetooth/)
 - [A "Sequel" to That Series](https://littlegreenviper.com/series/bluetooth-2/)
 - [The "Blue Van Clef" App](https://riftvalleysoftware.com/work/ios-apps/bluevanclef/)
-- [The Source Documentation (and Repo) for the Blue Van Clef App](https://riftvalleysoftware.github.io/BlueVanClef/)
+- [The Source Repo for the Blue Van Clef iOS App](https://github.com/RiftValleySoftware/BlueVanClef)
+- [The Source Documentation for the Blue Van Clef iOS App](https://riftvalleysoftware.github.io/BlueVanClef/)
 - [The Source Repo for the BlueThoth Bluetooth SDK Project (WIP)](https://github.com/RiftValleySoftware/RVS_BlueThoth)
 - [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
 - [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
@@ -146,3 +147,5 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [Apple WWDC 2019 "What's New In Core Bluetooth" Session (Video)](https://developer.apple.com/videos/play/wwdc2019/901/)
 - [The Main Bluetooth Site](https://www.bluetooth.com/)
 - [Bluetooth Core Specifications](https://www.bluetooth.com/specifications/bluetooth-core-specification/)
+- [The Official Bluetooth Name Story](https://www.bluetooth.com/about-us/bluetooth-origin/)
+- [An Intel Story About Jim Kardach, and His Name for Bluetooth](https://newsroom.intel.com/editorials/the-man-who-named-bluetooth/#gs.7shvhe)
