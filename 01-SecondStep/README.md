@@ -25,6 +25,7 @@ You should see something like this:
         override var _managerInstance: Any! {
             get {
                 if super._managerInstance == nil {
+                    print("Creating A new instance of CBCentralManager.")
                     super._managerInstance = CBCentralManager(delegate: self, queue: nil)
                 }
             
@@ -529,6 +530,7 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
         override var _managerInstance: Any! {
             get {
                 if super._managerInstance == nil {
+                    print("Creating A new instance of CBCentralManager.")
                     super._managerInstance = CBCentralManager(delegate: self, queue: nil)
                 }
             

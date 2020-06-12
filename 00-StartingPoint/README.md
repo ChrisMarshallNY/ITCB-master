@@ -85,6 +85,7 @@ The first thing that we'll do, is add the following code, just below the static 
         override var _managerInstance: Any! {
             get {
                 if super._managerInstance == nil {
+                    print("Creating A new instance of CBCentralManager.")
                     super._managerInstance = CBCentralManager(delegate: self, queue: nil)
                 }
             
@@ -271,6 +272,7 @@ At this point, we have added the following code to the [`ITCB/src/Shared/interna
         override var _managerInstance: Any! {
             get {
                 if super._managerInstance == nil {
+                    print("Creating A new instance of CBCentralManager.")
                     super._managerInstance = CBCentralManager(delegate: self, queue: nil)
                 }
             
