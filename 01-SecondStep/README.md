@@ -243,31 +243,20 @@ with this:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
 
-    public func sendQuestion(_ inQuestion: String) {  
-        question = nil  
-        if  let data = inQuestion.data(using: .utf8),  
-            let peripheral = _peerInstance as? CBPeripheral,  
-            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],  
-            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],  
-            let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {  
-            _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in  
-                self._timeoutTimer = nil  
-                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))  
+    public func sendQuestion(_ inQuestion: String) {
+        question = nil
+        if  let peripheral = _peerInstance as? CBPeripheral,
+            let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
+            let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {
+            _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in
+                self._timeoutTimer = nil
+                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
             }
-            _interimQuestion = inQuestion  
-            if answerCharacteristic.isNotifying {  
-                print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
-                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
-            } else {  
-                print("Not yet asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\", as we need to first set the answer Characteristic to notify.")
-                peripheral.setNotifyValue(true, for: answerCharacteristic)
-            }
-        } else if inQuestion.data(using: .utf8) == nil {  
-            print("Cannot send the question, because the question data is bad.")  
-            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))  
-        } else {  
-            print("Cannot send the question, because the Peripheral may be offline, or have other problems.")  
-            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))  
+            _interimQuestion = inQuestion
+            
+            peripheral.setNotifyValue(true, for: answerCharacteristic)
+        } else {
+            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
         }
     }
 
@@ -279,10 +268,6 @@ That's quite a handful, eh? Let's walk through it.
 
 Let's go through it, line-by-line:
 
-###### [`let data = inQuestion.data(using: .utf8)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L3)
-
-First, we convert the String to a [`Data`](https://developer.apple.com/documentation/foundation/data) object. If that fails, the whole shooting match goes down the tubes.
-
 ###### [`let peripheral = _peerInstance as? CBPeripheral`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L4)
 
 Next, we unwrap and cast the [`_peerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_internal.swift#L180) property to a [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) instance.
@@ -290,10 +275,6 @@ Next, we unwrap and cast the [`_peerInstance`](https://github.com/ChrisMarshallN
 ###### [`let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L5)
 
 Next, we use one of those constrained Array extensions that we mentioned earlier, to get the "Magic 8-Ball" Service from the Peripheral.
-
-###### [`let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L6)
-
-Next, we do the same for the "question" Characteristic.
 
 ###### [`let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString]`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L7)
 
@@ -573,44 +554,18 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
     extension ITCB_SDK_Device_Peripheral {
         public func sendQuestion(_ inQuestion: String) {
             question = nil
-            if  let data = inQuestion.data(using: .utf8),
-                let peripheral = _peerInstance as? CBPeripheral,
+            if  let peripheral = _peerInstance as? CBPeripheral,
                 let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
-                let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],
                 let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {
                 _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in
                     self._timeoutTimer = nil
                     self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
                 }
                 _interimQuestion = inQuestion
-                if answerCharacteristic.isNotifying {  
-                    print("Asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\".")
-                    peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
-                } else {  
-                    print("Not yet asking the Peripheral \(peripheral.name ?? "ERROR") the question \"\(_interimQuestion ?? "ERROR")\", as we need to first set the answer Characteristic to notify.")
-                    peripheral.setNotifyValue(true, for: answerCharacteristic)
-                }
-            } else if inQuestion.data(using: .utf8) == nil {
-                print("Cannot send the question, because the question data is bad.")
-                self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
+        
+                peripheral.setNotifyValue(true, for: answerCharacteristic)
             } else {
-                print("Cannot send the question, because the Peripheral may be offline, or have other problems.")
                 self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
-            }
-        }
-
-        public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-            if let error = error {
-                print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
-                _timeoutTimer?.invalidate()
-                _timeoutTimer = nil
-                owner?._sendErrorMessageToAllObservers(error: ITCB_Errors.coreBluetooth(error))
-                return
-            }
-            print("Successfully Discovered \(peripheral.services?.count ?? 0) Services for \(peripheral.name ?? "ERROR").")
-            peripheral.services?.forEach {
-                peripheral.discoverCharacteristics([_static_ITCB_SDK_8BallService_Question_UUID,
-                                                    _static_ITCB_SDK_8BallService_Answer_UUID], for: $0)
             }
         }
     

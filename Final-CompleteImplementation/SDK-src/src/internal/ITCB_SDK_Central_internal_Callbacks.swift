@@ -125,10 +125,8 @@ extension ITCB_SDK_Device_Peripheral {
      */
     public func sendQuestion(_ inQuestion: String) {
         question = nil
-        if  let data = inQuestion.data(using: .utf8),
-            let peripheral = _peerInstance as? CBPeripheral,
+        if  let peripheral = _peerInstance as? CBPeripheral,
             let service = peripheral.services?[_static_ITCB_SDK_8BallServiceUUID.uuidString],
-            let questionCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Question_UUID.uuidString],
             let answerCharacteristic = service.characteristics?[_static_ITCB_SDK_8BallService_Answer_UUID.uuidString] {
             _timeoutTimer = Timer.scheduledTimer(withTimeInterval: _timeoutLengthInSeconds, repeats: false) { [unowned self] (_) in
                 self._timeoutTimer = nil
@@ -136,14 +134,8 @@ extension ITCB_SDK_Device_Peripheral {
             }
             _interimQuestion = inQuestion
             
-            // If we are already notifying, then we simply send the question. Otherwise we first turn on answer notification.
-            if answerCharacteristic.isNotifying {
-                peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
-            } else {
-                peripheral.setNotifyValue(true, for: answerCharacteristic)
-            }
-        } else if inQuestion.data(using: .utf8) == nil {
-            self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(nil)))
+            // We first turn on answer notification.
+            peripheral.setNotifyValue(true, for: answerCharacteristic)
         } else {
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
         }
