@@ -304,17 +304,7 @@ Remember how we don't actually change the value of a Characteristic; instead, as
 
 We can't change the actual [`question`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L138) stored property, until we've been informed that the Peripheral has acceded to our demand, so we "stash" it here.
 
-Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", if it is not already notifying. If so, we then need to hold off asking the question until the Peripheral reports that the Characteristic has its "Notify" attribute set.
-
-##### If the Answer Characteristic is Not Already Notifying, We Need to Set Up Notification for the Answer
-
-If the Characteristic is not already notifying, we tell the "answer" Characteristic to notify us when it changes. We do that by setting its [`notify`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) value (again, we are asking the Peripheral to do this on our behalf).
-
-##### Otherwise, We Ask the Peripheral to Set the Question Characteristic to the Question We Are Asking
-
-If the "answer" Characteristic was already set to Notify, we actually ask the Peripheral to set the value of the "question" Characteristic to the question we are asking.
-
-> ***NOTE:*** *Note that the [`CBPeripheral.writeValue(_:,for:,type:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518747-writevalue) method is a **Peripheral** method; not a Characteristic method. As we will see, all Peripheral interactions, regardless of which attribute is being affected, go through the Peripheral object level.*
+Also, we will need to set the Peripheral's "answer" Characteristic to "Notify", and then hold off asking the question until the Peripheral reports that the Characteristic has its "Notify" attribute set. We do that by setting its [`notify`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) value (again, we are asking the Peripheral to do this on our behalf).
 
 #### Don't Forget Errors
 
@@ -340,11 +330,11 @@ This is done by calling the [`CBPeripheral.setNotifyValue(_:, for:)`](https://de
 
 The difference is *when* the callback is made. If it is a response to the `readValue(for:)` method, it's predictable. What goes up, must come down. Not so, for the `setNotifyValue(_:, for:)` method.
 
-I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L16) method, above.
+I have chosen to use the "Notify" method, so, if you remember, we called [`CBPeripheral.setNotifyValue(_:, for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue) in the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift-L13) method, above.
 
 ##### Notification
 
-Before we go to the write, we may need to respond to notifications being enabled.
+Before we go to the write, need to respond to notifications being enabled.
 
 Below the Characteristic discovery callback, add the following code:
 
@@ -384,7 +374,7 @@ Now that the write has been made, we need to make sure it took.
 
 Remember when I said that we don't actually write values, and, instead, ask the Peripheral to do it for us? Remember [`_interimQuestion`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L135)?
 
-In the [`sendQuestion(_:)`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L14) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
+In the [`Notify Callback`](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-03-swift-L16) method, above, we asked the Peripheral to set the "question" Characteristic, of the "Magic 8-Ball" Service, to the question that we asked.
 
 This sent the string (the question is a string) over to the Peripheral, telling it what Characteristic we wanted to modify.
 
