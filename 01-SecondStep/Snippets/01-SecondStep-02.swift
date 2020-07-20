@@ -10,7 +10,7 @@ extension ITCB_SDK_Device_Peripheral {
             }
             _interimQuestion = inQuestion
             
-            print("We have received the question \"\(inQuestion)\", and are setting it aside, as we ask the Peripheral to set the notify to true for the answer Characteristic.")")
+            print("We have received the question \"\(inQuestion)\", and are setting it aside, as we ask the Peripheral to set the notify to true for the answer Characteristic.")
             peripheral.setNotifyValue(true, for: answerCharacteristic)
         } else {
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
