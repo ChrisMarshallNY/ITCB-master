@@ -112,7 +112,7 @@ At the top, in the Scheme Menu, you will note that there are sixteen schemes:
 
 Each of these will build the app (and the SDK) for the indicated platform.
 
-> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only oiperating systems that support Peripheral Mode.***
+> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only operating systems that support Peripheral Mode.***
 
 The "`00-StartingPoint`" schemes will run, but the Central Mode won't work. Peripheral Mode will work fine (on Mac and iOS). You can use this to test as we proceed.
 
