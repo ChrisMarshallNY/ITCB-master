@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1160"
+   LastUpgradeVersion = "1240"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -57,7 +57,7 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Watch WatchKit App">
+         RemotePath = "/$(PRODUCT_NAME)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D40B433E23F381F100CFE862"
@@ -76,7 +76,7 @@
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Watch WatchKit App">
+         RemotePath = "/$(PRODUCT_NAME)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D40B433E23F381F100CFE862"
