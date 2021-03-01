@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4D5F5C823EEF33400E4F52B"
-               BuildableName = "Bluetooth 8-Ball On Mac.app"
-               BlueprintName = "Bluetooth 8-Ball On Mac"
+               BuildableName = "Bluetooth 8-Ball.app"
+               BlueprintName = "Bluetooth 8-Ball"
                ReferencedContainer = "container:ITCB-Apps.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4D5F5C823EEF33400E4F52B"
-            BuildableName = "Bluetooth 8-Ball On Mac.app"
-            BlueprintName = "Bluetooth 8-Ball On Mac"
+            BuildableName = "Bluetooth 8-Ball.app"
+            BlueprintName = "Bluetooth 8-Ball"
             ReferencedContainer = "container:ITCB-Apps.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4D5F5C823EEF33400E4F52B"
-            BuildableName = "Bluetooth 8-Ball On Mac.app"
-            BlueprintName = "Bluetooth 8-Ball On Mac"
+            BuildableName = "Bluetooth 8-Ball.app"
+            BlueprintName = "Bluetooth 8-Ball"
             ReferencedContainer = "container:ITCB-Apps.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

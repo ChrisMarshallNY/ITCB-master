@@ -97,10 +97,10 @@ These declarations are shared between all the apps.
 "SLUG-SEND-RANDOM-ANSWER-WATCH"     =   "RANDOM ANSWER";
 
 // The about text
-"SLUG-ABOUT-TEXT-MAC"               =   "This app is the Mac version of the sample apps used in the \"Writing an SDK With Core Bluetooth\" series.\nThe app is completely open-source (MIT License), and is available on GitHub.";
-"SLUG-ABOUT-TEXT-IOS"               =   "This app is the iOS version of the sample apps used in the \"Writing an SDK With Core Bluetooth\" series.\nThe app is completely open-source (MIT License), and is available on GitHub.";
-"SLUG-ABOUT-TEXT-TVOS"              =   "This app is the TVOS version of the sample apps used in the \"Writing an SDK With Core Bluetooth\" series.\nThe app is completely open-source (MIT License), and is available on GitHub.";
-"SLUG-SERIES-URI-TEXT"              =   "Go to the Series in Your Browser";
-"SLUG-SERIES-URI"                   =   "https://littlegreenviper.com/miscellany/bluetooth/itcb/";
+"SLUG-ABOUT-TEXT-MAC"               =   "This app is the Mac version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-ABOUT-TEXT-IOS"               =   "This app is the iOS version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-ABOUT-TEXT-TVOS"              =   "This app is the TVOS version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-SERIES-URI-TEXT"              =   "Go to try! Swift World in Your Browser";
+"SLUG-SERIES-URI"                   =   "https://www.tryswift.co/world/";
 "SLUG-GITHUB-URI-TEXT"              =   "Go to the GitHub Repo in Your Browser";
-"SLUG-GITHUB-URI"                   =   "https://github.com/LittleGreenViper/Magic8Ball";
+"SLUG-GITHUB-URI"                   =   "https://github.com/ChrisMarshallNY/ITCB-master";

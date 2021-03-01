@@ -257,7 +257,7 @@
 		D4CFE80923FEB75C003D2BFA /* ITCB_Peripheral_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Peripheral_ViewController.swift; sourceTree = "<group>"; };
 		D4CFE80B23FEBB78003D2BFA /* ITCB_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_ViewController.swift; sourceTree = "<group>"; };
 		D4CFE80D23FEBD7C003D2BFA /* ITCB_Base_WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_Base_WindowController.swift; sourceTree = "<group>"; };
-		D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball On Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluetooth 8-Ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E05CE82407FF4F00AF6BCA /* ITCB_TVOS_Central_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_Central_ViewController.swift; sourceTree = "<group>"; };
 		D4E05CE92407FF4F00AF6BCA /* ITCB_TVOS_Central_Device_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_Central_Device_ViewController.swift; sourceTree = "<group>"; };
 		D4E05CEC2407FF4F00AF6BCA /* ITCB_TVOS_About_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_TVOS_About_ViewController.swift; sourceTree = "<group>"; };
@@ -646,7 +646,7 @@
 		D4D5F5CA23EEF33400E4F52B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */,
+				D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball.app */,
 				D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */,
 				D40B433C23F381F100CFE862 /* Bluetooth 8-Ball On Watch.app */,
 				D40B433F23F381F100CFE862 /* Bluetooth 8-Ball On Watch App.app */,
@@ -835,9 +835,9 @@
 			productReference = D4BC057C23F34350008266BC /* Bluetooth 8-Ball On Mobile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball On Mac */ = {
+		D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mac" */;
+			buildConfigurationList = D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball" */;
 			buildPhases = (
 				D4D5F5C523EEF33400E4F52B /* Sources */,
 				D4D5F5C723EEF33400E4F52B /* Resources */,
@@ -849,9 +849,9 @@
 			dependencies = (
 				D4FC12BF23F7364400C3ED12 /* PBXTargetDependency */,
 			);
-			name = "Bluetooth 8-Ball On Mac";
+			name = "Bluetooth 8-Ball";
 			productName = IntroToCoreBluetooth;
-			productReference = D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball On Mac.app */;
+			productReference = D4D5F5C923EEF33400E4F52B /* Bluetooth 8-Ball.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -907,7 +907,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball On Mac */,
+				D4D5F5C823EEF33400E4F52B /* Bluetooth 8-Ball */,
 				D4BC057B23F34350008266BC /* Bluetooth 8-Ball On Mobile */,
 				D4195F8623F4533E0031A99E /* Bluetooth 8-Ball On TV */,
 				D40B433B23F381F100CFE862 /* Bluetooth 8-Ball On Watch */,
@@ -1174,9 +1174,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch";
 				SDKROOT = iphoneos;
@@ -1188,9 +1188,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch";
 				SDKROOT = iphoneos;
@@ -1204,11 +1204,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				IBSC_MODULE = Watch_WatchKit_Extension;
 				INFOPLIST_FILE = Watch/App/Meta/Info.plist;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App";
 				SDKROOT = watchos;
@@ -1224,11 +1224,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				IBSC_MODULE = Watch_WatchKit_Extension;
 				INFOPLIST_FILE = Watch/App/Meta/Info.plist;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App";
 				SDKROOT = watchos;
@@ -1246,7 +1246,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = Watch/Extension/Meta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1254,7 +1254,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball.extension";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App Extension";
 				SDKROOT = watchos;
@@ -1272,7 +1272,7 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3001;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = Watch/Extension/Meta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1280,7 +1280,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.Watch.8-ball.extension";
 				PRODUCT_NAME = "Bluetooth 8-Ball On Watch App Extension";
 				SDKROOT = watchos;
@@ -1298,14 +1298,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3003;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = TV/Meta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.TV.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On TV";
 				SDKROOT = appletvos;
@@ -1322,14 +1322,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3003;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = TV/Meta/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.TV.8-ball";
 				PRODUCT_NAME = "Bluetooth 8-Ball On TV";
 				SDKROOT = appletvos;
@@ -1345,7 +1345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3002;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = iOS/Meta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1354,7 +1354,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.iOS.8-ball";
 				PRODUCT_MODULE_NAME = ITCB_iOS;
 				PRODUCT_NAME = "Bluetooth 8-Ball On Mobile";
@@ -1371,7 +1371,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3002;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				INFOPLIST_FILE = iOS/Meta/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1380,7 +1380,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.iOS.8-ball";
 				PRODUCT_MODULE_NAME = ITCB_iOS;
 				PRODUCT_NAME = "Bluetooth 8-Ball On Mobile";
@@ -1519,7 +1519,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3003;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Mac/Meta/Info.plist;
@@ -1529,7 +1529,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Mac.8-ball";
 				PRODUCT_MODULE_NAME = ITCB_Mac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1549,7 +1549,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3003;
+				CURRENT_PROJECT_VERSION = 0000;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Mac/Meta/Info.plist;
@@ -1559,7 +1559,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Mac.8-ball";
 				PRODUCT_MODULE_NAME = ITCB_Mac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1626,7 +1626,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mac" */ = {
+		D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4D5F5DA23EEF33500E4F52B /* Debug */,
