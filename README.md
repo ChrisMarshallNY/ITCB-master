@@ -91,7 +91,7 @@ If you are reading this in the "`TheOneRing.xcworkspace`" file, then it's easy. 
 
 This is an alias to the actual file that we'll be working on in the project.
 
-At the top, in the Scheme Menu, you will note that there are sixteen schemes:
+At the top, in the Scheme Menu, you will note that there are sixteen schemes (**NOTE:** The displayed order is likely to be different):
 
 - "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On iOS (App)`"
@@ -139,8 +139,8 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [A "Sequel" to That Series](https://littlegreenviper.com/series/bluetooth-2/)
 - [The "Blue Van Clef" App](https://riftvalleysoftware.com/work/ios-apps/bluevanclef/)
 - [The Source Repo for the Blue Van Clef iOS App](https://github.com/RiftValleySoftware/BlueVanClef)
+- [The Source Repo for the BlueThoth Bluetooth SDK Project (Used by Blue Van Clef)](https://github.com/RiftValleySoftware/RVS_BlueThoth)
 - [The Source Documentation for the Blue Van Clef iOS App](https://riftvalleysoftware.github.io/BlueVanClef/)
-- [The Source Repo for the BlueThoth Bluetooth SDK Project (WIP)](https://github.com/RiftValleySoftware/RVS_BlueThoth)
 - [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
 - [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
 - [Apple WWDC 2017 "What's New In Core Bluetooth" Session (Video)](https://developer.apple.com/videos/play/wwdc2017/712/)
