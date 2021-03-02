@@ -1,5 +1,5 @@
 /*
-© Copyright 2020, Little Green Viper Software Development LLC
+© Copyright 2021, Little Green Viper Software Development LLC
 
 LICENSE:
 
@@ -42,7 +42,13 @@ class ITCB_About_ViewController: ITCB_Base_ViewController {
     
     /* ################################################################## */
     /**
-     This button allows the user to go to the series in their browser.
+     This button allows the user to go to the try! Swift site in their browser.
+     */
+    @IBOutlet weak var trySwiftLogoButton: NSButton!
+
+    /* ################################################################## */
+    /**
+     This button allows the user to go to the try! Swift site in their browser.
      */
     @IBOutlet weak var seriesURIButton: NSButton!
     
@@ -51,13 +57,13 @@ class ITCB_About_ViewController: ITCB_Base_ViewController {
      This button allows the user to go to the GitHub repo in their browser.
      */
     @IBOutlet weak var githubURIButton: NSButton!
-    
+
     /* ################################################################## */
     /**
      This is called when a URI button is hit. It parses the URI from the button name, and goes there.
      */
     @IBAction func uriButtonHit(_ inButton: NSButton) {
-        if let url = URL(string: inButton.alternateTitle) {
+        if let url = URL(string: inButton.alternateTitle.localizedVariant) {
             NSWorkspace.shared.open(url)
         }
     }
@@ -71,8 +77,8 @@ class ITCB_About_ViewController: ITCB_Base_ViewController {
         mainLabel?.stringValue = "\(Bundle.main.appDisplayName), Version \(Bundle.main.appVersionString).\(Bundle.main.appVersionBuildString)"
         mainDisplayTextView?.string = mainDisplayTextView?.string.localizedVariant ?? "ERROR"
         seriesURIButton?.title = seriesURIButton?.title.localizedVariant ?? "ERROR"
-        seriesURIButton?.alternateTitle = seriesURIButton?.alternateTitle.localizedVariant ?? "ERROR"
         githubURIButton?.title = githubURIButton?.title.localizedVariant ?? "ERROR"
-        githubURIButton?.alternateTitle = githubURIButton?.alternateTitle.localizedVariant ?? "ERROR"
+        trySwiftLogoButton?.setAccessibilityLabel("SLUG-SERIES-URI-TEXT".localizedVariant)
+        trySwiftLogoButton?.toolTip = "SLUG-SERIES-URI-TEXT".localizedVariant
     }
 }

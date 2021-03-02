@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -820,23 +821,23 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cx-hj-p4l">
-                                <rect key="frame" x="20" y="81" width="760" height="368"/>
+                                <rect key="frame" x="20" y="141" width="760" height="308"/>
                                 <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="uuc-0G-2Jd">
-                                    <rect key="frame" x="0.0" y="0.0" width="760" height="368"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="760" height="308"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView focusRingType="none" editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsCharacterPickerTouchBarItem="NO" linkDetection="YES" textCompletion="NO" id="XOe-D1-6DO">
-                                            <rect key="frame" x="0.0" y="0.0" width="760" height="368"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="760" height="308"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <size key="minSize" width="760" height="368"/>
+                                            <size key="minSize" width="760" height="308"/>
                                             <size key="maxSize" width="1240" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="SLUG-ABOUT-TEXT-MAC">
                                                     <attributes>
                                                         <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <font key="NSFont" metaFont="user"/>
+                                                        <font key="NSFont" usesAppearanceFont="YES"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -883,9 +884,24 @@
                                     <action selector="uriButtonHit:" target="6gt-lw-eDQ" id="Z9n-6T-swm"/>
                                 </connections>
                             </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Xed-D1-Ugs">
+                                <rect key="frame" x="376" y="85" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xed-D1-Ugs" secondAttribute="height" multiplier="1:1" id="Br2-Sq-I8j"/>
+                                    <constraint firstAttribute="width" constant="48" id="fle-RU-PEE"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" alternateTitle="SLUG-SERIES-URI" bezelStyle="rounded" image="trySwiftWorld2020-Logo" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="myY-VE-pCM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="uriButtonHit:" target="6gt-lw-eDQ" id="ot9-tf-GS7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="tfT-SC-R8R" firstAttribute="leading" secondItem="7XZ-3S-iyW" secondAttribute="leading" constant="20" id="3yh-Gb-rDI"/>
+                            <constraint firstItem="tfT-SC-R8R" firstAttribute="top" secondItem="Xed-D1-Ugs" secondAttribute="bottom" constant="8" symbolic="YES" id="5E2-iF-X4b"/>
                             <constraint firstAttribute="trailing" secondItem="L2f-7u-dfu" secondAttribute="trailing" id="CSW-ay-UMF"/>
                             <constraint firstItem="L2f-7u-dfu" firstAttribute="leading" secondItem="7XZ-3S-iyW" secondAttribute="leading" id="DQF-7y-ZP0"/>
                             <constraint firstItem="6Cx-hj-p4l" firstAttribute="top" secondItem="KFr-IN-mkK" secondAttribute="bottom" constant="8" id="F6H-he-COH"/>
@@ -896,12 +912,13 @@
                             <constraint firstAttribute="bottom" secondItem="L2f-7u-dfu" secondAttribute="bottom" id="RpJ-vx-ndc"/>
                             <constraint firstItem="KFr-IN-mkK" firstAttribute="leading" secondItem="7XZ-3S-iyW" secondAttribute="leading" constant="20" id="Wc1-ZM-qHE"/>
                             <constraint firstAttribute="trailing" secondItem="tfT-SC-R8R" secondAttribute="trailing" constant="20" id="bPd-I7-QyR"/>
-                            <constraint firstItem="tfT-SC-R8R" firstAttribute="top" secondItem="6Cx-hj-p4l" secondAttribute="bottom" constant="4" id="eiW-rx-LSP"/>
                             <constraint firstItem="KFr-IN-mkK" firstAttribute="top" secondItem="7XZ-3S-iyW" secondAttribute="top" constant="20" id="fD4-IX-99V"/>
                             <constraint firstItem="TQT-F9-up1" firstAttribute="leading" secondItem="7XZ-3S-iyW" secondAttribute="leading" constant="20" id="fYq-D1-Jls"/>
+                            <constraint firstItem="Xed-D1-Ugs" firstAttribute="centerX" secondItem="7XZ-3S-iyW" secondAttribute="centerX" id="frP-cK-CcX"/>
                             <constraint firstItem="6Cx-hj-p4l" firstAttribute="leading" secondItem="7XZ-3S-iyW" secondAttribute="leading" constant="20" id="lOa-Q3-lad"/>
                             <constraint firstItem="L2f-7u-dfu" firstAttribute="top" secondItem="7XZ-3S-iyW" secondAttribute="top" id="mrG-Jc-lS8"/>
                             <constraint firstItem="TQT-F9-up1" firstAttribute="top" secondItem="tfT-SC-R8R" secondAttribute="bottom" constant="4" id="u8Z-bf-Hcr"/>
+                            <constraint firstItem="Xed-D1-Ugs" firstAttribute="top" secondItem="6Cx-hj-p4l" secondAttribute="bottom" constant="8" symbolic="YES" id="x4d-sE-yuY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -909,6 +926,7 @@
                         <outlet property="mainDisplayTextView" destination="XOe-D1-6DO" id="gFu-7g-tTJ"/>
                         <outlet property="mainLabel" destination="KFr-IN-mkK" id="pm0-h7-aDF"/>
                         <outlet property="seriesURIButton" destination="tfT-SC-R8R" id="NNv-MB-Xyy"/>
+                        <outlet property="trySwiftLogoButton" destination="Xed-D1-Ugs" id="e8t-ce-hH4"/>
                     </connections>
                 </viewController>
                 <customObject id="V1U-E3-JNr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -940,7 +958,7 @@
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="757" minWidth="100" maxWidth="10000" id="wUl-0O-tVp">
+                                                <tableColumn editable="NO" width="728" minWidth="100" maxWidth="10000" id="wUl-0O-tVp">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1009,7 +1027,7 @@
                                         <rect key="frame" x="20" y="20" width="760" height="460"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MMg-uV-cgz">
-                                                <rect key="frame" x="320" y="437" width="121" height="23"/>
+                                                <rect key="frame" x="320" y="436" width="120" height="24"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="SLUG-WAIT" id="ft9-bN-Q9G">
                                                     <font key="font" metaFont="systemBold" size="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1017,7 +1035,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="LTM-h4-8Nj">
-                                                <rect key="frame" x="372" y="0.0" width="16" height="429"/>
+                                                <rect key="frame" x="372" y="0.0" width="16" height="428"/>
                                             </progressIndicator>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1049,7 +1067,7 @@
                                 </textFieldCell>
                             </textField>
                             <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rjT-dx-3a4">
-                                <rect key="frame" x="280" y="424" width="240" height="32"/>
+                                <rect key="frame" x="279" y="424" width="242" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="LfU-OR-Rr5"/>
                                     <constraint firstAttribute="width" constant="228" placeholder="YES" id="cYr-K3-J0e"/>
@@ -1075,7 +1093,7 @@
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="757" minWidth="40" maxWidth="1000" id="Cx2-je-MLU">
+                                                <tableColumn width="728" minWidth="40" maxWidth="1000" id="Cx2-je-MLU">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1153,7 +1171,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="topLeft" imageScaling="axesIndependently" image="BackgroundGradient" id="Rdd-Ee-al9"/>
                             </imageView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hw0-xf-VDF">
-                                <rect key="frame" x="339" y="13" width="123" height="32"/>
+                                <rect key="frame" x="338" y="13" width="125" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" placeholder="YES" id="HYq-Dt-QIs"/>
                                     <constraint firstAttribute="height" constant="21" id="vN5-3c-ev4"/>
@@ -1195,7 +1213,7 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fGA-oE-b3r">
-                                <rect key="frame" x="306" y="66" width="188" height="32"/>
+                                <rect key="frame" x="305" y="66" width="190" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="HpW-Q2-vFK"/>
                                     <constraint firstAttribute="width" constant="176" placeholder="YES" id="jCc-CC-MYY"/>
@@ -1255,5 +1273,6 @@
         <image name="BackgroundGradient" width="10" height="3000"/>
         <image name="Central" width="64" height="64"/>
         <image name="Peripheral" width="64" height="64"/>
+        <image name="trySwiftWorld2020-Logo" width="400" height="400"/>
     </resources>
 </document>

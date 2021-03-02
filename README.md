@@ -30,7 +30,7 @@ Go forth, and explore. Bluetooth is an enormous topic, and promises great advent
 
 The application that we will use as a learning platform will be a Bluetooth expression of the famous [Mattel Magic 8-Ball toy](https://en.wikipedia.org/wiki/Magic_8-Ball).
 
-In order to understand the game completely, view [the `README.md` file](https://github.com/LittleGreenViper/ITCB/blob/master/README.md) in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
+In order to understand the game completely, view [the `README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/README.md) in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
 
 At the start, we will have 4 applications that already function, but not completely. The goal of this exercise is to "fill in the blanks," and get the apps working properly.
 
@@ -53,7 +53,7 @@ Thse versions are:
 
 They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: ***Only Mac OS and iOS/iPadOS support "Peripheral Mode,"** so Watch and TV will not have this functionality.*
 
-We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
+We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
 
 All other files and directories will be left alone.
 

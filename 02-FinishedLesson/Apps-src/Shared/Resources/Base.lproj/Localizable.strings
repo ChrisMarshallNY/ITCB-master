@@ -1,5 +1,5 @@
 /**
-© Copyright 2020, Little Green Viper Software Development LLC
+© Copyright 2021, Little Green Viper Software Development LLC
 
 LICENSE:
 
@@ -103,4 +103,4 @@ These declarations are shared between all the apps.
 "SLUG-SERIES-URI-TEXT"              =   "Go to try! Swift World in Your Browser";
 "SLUG-SERIES-URI"                   =   "https://www.tryswift.co/world/";
 "SLUG-GITHUB-URI-TEXT"              =   "Go to the GitHub Repo in Your Browser";
-"SLUG-GITHUB-URI"                   =   "https://github.com/ChrisMarshallNY/ITCB-master";
+"SLUG-GITHUB-URI"                   =   "https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson";

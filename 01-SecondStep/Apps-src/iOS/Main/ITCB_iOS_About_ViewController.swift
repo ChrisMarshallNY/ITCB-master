@@ -1,5 +1,5 @@
 /*
-© Copyright 2020, Little Green Viper Software Development LLC
+© Copyright 2021, Little Green Viper Software Development LLC
 
 LICENSE:
 
@@ -42,7 +42,13 @@ class ITCB_iOS_About_ViewController: UIViewController {
 
     /* ################################################################## */
     /**
-     The button near the bottom, that leads to the series page.
+     The button that leads to the try! Swift World page.
+     */
+    @IBOutlet weak var trySwiftIconButton: UIButton!
+    
+    /* ################################################################## */
+    /**
+     The button near the bottom, that leads to the try! Swift World page.
      */
     @IBOutlet weak var seriesPageURIButton: UIButton!
     

@@ -7,48 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D40FF5D42406A67800349E77 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */; };
-		D40FF5D52406A67800349E77 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */; };
-		D40FF5D62406A67800349E77 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */; };
-		D410BB0B23F8E799008DE79C /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */; };
-		D410BB0E23F8E9C2008DE79C /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */; };
-		D41DD5092401D79600A99087 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */; };
-		D41DD50A2401D79600A99087 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */; };
-		D41DD50B2401D79600A99087 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */; };
-		D49AE304240841F30002D53C /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */; };
-		D49AE305240841F30002D53C /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */; };
-		D49AE306240841F30002D53C /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */; };
-		D4B2729E246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
-		D4B2729F246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
-		D4B272A0246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
-		D4B272A1246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
-		D4D01F9B240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F99240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift */; };
-		D4D01F9C240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F99240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift */; };
-		D4D01F9F240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */; };
-		D4D01FA0240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */; };
-		D4D01FA1240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */; };
-		D4D01FA2240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */; };
-		D4FC12C323F736D800C3ED12 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */; };
+		D4CF5C7B25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */; };
+		D4CF5C7C25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */; };
+		D4CF5C7D25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */; };
+		D4CF5C7E25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */; };
+		D4CF5C7F25EE81B0000DDB52 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */; };
+		D4CF5C8025EE81B0000DDB52 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */; };
+		D4CF5C8125EE81B0000DDB52 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */; };
+		D4CF5C8225EE81B0000DDB52 /* ITCB_SDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */; };
+		D4CF5C8325EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7725EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift */; };
+		D4CF5C8425EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7725EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift */; };
+		D4CF5C8725EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
+		D4CF5C8825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
+		D4CF5C8925EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
+		D4CF5C8A25EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */; };
+		D4CF5C8B25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */; };
+		D4CF5C8C25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */; };
+		D4CF5C8D25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */; };
+		D4CF5C8E25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */; };
+		D4CF5C8F25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */; };
+		D4CF5C9025EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */; };
+		D4CF5C9125EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */; };
+		D4CF5C9225EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D40FF5CC2406A66100349E77 /* ITCB_SDK_TVOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ITCB_SDK_TVOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40FF5CF2406A66100349E77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK.swift; path = src/public/ITCB_SDK.swift; sourceTree = SOURCE_ROOT; };
-		D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK_internal.swift; path = src/internal/ITCB_SDK_internal.swift; sourceTree = SOURCE_ROOT; };
 		D41DD5012401D71B00A99087 /* ITCB_SDK_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ITCB_SDK_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41DD5042401D71B00A99087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4810DCE246C3B7100863A5B /* Warnings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Warnings.xcconfig; path = "../Project-Meta/Warnings.xcconfig"; sourceTree = "<group>"; };
 		D4810DD3246C3C7800863A5B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D49AE2FC240841A00002D53C /* ITCB_SDK_Watch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ITCB_SDK_Watch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49AE2FF240841A00002D53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK_Central_internal_Callbacks.swift; path = src/internal/ITCB_SDK_Central_internal_Callbacks.swift; sourceTree = SOURCE_ROOT; };
 		D4BFAF8723F42B6F006D2C07 /* ITCB_SDK_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ITCB_SDK_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4BFAF8B23F42B6F006D2C07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4D01F99240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK_Peripheral_internal.swift; path = src/internal/ITCB_SDK_Peripheral_internal.swift; sourceTree = SOURCE_ROOT; };
-		D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK_Central_internal.swift; path = src/internal/ITCB_SDK_Central_internal.swift; sourceTree = SOURCE_ROOT; };
+		D4CF5C6225EE814A000DDB52 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK_Protocol.swift; sourceTree = "<group>"; };
+		D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK.swift; sourceTree = "<group>"; };
+		D4CF5C7725EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK_Peripheral_internal.swift; sourceTree = "<group>"; };
+		D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK_Central_internal_Callbacks.swift; sourceTree = "<group>"; };
+		D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK_internal.swift; sourceTree = "<group>"; };
+		D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCB_SDK_Central_internal.swift; sourceTree = "<group>"; };
 		D4EE378123F5D67500037010 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ITCB_SDK_Protocol.swift; path = src/public/ITCB_SDK_Protocol.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -80,11 +80,19 @@
 		D455684723F42BF0007487BE /* Meta */ = {
 			isa = PBXGroup;
 			children = (
-				D4810DCE246C3B7100863A5B /* Warnings.xcconfig */,
 				D4EE378123F5D67500037010 /* README.md */,
 				D4810DD3246C3C7800863A5B /* .swiftlint.yml */,
+				D4CF5C6225EE814A000DDB52 /* Warnings.xcconfig */,
 			);
 			name = Meta;
+			sourceTree = "<group>";
+		};
+		D471A32B25EE926900A9FAAF /* Mac_iOS_Only */ = {
+			isa = PBXGroup;
+			children = (
+				D4CF5C7725EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift */,
+			);
+			path = Mac_iOS_Only;
 			sourceTree = "<group>";
 		};
 		D49AE2FD240841A00002D53C /* ITCB_SDK_Watch */ = {
@@ -109,8 +117,8 @@
 		D4B79C49246978AF0018BD10 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				D4FC12C023F7367F00C3ED12 /* public */,
-				D4FC12C123F7368C00C3ED12 /* internal */,
+				D4CF5C7325EE81B0000DDB52 /* public */,
+				D4CF5C7625EE81B0000DDB52 /* internal */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -143,24 +151,26 @@
 			path = ITCB_SDK_Mac;
 			sourceTree = "<group>";
 		};
-		D4FC12C023F7367F00C3ED12 /* public */ = {
+		D4CF5C7325EE81B0000DDB52 /* public */ = {
 			isa = PBXGroup;
 			children = (
-				D4FC12C223F736D800C3ED12 /* ITCB_SDK_Protocol.swift */,
-				D410BB0A23F8E799008DE79C /* ITCB_SDK.swift */,
+				D4CF5C7425EE81B0000DDB52 /* ITCB_SDK_Protocol.swift */,
+				D4CF5C7525EE81B0000DDB52 /* ITCB_SDK.swift */,
 			);
-			path = public;
+			name = public;
+			path = src/public;
 			sourceTree = "<group>";
 		};
-		D4FC12C123F7368C00C3ED12 /* internal */ = {
+		D4CF5C7625EE81B0000DDB52 /* internal */ = {
 			isa = PBXGroup;
 			children = (
-				D4B2729D246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift */,
-				D410BB0D23F8E9C2008DE79C /* ITCB_SDK_internal.swift */,
-				D4D01F9A240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift */,
-				D4D01F99240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift */,
+				D471A32B25EE926900A9FAAF /* Mac_iOS_Only */,
+				D4CF5C7825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift */,
+				D4CF5C7925EE81B0000DDB52 /* ITCB_SDK_internal.swift */,
+				D4CF5C7A25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift */,
 			);
-			path = internal;
+			name = internal;
+			path = src/internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,11 +366,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D01FA1240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */,
-				D40FF5D52406A67800349E77 /* ITCB_SDK.swift in Sources */,
-				D40FF5D62406A67800349E77 /* ITCB_SDK_internal.swift in Sources */,
-				D40FF5D42406A67800349E77 /* ITCB_SDK_Protocol.swift in Sources */,
-				D4B272A0246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C8D25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */,
+				D4CF5C8125EE81B0000DDB52 /* ITCB_SDK.swift in Sources */,
+				D4CF5C8925EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C7D25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */,
+				D4CF5C9125EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,12 +378,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B2729F246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
-				D4D01FA0240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */,
-				D41DD50A2401D79600A99087 /* ITCB_SDK.swift in Sources */,
-				D41DD50B2401D79600A99087 /* ITCB_SDK_internal.swift in Sources */,
-				D41DD5092401D79600A99087 /* ITCB_SDK_Protocol.swift in Sources */,
-				D4D01F9C240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift in Sources */,
+				D4CF5C8C25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */,
+				D4CF5C8025EE81B0000DDB52 /* ITCB_SDK.swift in Sources */,
+				D4CF5C8425EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift in Sources */,
+				D4CF5C8825EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C7C25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */,
+				D4CF5C9025EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,11 +391,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D01FA2240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */,
-				D49AE305240841F30002D53C /* ITCB_SDK.swift in Sources */,
-				D49AE306240841F30002D53C /* ITCB_SDK_internal.swift in Sources */,
-				D49AE304240841F30002D53C /* ITCB_SDK_Protocol.swift in Sources */,
-				D4B272A1246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C8E25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */,
+				D4CF5C8225EE81B0000DDB52 /* ITCB_SDK.swift in Sources */,
+				D4CF5C8A25EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C7E25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */,
+				D4CF5C9225EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,12 +403,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B2729E246D95D500666170 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
-				D4D01F9F240E9E94005CC8DA /* ITCB_SDK_Central_internal.swift in Sources */,
-				D410BB0B23F8E799008DE79C /* ITCB_SDK.swift in Sources */,
-				D410BB0E23F8E9C2008DE79C /* ITCB_SDK_internal.swift in Sources */,
-				D4FC12C323F736D800C3ED12 /* ITCB_SDK_Protocol.swift in Sources */,
-				D4D01F9B240E9E94005CC8DA /* ITCB_SDK_Peripheral_internal.swift in Sources */,
+				D4CF5C8B25EE81B0000DDB52 /* ITCB_SDK_internal.swift in Sources */,
+				D4CF5C7F25EE81B0000DDB52 /* ITCB_SDK.swift in Sources */,
+				D4CF5C8325EE81B0000DDB52 /* ITCB_SDK_Peripheral_internal.swift in Sources */,
+				D4CF5C8725EE81B0000DDB52 /* ITCB_SDK_Central_internal_Callbacks.swift in Sources */,
+				D4CF5C7B25EE81B0000DDB52 /* ITCB_SDK_Protocol.swift in Sources */,
+				D4CF5C8F25EE81B0000DDB52 /* ITCB_SDK_Central_internal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +419,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -421,7 +432,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-TVOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = appletvos;
@@ -436,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -448,7 +460,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-TVOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = appletvos;
@@ -464,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -477,7 +490,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -492,6 +505,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -505,7 +519,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-IOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -522,6 +536,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -534,7 +549,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-Watch";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = watchos;
@@ -550,6 +565,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -562,7 +578,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-SDK-Watch";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = watchos;
@@ -576,7 +592,6 @@
 		};
 		D4BFAF9923F42B6F006D2C07 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4810DCE246C3B7100863A5B /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -641,7 +656,6 @@
 		};
 		D4BFAF9A23F42B6F006D2C07 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4810DCE246C3B7100863A5B /* Warnings.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -704,6 +718,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -716,7 +731,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -732,6 +747,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3000;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = P53V4JS928;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -744,7 +760,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.littlegreenviper.ITCB-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
