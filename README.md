@@ -1,4 +1,4 @@
-![Bluetooth 8-Ball Icon](trySwiftWorldITCB.png)
+![Bluetooth 8-Ball Icon](img/trySwiftWorldITCB.png)
 
 # INTRODUCTION TO CORE BLUETOOTH
 
@@ -60,7 +60,7 @@ All other files and directories will be left alone.
 ## REQUIREMENTS TO START
 
 - We should each have the latest version of Xcode, installed and ready to go.
-- We should each have two Apple devices that we can access with Xcode, and run in debug mode.
+- We should each have two Apple devices that we can access with Xcode, and run in debug mode *(one of them can be the Mac on which we are developing)*.
 - These devices should be [registered](https://help.apple.com/developer-account/#/dev40df0d9fa) and prepared for debugging. We will run all our code on-device.
 - We should all have Apple Developer accounts. **THEY NO LONGER NEED TO BE PAID ACCOUNTS (ADP).** Apple now [allows free accounts to run on-device](https://help.apple.com/xcode/mac/current/#/dev60b6fbbc7).
 
@@ -68,53 +68,63 @@ All other files and directories will be left alone.
 
 ## STEPS
 
-The lesson will proceed in two major steps, which will have "sub-steps." These major steps can be found in these directories:
+#### The lesson will proceed in two major steps, which will have "sub-steps." These major steps can be found in these directories:
 
-- `00-StartingPoint`
-    This directory contains the "bald" starting point. No code has been added.
-    It walks through the process of adding [CBCentralManagerDelegate](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and starting the process by discovering devices and their Services and Peripherals.
+- [`00-StartingPoint`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
+
+This directory contains the "bald" starting point. No code has been added.
+It walks through the process of adding [CBCentralManagerDelegate](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and starting the process by discovering devices and their Services and Peripherals.
     
-- `01-SecondStep`
-    This directory starts at the completion of the previous step, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
+- [`01-SecondStep`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
+
+This directory starts at the completion of the previous step, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
     
-These directories will contain the complete, running applications:
+#### These directories will contain the complete, running applications:
     
-- `02-FinishedLesson`
-    This directory just contains the final implementation, including the Peripheral delegate callbacks. It is sparse, and not LINTed.
+- [`02-FinishedLesson`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
+
+This directory just contains the final implementation, including the Peripheral delegate callbacks. It is sparse, and not LINTed.
     
-- `03-Final-CompleteImplementation`
-    This directory is a "ship-ready" implementation of the project, with full source code documentation and LINTing.
+- [`03-Final-CompleteImplementation`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation)
+
+This directory is a "ship-ready" implementation of the project, with full source code documentation and LINTing.
     
 ## LET'S GET STARTED
 
-If you are reading this in the "`TheOneRing.xcworkspace`" file, then it's easy. Simply look at the Project Navigator pane on the left side of the screen, and choose the "`00-StartingPoint/ITCB_SDK_Central_internal_Callbacks.swift`" source file.
+### OPEN THE MAIN WORKSPACE
 
-This is an alias to the actual file that we'll be working on in the project.
+It's likely that you have already done so, but, if not, open the [`TheOneRing.xcworkspace` Xcode workspace file](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/TheOneRing.xcworkspace). All work in this class will be done from this workspace.
 
-At the top, in the Scheme Menu, you will see that there are sixteen schemes (**NOTE:** The displayed order is likely to be different from the order below):
+### IDEAL CONFIGURATION
 
-These implement the first lesson (Part 1):
+The ideal configuration for the lesson, is to use the Mac as the Central (question asker), and install the `03-Final-Bluetooth 8-Ball On iOS (App)` scheme *(explained below)* onto an iOS/iPadOS device (an iPod, iPhone, or iPad). You would then use the iOS device as a "test target," while developing the Mac application. This is the configuration that I will use during the class.
+
+### RUN SCHEMES
+
+At the top, in the Scheme Menu, you will see that there are sixteen schemes that will implement the app for each operating system, at each stage of the lesson *(**NOTE:** The displayed order is likely to be different from the order below)*:
+
+**These implement the first lesson (Part 1):**
 
 - "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On iOS (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On Watch (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On TV (App)`"
 
-These implement the second lesson (Part 2):
+**These implement the second lesson (Part 2):**
 
 - "`01-SecondStep-Bluetooth 8-Ball On Mac (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On iOS (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On Watch (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On TV (App)`"
 
-These implement the completed apps, but with debug symbols and console strings:
+**These implement the completed apps, but with debug symbols and console strings:**
 
 - "`02-FinishedLesson-Bluetooth 8-Ball On Mac (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On iOS (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On Watch (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On TV (App)`"
 
-These implement the completed apps, as if they were to be released to the App Store:
+**These implement the completed apps, as if they were to be released to the App Store:**
 
 - "`03-Final-Bluetooth 8-Ball On Mac (App)`"
 - "`03-Final-Bluetooth 8-Ball On iOS (App)`"
@@ -123,9 +133,9 @@ These implement the completed apps, as if they were to be released to the App St
 
 Each of these will build the app (and the SDK) for the indicated platform.
 
-If you were to look at the schemes in the Scheme Manager, you would see additional schemes to build the SDKs, but those are not displayed, as they are actally incorporated into the app  build schemes.
+If you were to look at the schemes in the Scheme Manager, you would see additional schemes to build the SDKs, but those are not displayed, as they are actually incorporated into the app  build schemes.
 
-> ***NOTE:*** *You should choose an actual device as the target for each scheme. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only operating systems that support Peripheral Mode.***
+> ***The simulator won't support Core Bluetooth, so you should choose an actual device as the target for each scheme. Also, be aware that iOS/iPadOS and MacOS are the only operating systems that support Peripheral Mode.***
 
 The "`00-StartingPoint`" schemes will run, but the Central Mode won't work. Peripheral Mode will work fine (on Mac and iOS). You can use this to test as we proceed.
 
@@ -135,17 +145,38 @@ The "`02-FinishedLesson`" schemes will run properly, but you will also see debug
 
 The "`03-Final`" schemes will run properly, without debug strings.
 
-Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`" as the target, for the first part. Build and run, just to make sure that all is good. There should be no errors, and you should get the Mode Selection Screen on the Mac.
+### QUICK VERIFICATION RUN
 
-![Mode Selection Screen for Mac](ModeSelectionScreen.png)
+Select the "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`" scheme, and choose "`My Mac`" as the target. Build and run, just to make sure that all is good. There should be no errors, and you should get the Mode Selection Screen on the Mac.
+
+![Mode Selection Screen for Mac](img/ModeSelectionScreen.png)
+
+If you click on the "PERIPHERAL" button, the app will start waiting for a connection.
+
+If you click on the "CENTRAL" button, you will get a blank screen, which is to be expected, at this point.
+
+### WORKING FILE
+
+If you are reading this in the "`TheOneRing.xcworkspace`" file, then it's easy. Simply look at the Project Navigator pane on the left side of the screen, and choose [the "`00-StartingPoint/ITCB_SDK_Central_internal_Callbacks.swift`" source file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift):
+
+![The Source File We'll be Modifying](img/FileLocation.png)
+
+This is an alias to the actual file that we'll be working on in the project.
+
+![The Actual Location of the Source File We'll be Modifying](img/AliasTarget.png)
+
+Next, go to the [the `00-StartingPoint/README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/README.md).
+
+![The Next README File](img/NextREADME.png)
 
 ## REFERENCES
 
 - [try! Swift World](https://tryswift.co/world)
 - [My GitHub ID](https://github.com/ChrisMarshallNY)
-- [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) ***(Warning: Not A Small File)***
+- [My Email (chris@riftvalleysoftware.com)](mailto:chris@riftvalleysoftware.com)
+- [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) *(**WARNING:** Big File -About 34MB)*
 - [The Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
-- [The Git Repo Location of the Presentations](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/Presentations) *[(Apple Keynote files)](https://www.apple.com/keynote/)*
+- [The Git Repo Location of the Presentations](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/Presentations) *([Apple Keynote](https://www.apple.com/keynote/) files)*
 - [The Git Repo Location for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
 - [The Git Repo Location for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
 - [The Git Repo Location for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
