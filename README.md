@@ -139,15 +139,16 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 
 ## REFERENCES
 
+- [try! Swift World](https://tryswift.co/world)
+- [My GitHub ID](https://github.com/ChrisMarshallNY)
 - [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) ***(Warning: Not A Small File)***
 - [This is the Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
-- [The Git Repo Branch for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
-- [The Git Repo Branch for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
-- [The Git Repo Branch for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
+- [The Git Repo Location for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
+- [The Git Repo Location for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
+- [The Git Repo Location for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
+- [The Git Repo Location for the "Ship-Ready" Apps](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation)
 - [This is a GitHub Gist, with the Snippets for the First Phase](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32)
 - [This is a GitHub Gist, with the Snippets for the Second Phase](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894)
-- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part One).](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32/archive/fc204268648b5bbee482a40607cfa9243761100b.zip)
-- [This is a ZIP file, with all the various gist file snippets that can be used to "fill in" the places where we need to work (Part Two).](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894/archive/850355629168d0224b04b30ae373ff501392636c.zip)
 - [The "Genesis" of This Lesson: A Series That Walks Through Development of a Core Bluetooth App](https://littlegreenviper.com/series/bluetooth/)
 - [A "Sequel" to That Series](https://littlegreenviper.com/series/bluetooth-2/)
 - [The "Blue Van Clef" App](https://riftvalleysoftware.com/work/ios-apps/bluevanclef/)
