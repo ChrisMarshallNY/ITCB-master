@@ -144,7 +144,8 @@ Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`"
 - [try! Swift World](https://tryswift.co/world)
 - [My GitHub ID](https://github.com/ChrisMarshallNY)
 - [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) ***(Warning: Not A Small File)***
-- [This is the Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
+- [The Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
+- [The Git Repo Location of the Presentations](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/Presentations) *[(Apple Keynote files)](https://www.apple.com/keynote/)*
 - [The Git Repo Location for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
 - [The Git Repo Location for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
 - [The Git Repo Location for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
