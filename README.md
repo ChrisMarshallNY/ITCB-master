@@ -137,6 +137,8 @@ The "`03-Final`" schemes will run properly, without debug strings.
 
 Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`" as the target, for the first part. Build and run, just to make sure that all is good. There should be no errors, and you should get the Mode Selection Screen on the Mac.
 
+![Mode Selection Screen for Mac](ModeSelectionScreen.png)
+
 ## REFERENCES
 
 - [try! Swift World](https://tryswift.co/world)
