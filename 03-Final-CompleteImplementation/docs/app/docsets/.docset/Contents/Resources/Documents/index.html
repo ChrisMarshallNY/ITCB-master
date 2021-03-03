@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Magic8Ball Internal App Doumentation
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/LittleGreenViper/ITCB">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+        Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_About_ViewController.html">ITCB_About_ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_AppDelegate.html">ITCB_AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_Base_ViewController.html">ITCB_Base_ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_Base_WindowController.html">ITCB_Base_WindowController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_CENTRAL_Initial_ViewController.html">ITCB_CENTRAL_Initial_ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_Central_Peripheral_Device_ViewController.html">ITCB_Central_Peripheral_Device_ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_Mode_Selection_ViewController.html">ITCB_Mode_Selection_ViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_Peripheral_ViewController.html">ITCB_Peripheral_ViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            
+            <p><img src="../img/icon.png" alt="Icon"></p>
+<h1 id='a-href-https-github-com-littlegreenviper-thebasicsofcorebluetooth-tree-master-apps-src-the-apps-a' class='heading'><a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/Apps-src">The Apps</a></h1>
+
+<p>The apps are &ldquo;Ship-quality&rdquo; apps, written to the standards of any apps destined to be sold/distributed through the various Apple App Stores. They are localizable and carefully designed.</p>
+
+<p>They are not &ldquo;super-advanced&rdquo; apps, though. They don&rsquo;t use <a href="https://developer.apple.com/documentation/swiftui">SwiftUI</a>, for example; instead, sticking with the traditional <a href="https://developer.apple.com/xcode/interface-builder/">Interface Builder</a>.</p>
+
+<p>They aren&rsquo;t the star of the show, and the lesson doesn&rsquo;t deal with them at all, except to mention the need for some plist values and a sandbox setting.</p>
+<h2 id='the-way-they-work' class='heading'>The Way They Work</h2>
+
+<p>The apps implement a rather simple &ldquo;game,&rdquo; based on the famous <a href="https://en.wikipedia.org/wiki/Magic_8-Ball">Mattel Magic 8-Ball Toy</a>.</p>
+
+<p>It requires two devices (at least), with one acting as a &ldquo;Central&rdquo; (the &ldquo;question-asker&rdquo;), and the other[s] acting as a &ldquo;Peripheral&rdquo; (the &ldquo;question-answerers&rdquo;).</p>
+
+<p>There will only be one Central, but there can be more than one Peripheral.</p>
+
+<p>Only iOS/iPadOS and MacOS support Peripheral Mode, so those are the only app variants that can act as &ldquo;question-answerers.&rdquo;</p>
+
+<p><em>**NOTE:</em>* The following example images are from the iOS app, on an iPad and an iPhone.*</p>
+<h2 id='the-initial-mode-selection-screen-ios-and-macos-apps-only' class='heading'>The Initial Mode Selection Screen (iOS and MacOS apps Only)</h2>
+
+<p><img src="../img/Figure-1.png" alt="The Initial Mode Selection Screen"></p>
+
+<p><em>Figure 1: The Initial Mode Selection Screen</em></p>
+
+<p>In this screen, the user is presented with two image buttons: &ldquo;CENTRAL&rdquo;, and &ldquo;PERIPHERAL&rdquo;.</p>
+
+<p>They each represent an operating mode for the app.</p>
+
+<p>This screen is only shown at startup, and &ldquo;commits&rdquo; the user to that mode, thereafter. In order to change modes, the user needs to exit the application, and restart.</p>
+<h2 id='the-central-mode-screen' class='heading'>The Central Mode Screen</h2>
+
+<p>In Central Mode (which is also the only mode for tvOS and watchOS), the app acts as a &ldquo;question-asking&rdquo; app. The user is presented with a list of nearby Peripheral Mode devices in a simple, vertical table.</p>
+
+<p><img src="../img/Figure-2.png" alt="The Central Mode Screen"></p>
+
+<p><em>Figure 2: The Central Mode Screen</em></p>
+<h2 id='the-device-information-screen' class='heading'>The Device Information Screen</h2>
+
+<p>Once a user selects one of the Peripherals, they are taken to a simple screen, with just a text entry field.</p>
+
+<p>They use this field to &ldquo;ask a question&rdquo; of the Peripheral. It should be a &ldquo;yes/no&rdquo; question.</p>
+
+<p><img src="../img/Figure-3.png" alt="Asking A Question In the Device Information Screen"></p>
+
+<p><em>Figure 3: Asking a Question</em></p>
+
+<p>The Peripheral will automatically return an answer, randomly selected from <a href="https://en.wikipedia.org/wiki/Magic_8-Ball#Possible_answers">the 20 standard answers</a>.</p>
+
+<p><img src="../img/Figure-4.png" alt="Getting the Answer In the Device Information Screen"></p>
+
+<p><em>Figure 4: Getting the Answer</em></p>
+
+<p><em>**NOTE:</em>* In the Watch variant of the app, there is no room to enter a question, so one of 20 random questions is selected to be sent.*</p>
+<h2 id='the-peripheral-mode-screen' class='heading'>The Peripheral Mode Screen</h2>
+
+<p>In Peripheral Mode <em>(Again, only for iOS/iPadOS and MacOS)</em>, the user doesn&rsquo;t do anything. The app reacts automatically to questions from the Central.</p>
+
+<p><img src="../img/Figure-5.png" alt="The Peripheral Mode Screen"></p>
+
+<p><em>Figure 5: Waiting for a Question</em></p>
+
+<p>Once a question is asked of a Peripheral, it is reported in an alert.</p>
+
+<p><img src="../img/Figure-6.png" alt="The Peripheral Mode Screen Reports An Answer"></p>
+
+<p><em>Figure 6: Reporting an Answer</em></p>
+
+<p><em>**NOTE</em>* The alert needs to be dismissed by the user, so there is &ldquo;a bit&rdquo; of user interaction in Peripheral Mode.*</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-05-31)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

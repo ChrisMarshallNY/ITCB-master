@@ -1,8 +1,8 @@
-![Bluetooth 8-Ball Icon](icon.png)
+![Bluetooth 8-Ball Icon](trySwiftWorldITCB.png)
 
 # INTRODUCTION TO CORE BLUETOOTH
 
-Welcome to try! Swift World!
+Welcome to [try! Swift World](https://tryswift.co/world)!
 
 This is a ***VERY*** quick introduction to Core Bluetooth.
 
@@ -53,7 +53,7 @@ Thse versions are:
 
 They all share the same SDK, which has four variants, one for each platform. The SDK code is completely cross-platform, with one exception: ***Only Mac OS and iOS/iPadOS support "Peripheral Mode,"** so Watch and TV will not have this functionality.*
 
-We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
+We will work with one single SDK file throughout the entire exercise, [`SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift); filling it in as we proceed.
 
 All other files and directories will be left alone.
 
@@ -82,7 +82,7 @@ These directories will contain the complete, running applications:
 - `02-FinishedLesson`
     This directory just contains the final implementation, including the Peripheral delegate callbacks. It is sparse, and not LINTed.
     
-- `Final-CompleteImplementation`
+- `03-Final-CompleteImplementation`
     This directory is a "ship-ready" implementation of the project, with full source code documentation and LINTing.
     
 ## LET'S GET STARTED
@@ -91,28 +91,41 @@ If you are reading this in the "`TheOneRing.xcworkspace`" file, then it's easy. 
 
 This is an alias to the actual file that we'll be working on in the project.
 
-At the top, in the Scheme Menu, you will note that there are sixteen schemes (**NOTE:** The displayed order is likely to be different):
+At the top, in the Scheme Menu, you will see that there are sixteen schemes (**NOTE:** The displayed order is likely to be different from the order below):
+
+These implement the first lesson (Part 1):
 
 - "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On iOS (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On Watch (App)`"
 - "`00-StartingPoint-Bluetooth 8-Ball On TV (App)`"
+
+These implement the second lesson (Part 2):
+
 - "`01-SecondStep-Bluetooth 8-Ball On Mac (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On iOS (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On Watch (App)`"
 - "`01-SecondStep-Bluetooth 8-Ball On TV (App)`"
+
+These implement the completed apps, but with debug symbols and console strings:
+
 - "`02-FinishedLesson-Bluetooth 8-Ball On Mac (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On iOS (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On Watch (App)`"
 - "`02-FinishedLesson-Bluetooth 8-Ball On TV (App)`"
-- "`Final-Bluetooth 8-Ball On Mac (App)`"
-- "`Final-Bluetooth 8-Ball On iOS (App)`"
-- "`Final-Bluetooth 8-Ball On Watch (App)`"
-- "`Final-Bluetooth 8-Ball On TV (App)`"
+
+These implement the completed apps, as if they were to be released to the App Store:
+
+- "`03-Final-Bluetooth 8-Ball On Mac (App)`"
+- "`03-Final-Bluetooth 8-Ball On iOS (App)`"
+- "`03-Final-Bluetooth 8-Ball On Watch (App)`"
+- "`03-Final-Bluetooth 8-Ball On TV (App)`"
 
 Each of these will build the app (and the SDK) for the indicated platform.
 
-> ***NOTE:*** *You should choose an actual device as the target. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only operating systems that support Peripheral Mode.***
+If you were to look at the schemes in the Scheme Manager, you would see additional schemes to build the SDKs, but those are not displayed, as they are actally incorporated into the app  build schemes.
+
+> ***NOTE:*** *You should choose an actual device as the target for each scheme. **The simulator won't support Core Bluetooth. Also, be aware that iOS/iPadOS and MacOS are the only operating systems that support Peripheral Mode.***
 
 The "`00-StartingPoint`" schemes will run, but the Central Mode won't work. Peripheral Mode will work fine (on Mac and iOS). You can use this to test as we proceed.
 
@@ -120,14 +133,14 @@ The "`01-SecondStep`" schemes will run, but the Central Mode still won't work. H
 
 The "`02-FinishedLesson`" schemes will run properly, but you will also see debug strings in the Console.
 
-The "`Final`" schemes will run properly, without debug strings.
+The "`03-Final`" schemes will run properly, without debug strings.
 
 Select "`00-StartingPoint-Bluetooth 8-Ball On Mac (App)`", and choose "`My Mac`" as the target, for the first part. Build and run, just to make sure that all is good. There should be no errors, and you should get the Mode Selection Screen on the Mac.
 
 ## REFERENCES
 
-- [This is a Downloadable ZIP File, With the Entire Lesson ***(Warning: Not A Small File)***](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip)
-- [This is the Git Repo for This Exercise (The Final Implementation)](https://github.com/ChrisMarshallNY/ITCB-master)
+- [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) ***(Warning: Not A Small File)***
+- [This is the Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
 - [The Git Repo Branch for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
 - [The Git Repo Branch for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
 - [The Git Repo Branch for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)

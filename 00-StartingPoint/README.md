@@ -318,6 +318,15 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 Go back to the main lesson, and open the `01-SecondStep` directory, then, open the [`ITCB.xcworkspace` workspace](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep/ITCB.xcworkspace) file with Xcode, and follow the steps in the [`README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/README.md).
 
+# SNIPPETS
+
+- [00-StartingPoint-00.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift)
+- [00-StartingPoint-01.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-01-swift)
+- [00-StartingPoint-02.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-02-swift)
+- [00-StartingPoint-03.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-03-swift)
+- [00-StartingPoint-04.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift)
+- [00-StartingPoint-05.swift](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-05-swift)
+
 # REFERENCES
 
 - [The Git Repo Location for This Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)

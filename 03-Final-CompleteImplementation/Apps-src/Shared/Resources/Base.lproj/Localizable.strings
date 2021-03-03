@@ -1,0 +1,106 @@
+/**
+© Copyright 2021, Little Green Viper Software Development LLC
+
+LICENSE:
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Little Green Viper Software Development LLC: https://littlegreenviper.com
+
+These declarations are shared between all the apps.
+ */
+
+// This is how many answers we have available, and can be used to manage an index.
+"SLUG-NUMBER-MAX"                   =   "20";
+
+// These are the answers that are possible from the 8-ball.
+"SLUG-ANSWER-00"                    =   "It is certain.";
+"SLUG-ANSWER-01"                    =   "It is decidedly so.";
+"SLUG-ANSWER-02"                    =   "Without a doubt.";
+"SLUG-ANSWER-03"                    =   "Yes – definitely.";
+"SLUG-ANSWER-04"                    =   "You may rely on it.";
+"SLUG-ANSWER-05"                    =   "As I see it, yes.";
+"SLUG-ANSWER-06"                    =   "Most likely.";
+"SLUG-ANSWER-07"                    =   "Outlook good.";
+"SLUG-ANSWER-08"                    =   "Yes.";
+"SLUG-ANSWER-09"                    =   "Signs point to yes.";
+"SLUG-ANSWER-10"                    =   "Reply hazy, try again.";
+"SLUG-ANSWER-11"                    =   "Ask again later.";
+"SLUG-ANSWER-12"                    =   "Better not tell you now.";
+"SLUG-ANSWER-13"                    =   "Cannot predict now.";
+"SLUG-ANSWER-14"                    =   "Concentrate and ask again.";
+"SLUG-ANSWER-15"                    =   "Don’t count on it.";
+"SLUG-ANSWER-16"                    =   "My reply is no.";
+"SLUG-ANSWER-17"                    =   "My sources say no.";
+"SLUG-ANSWER-18"                    =   "Outlook not so good.";
+"SLUG-ANSWER-19"                    =   "Very doubtful.";
+
+// These are the questions that are used to send randomly from the Watch.
+"SLUG-QUESTION-00"                  =   "Will the moon ever crash into the Earth?";
+"SLUG-QUESTION-01"                  =   "Will I ever love again?";
+"SLUG-QUESTION-02"                  =   "Do you know tomorrow's lotto numbers?";
+"SLUG-QUESTION-03"                  =   "Can I rely on my gut instinct?";
+"SLUG-QUESTION-04"                  =   "Will I find a job?";
+"SLUG-QUESTION-05"                  =   "Will I lose my job?";
+"SLUG-QUESTION-06"                  =   "Does [s]he love me?";
+"SLUG-QUESTION-07"                  =   "Did you say something to me? I wasn't paying attention.";
+"SLUG-QUESTION-08"                  =   "Will I ever fix this blasted bug?";
+"SLUG-QUESTION-09"                  =   "Do I have to be concerned about entropy?";
+"SLUG-QUESTION-10"                  =   "Will the swallows return home to Capistrano?";
+"SLUG-QUESTION-11"                  =   "Cast est mori?";
+"SLUG-QUESTION-12"                  =   "Did someone knock at the front door?";
+"SLUG-QUESTION-13"                  =   "Did I just get dissed?";
+"SLUG-QUESTION-14"                  =   "Can I come out of my box, now?";
+"SLUG-QUESTION-15"                  =   "Did Susan Lucci ever get her Emmy?";
+"SLUG-QUESTION-16"                  =   "What goes up...does it also come down?";
+"SLUG-QUESTION-17"                  =   "Et tu, Brute?";
+"SLUG-QUESTION-18"                  =   "Are we alone in the universe?";
+"SLUG-QUESTION-19"                  =   "Was that a shooting star?";
+
+// These are the error slugs, returned by the SDK.
+"ITCB-SDK-ERROR-UNKNOWN"            =   "Unknown Error";
+"ITCB-SDK-ERROR-BLUETOOTH"          =   "Bluetooth Error";
+"ITCB-SDK-ERROR-SEND-FAILURE"       =   "Failed to Send";
+"ITCB-SDK-REJECT-OFFLINE"           =   "The device is offline";
+"ITCB-SDK-REJECT-BUSY"              =   "The device is busy";
+"ITCB-SDK-REJECT-NO-QUESTION-MARK"  =   "Please rephrase as a question";
+"ITCB-SDK-REJECT-PERIPHERAL-ERROR"  =   "There is some error internal to the other device";
+"ITCB-SDK-REJECT-UNKNOWN"           =   "The device rejected the connection";
+
+// Various strings for use throughout the apps.
+"SLUG-WAIT"                         =   "WAITING FOR QUESTION";
+"SLUG-ERROR"                        =   "ERROR!";
+"SLUG-ABOUT"                        =   "ABOUT THIS APP";
+"SLUG-ABOUT-MENU-ITEM-FORMAT"       =   "About %@";
+"SLUG-QUIT-MENU-ITEM-FORMAT"        =   "Quit %@";
+"SLUG-SELECT-MODE"                  =   "SELECT THE MODE";
+"SLUG-CENTRAL"                      =   "CENTRAL";
+"SLUG-PERIPHERAL"                   =   "PERIPHERAL";
+"SLUG-CLOSE"                        =   "CLOSE";
+"SLUG-ENTER-QUESTION-PLACEHOLDER"   =   "Enter A Question";
+"SLUG-SEND-QUESTION"                =   "SEND QUESTION TO 8-BALL";
+"SLUG-OK-BUTTON-TEXT"               =   "OK";
+"SLUG-SEND-RANDOM-ANSWER"           =   "SEND A RANDOM ANSWER";
+"SLUG-ASK-RANDOM-QUESTION"          =   "RANDOM QUESTION";
+"SLUG-SEND-RANDOM-ANSWER-WATCH"     =   "RANDOM ANSWER";
+
+// The about text
+"SLUG-ABOUT-TEXT-MAC"               =   "This app is the Mac version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-ABOUT-TEXT-IOS"               =   "This app is the iOS version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-ABOUT-TEXT-TVOS"              =   "This app is the TVOS version of the sample apps used in the \"Introduction to Core Bluetooth\" try! Swift World course.\nThe app is completely open-source (MIT License), and is available on GitHub.";
+"SLUG-SERIES-URI-TEXT"              =   "Go to try! Swift World in Your Browser";
+"SLUG-SERIES-URI"                   =   "https://www.tryswift.co/world/";
+"SLUG-GITHUB-URI-TEXT"              =   "Go to the GitHub Repo in Your Browser";
+"SLUG-GITHUB-URI"                   =   "https://github.com/ChrisMarshallNY/ITCB-master/tree/master/Final-CompleteImplementation";

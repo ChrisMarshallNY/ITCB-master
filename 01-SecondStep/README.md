@@ -640,6 +640,16 @@ The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https
 
 Remember that we have removed comments, in order to reduce the vertical footprint of all this text.
 
+# SNIPPETS
+
+- [01-secondstep-00.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
+- [01-secondstep-01.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)
+- [01-secondstep-02.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
+- [01-secondstep-ArrayExtension.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-arrayextension-swift)
+- [01-secondstep-03.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-03-swift)
+- [01-secondstep-04.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-04-swift)
+- [01-secondstep-05.swift](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-05-swift)
+
 # REFERENCES
 
 - [The Git Repo Location for This Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)

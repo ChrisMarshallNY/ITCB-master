@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Magic8Ball Public API Doumentation
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/LittleGreenViper/ITCB">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+        Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_SDK.html">ITCB_SDK</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_SDK_Central.html">ITCB_SDK_Central</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/ITCB_SDK_Peripheral.html">ITCB_SDK_Peripheral</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/ITCB_Errors.html">ITCB_Errors</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/ITCB_RejectionReason.html">ITCB_RejectionReason</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Device_Central_Protocol.html">ITCB_Device_Central_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Device_Peripheral_Protocol.html">ITCB_Device_Peripheral_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Device_Protocol.html">ITCB_Device_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Observer_Central_Protocol.html">ITCB_Observer_Central_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Observer_Peripheral_Protocol.html">ITCB_Observer_Peripheral_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_Observer_Protocol.html">ITCB_Observer_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_SDK_Central_Protocol.html">ITCB_SDK_Central_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_SDK_Peripheral_Protocol.html">ITCB_SDK_Peripheral_Protocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ITCB_SDK_Protocol.html">ITCB_SDK_Protocol</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            
+            <p><img src="../img/icon.png" alt="Icon"></p>
+<h1 id='a-href-https-github-com-littlegreenviper-thebasicsofcorebluetooth-tree-master-sdk-src-the-sdks-a' class='heading'><a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src">The SDKs</a></h1>
+<h2 id='common-core' class='heading'>Common Core</h2>
+
+<p>The entirety of <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/src">the SDK code</a> is shared between platforms, with the exception of <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/blob/master/SDK-src/src/internal/ITCB_SDK_Peripheral_internal.swift">this file</a>, which is only included in the <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Mac">MacOS</a> and <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_iOS">iOS/iPadOS</a> targets (it implements Peripheral Mode, which is not supported in TV or Watch).</p>
+
+<p>The various target directories (<a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Mac">MacOS</a>, <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_iOS">iOS</a>, <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Watch">watchOS</a>, and <a href="https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_TVOS">tvOS</a>) contain only a single <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=13&cad=rja&uact=8&ved=2ahUKEwjytoaSy7HpAhXagnIEHdRwDRUQFjAMegQIPBAB&url=https%3A%2F%2Fdeveloper.apple.com%2Flibrary%2Farchive%2Fdocumentation%2FGeneral%2FReference%2FInfoPlistKeyReference%2FArticles%2FAboutInformationPropertyListFiles.html&usg=AOvVaw2rlth1YGdVn8U50mCDZp-n">plist</a> file, each.</p>
+
+<p>There is a separate target for each platform, with the naming convention of &ldquo;ITCB_SDK_<em><code>XXX</code></em>&rdquo;, where &ldquo;<em><code>XXX</code></em>&rdquo; is replaced with the target operating system (&ldquo;Mac&rdquo;, &ldquo;iOS&rdquo;, &ldquo;Watch&rdquo;, or &ldquo;TV&rdquo;).</p>
+
+<p>Each target is <a href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html">a dynamic &ldquo;pure Swift&rdquo; framework</a>. By &ldquo;pure Swift,&rdquo; we mean that there is no <a href="https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_swift_into_objective-c">bridging header</a>. Only Swift applications can use the SDK.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-05-31)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
