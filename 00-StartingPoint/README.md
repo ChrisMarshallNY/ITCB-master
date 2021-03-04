@@ -17,13 +17,13 @@ We will see that the app initializes the Core Bluetooth subsystem, creates a Cen
 If you haven't already done so, open the [`ITCB.xcworkspace`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint/ITCB.xcworkspace) workspace with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
 
 The following code is all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
-
+```
     import CoreBluetooth
 
     internal let _static_ITCB_SDK_8BallServiceUUID = CBUUID(string: "8E38140A-27BE-4090-8955-4FC4B5698D1E")
     internal let _static_ITCB_SDK_8BallService_Question_UUID = CBUUID(string: "BDD37D7A-F66A-47B9-A49C-FE29FD235A77")
     internal let _static_ITCB_SDK_8BallService_Answer_UUID = CBUUID(string: "349A0D7B-6215-4E2C-A095-AF078D737445")
-
+```
 
 This is the bare minimum to allow the SDK to compile and operate in Peripheral Mode for the apps.
 
@@ -32,10 +32,13 @@ Those three [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/c
 ### Command Line
 
 Simply start Terminal, and enter "[`uuidgen`](https://www.freebsd.org/cgi/man.cgi?query=uuidgen&sektion=1&manpath=freebsd-release-ports)", followed by a carriage return.
-
-    $ uuidgen
+```
+    [Command Prompt]>$ uuidgen⏎
+```
+Which will print out a line of Hex characters, like so:
+```
     8E38140A-27BE-4090-8955-4FC4B5698D1E
-
+```
 [`uuidgen`](https://www.freebsd.org/cgi/man.cgi?query=uuidgen&sektion=1&manpath=freebsd-release-ports) is a built-in UUID generator, and we can use it to create unique identifiers for our attributes. The devices, themselves, will already have their own UUIDs.
 
 ### UUID-Generator Web Site
@@ -43,7 +46,9 @@ Simply start Terminal, and enter "[`uuidgen`](https://www.freebsd.org/cgi/man.cg
 You can also use a UUID-generator Web site, [like this one](https://www.uuidgenerator.net/).
 
 ## A TIMELINE OF EVENTS
-![Timeline Doagram](01-Timeline-CBManager.png)
+This diagram will illustrate the various steps and states in the lesson:
+
+![Timeline Diagram](01-Timeline-CBManager.png)
 
 1. App Creates Instance of SDK
 2. SDK Creates Instance of CBCentralManager
@@ -80,7 +85,7 @@ This means that we'll be doing a couple of things:
 The first thing that we'll do, is add the following code, just below the static variables:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift)
-
+```
     extension ITCB_SDK_Central {
         override var _managerInstance: Any! {
             get {
@@ -97,7 +102,7 @@ The first thing that we'll do, is add the following code, just below the static 
             }
         }
     }
-
+```
 What this does, is override the stored property [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) with [a computed property](https://docs.swift.org/swift-book/LanguageGuide/Properties.html#ID259), so we intercept access to the stored property.
 
 The [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) property is typeless, so that it can store either an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) or [`CBPeripheralManager`](https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager), dependent upon the mode the SDK has been set to. It is *completely* typeless, as opposed to being an instance of [`CBManager`](https://developer.apple.com/documentation/corebluetooth/cbmanager), because I wanted to avoid referencing the Core Bluetooth module in the two "public" files (note that they both just import [`Foundation`](https://developer.apple.com/documentation/foundation)). I like my SDKs to hide as much stuff as possible.
@@ -115,12 +120,11 @@ The setter is a simple straight-up passthrough.
 Below the code we just added, we should now add this code:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-01-swift)
-
+```
     extension ITCB_SDK_Central: CBCentralManagerDelegate {
         public func centralManagerDidUpdateState(_ centralManager: CBCentralManager) { }
     }
-
-
+```
 Nothing will change, but the compiler will stop complaining.
 
 That [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method is the only required method for [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) conformance. We added an empty "placeholder" method there (for now), in order to satisfy the conformance requirement.
@@ -137,12 +141,12 @@ In our app, we'll assume that scanning is enabled at startup. What this means to
 We'll add the following code inside the empty [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-01-swift-L2) method body:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-02-swift)
-
+```
         if centralManager.state == .poweredOn {
             print("Scanning for Peripherals")
             centralManager.scanForPeripherals(withServices: [_static_ITCB_SDK_8BallServiceUUID], options: nil)
         }
-
+```
 What we just did, was tell the app that, upon the Bluetooth system becoming powered-up and ready (the [`.poweredOn`](https://developer.apple.com/documentation/corebluetooth/cbmanagerstate/poweredon) state), we are to immediately [begin scanning for Peripherals](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipherals).
 
 Note the [`_static_ITCB_SDK_8BallServiceUUID`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift#L28) that we send into the [`CBCentralManager.scanForPeripherals(withServices:,options:)`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-02-swift-L3) method. That tells the Central to filter advertisements from Peripherals, and only pay attention to ones that claim that they provide the "Magic 8-Ball" Service. You can scan for multiple Services, here, with the filtering done on an "AND" basis (a device that advertises all of the Services will result in a "hit").
@@ -156,16 +160,16 @@ In our app, we are only interested in the one custom Service that we created to 
 before we proceed further, we'll need to add two more static constants, just below the static variables at the top of the file:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-03-swift)
-
+```
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20
-
+```
 These define a signal strength "window," describing a range of signal strength that we will consider valid for connection. The lower bound is -60dBm, and the upper bound is -20dBm.
 
 Now that we are scanning for devices, we need to be able to react to their discovery, so we'll now add the following callback inside the extension we just made, and just after the [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift)
-
+```
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
         if  !devices.contains(where: { $0.uuid == peripheral.identifier.uuidString }),
             let peripheralName = peripheral.name,
@@ -177,7 +181,7 @@ Now that we are scanning for devices, we need to be able to react to their disco
             centralManager.connect(peripheral, options: nil)
         }
     }
-
+```
 Note the rather convoluted `if {}` statement. We do a bit of checking up on the Peripheral before moving forward with it.
 
 Let's walk through this vetting:
@@ -196,27 +200,27 @@ It's also important to maintain **only one** reference to each of the instances.
 
 Now that **that** is out of the way, let's walk through the `if...{}` statement, line by line.
 
-###### [`!devices.contains(where: { $0.uuid == peripheral.identifier.uuidString })`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L3)
+[```!devices.contains(where: { $0.uuid == peripheral.identifier.uuidString })```](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L2)
 
 In the first line, we make sure that we don't already know about the Peripheral. We use the closure-based version of the [`Array.contains(_:)`](https://developer.apple.com/documentation/swift/array/2297359-contains) method, because we need to extract the UUID of each device from its "wrapper" instance.
 
-###### [`let peripheralName = peripheral.name`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L4)
+[```let peripheralName = peripheral.name```](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L3)
 
 The second line checks the name of the Peripheral, unwinds its optional, and sets that to a local context constant.
 
-###### [`!peripheralName.isEmpty`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L5)
+[```!peripheralName.isEmpty```](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L4)
 
 The third line just makes sure that this name is valid (has a value). We need this name for display in our table.
 
-###### [`(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue)`](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L6)
+[```(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue)```](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L5)
 
 The last line makes sure that the signal strength of the Peripheral is within our acceptable range. Note that it is a "Closed" range, that includes the upper and lower bounds.
 
-Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can [add it to our collection](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L8).
+Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can [add it to our collection](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7).
 
 We do this by instantiating the "Peripheral wrapper" class ([`ITCB_SDK_Device_Peripheral`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L125)). When we instantiate that, [it will establish itself](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L207) as the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) for the discovered Peripheral, and will handle callbacks from here on out.
 
-[We execute a `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7), so that our console will log the discovery, and [append the new device wrapper](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L8) to our [`devices`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L145) Array.
+[We execute a `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L6), so that our console will log the discovery, and [append the new device wrapper](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7) to our [`devices`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L145) Array.
 
 [We then execute another `print()` statement](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L9), reporting that we are about to connect to the device, and call the [`CBCentralManager.connect(_:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518766-connect) method to initiate a connection to the Peripheral.
 
@@ -229,13 +233,13 @@ The last part of establishing [`CBCentralManagerDelegate`](https://developer.app
 Inside the extension, just below the discovery callback, we should add the following code:
 
 [This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-05-swift)
-
+```
     public func centralManager(_ centralManager: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Successfully Connected to \(peripheral.name ?? "ERROR").")
         print("Discovering Services for \(peripheral.name ?? "ERROR").")
         peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
     }
-
+```
 This is the [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) method. It is called when a successful connection to the device occurs.
 
 In this, we simply execute a couple of `print()` statements, recording the event(Note that we use [the Nil-Coalescing Operator](https://littlegreenviper.com/miscellany/swiftwater/the-nil-coalescing-operator/)), and then ask the newly-connected Peripheral to [discover its Services](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices).
@@ -249,14 +253,14 @@ All the rest of the action will happen in the [`CBPeripheralDelegate`](https://d
 **IT STILL DOESN'T WORK**
 
 Despite the app stil not working, there's now a lot more happening under the hood. If we run the app in Central Mode, and run another device in Peripheral Mode, we should see something like this in the debugger console:
-
+```
     Scanning for Peripherals
     Peripheral Discovered: iPhone Xs Max, RSSI: -34
     Connecting to iPhone Xs Max.
     Successfully Connected to iPhone Xs Max.
     Discovering Services for iPhone Xs Max.
     2020-05-15 11:50:27.106865-0400 Bluetooth 8-Ball On Mac[12724:438012] [CoreBluetooth] API MISUSE: Discovering services for peripheral <CBPeripheral: 0x6000033340a0, identifier = 0AD4EE4D-F702-4C62-BA7A-4AB5054C1186, name = iPhone Xs Max, state = connected> while delegate is either nil or does not implement peripheral:didDiscoverServices:
-
+```
 Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for peripheral <CBPeripheral: 0x6000033340a0, identifier = 0AD4EE4D-F702-4C62-BA7A-4AB5054C1186, name = iPhone Xs Max, state = connected> while delegate is either nil or does not implement peripheral:didDiscoverServices:`"). That's because we have yet to implement the [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) conformance in the app.
 
 > ***NOTE:*** *It can take some time for a device to be discovered.*
@@ -264,7 +268,7 @@ Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for pe
 ## WHERE WE ARE NOW
 
 At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift) file, after the original static constants:
-
+```
     internal let _static_ITCB_SDK_RSSI_Min = -60
     internal let _static_ITCB_SDK_RSSI_Max = -20
 
@@ -311,7 +315,7 @@ At this point, we have added the following code to the [`ITCB/src/Shared/interna
             peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
         }
     }
-
+```
 Running the app in Central Mode still doesn't do anything, but we can see some output in the console, showing that devices are being discovered.
 
 ## NEXT STEP
