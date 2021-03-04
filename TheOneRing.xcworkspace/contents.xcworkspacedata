@@ -128,4 +128,11 @@
          </FileRef>
       </Group>
    </Group>
+   <Group
+      location = "container:"
+      name = "Meta">
+      <FileRef
+         location = "group:LICENSE">
+      </FileRef>
+   </Group>
 </Workspace>
