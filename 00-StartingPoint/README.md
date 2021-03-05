@@ -14,7 +14,7 @@ We will see that the app initializes the Core Bluetooth subsystem, creates a Cen
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
-If you haven't already done so, open the [`ITCB.xcworkspace`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint/ITCB.xcworkspace) workspace with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
+If you haven't already done so, open the [`ITCB.xcworkspace`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint/ITCB.xcworkspace) workspace with Xcode, and use the Project navigator to select the [`00-StartingPoint/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file (which is actually an "alias" to the `00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift` file).
 
 The following code is all that you'll see (***NOTE:*** *We are removing comments, in order to keep these examples smaller*):
 ```
@@ -50,18 +50,18 @@ This diagram will illustrate the various steps and states in the lesson:
 
 ![Timeline Diagram](01-Timeline-CBManager.png)
 
-1. The app creates an instance of the Central version of the SDK (an instance of [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130)).
+1. The app creates an instance of [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130), which is the Central version of the SDK.
 2. This SDK instance creates an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager).
-3. This instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) Calls the delegate method [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) in the SDK, telling it that it is ready to scan.
-4. The SDK then calls [`CBCentralManager.scanForPeripherals(withServices:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipherals).
+3. This instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) calls the delegate method [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) in the SDK, telling it that it is ready to scan.
+4. The SDK then calls [`CBCentralManager.scanForPeripherals(withServices:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipherals). This tells Core Bluetooth to start scanning for Peripherals.
 5. Core Bluetooth starts scanning for advertising peripherals.
 6. A matching Peripheral is discovered by Core Bluetooth.
 7. The instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) calls the delegate method [`CBCentralManagerDelegate.centralManager(_:,didDiscover:,advertisementData:,rssi:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518937-centralmanager) in the SDK, with an instance of [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral). This represents the discovered Peripheral.
 8. The SDK creates a strong reference to the Peripheral, then calls [`CBCentralManager.connect(_:,options:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518766-connect), asking it to connect to the discovered Peripheral.
-9. Core Bluetooth connects to the Peripheral.
-10. The Peripheral accepts the connection.
-11. The instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) calls the delegate method [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) in the SDK.
-12. The SDK then calls [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) on that Peripheral.
+9. Core Bluetooth sends a connection request to the Peripheral.
+10. The Peripheral accepts the connection request. Core Bluetooth now has a connection to the Peripheral.
+11. The instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) calls the delegate method [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) in the SDK, informing the SDK that it has successfully connected to the Peripheral.
+12. Now that we are connected to the Peripheral, the SDK then calls [`CBPeripheral.discoverServices(_:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices) on that Peripheral (note that it is asking [`CBPeripheral`](https://developer.apple.com/documentation/corebluetooth/cbperipheral) to do the discovery -not [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager)); asking it to return a list of available Services.
 
 ## ON TO CODING
 
@@ -117,7 +117,7 @@ The [`_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/mas
 
 It should also be noted that this is a **strong** reference. This is important. The `CB`*`XXX`*`Manager` instance needs to be kept around, after instantiation.
 
-Our getter method will check [the superclass instance of `_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) before returning it. If that instance is `nil`, then we'll actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
+[Our getter method](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift-L3) will check [the superclass instance of `_managerInstance`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L113) before returning it. If that instance is `nil`, then we'll actually instantiate an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), setting our class as the delegate, and using the Main Thread (by leaving the second argument as `nil`). We then assign this to the superclass property before returning the superclass property (which now has the new instance).
 
 The setter is a simple straight-up passthrough.
 
@@ -171,7 +171,7 @@ before we proceed further, we'll need to add two more static constants, just bel
 ```
 These define a signal strength "window," describing a range of signal strength that we will consider valid for connection. The lower bound is -60dBm, and the upper bound is -20dBm.
 
-Now that we are scanning for devices, we need to be able to react to their discovery, so we'll now add the following callback inside the extension we just made, and just after the [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method (This is in [the `00-StartingPoint-04.swift` snippet file](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift)):
+Now that we are scanning for devices, we need to be able to react to their discovery, so we'll now add the following callback inside the extension we just made, and just after [the `CBCentralManagerDelegate.centralManagerDidUpdateState(_:)` method](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-01-swift-L2) (This is in [the `00-StartingPoint-04.swift` snippet file](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift)):
 
 ```
     public func centralManager(_ centralManager: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi: NSNumber) {
@@ -218,7 +218,7 @@ The third line just makes sure that this name is valid (has a value). We need th
 
 [```(_static_ITCB_SDK_RSSI_Min..._static_ITCB_SDK_RSSI_Max).contains(rssi.intValue)```](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L5)
 
-The last line makes sure that the signal strength of the Peripheral is within our acceptable range. Note that it is a "Closed" range, that includes the upper and lower bounds.
+The last line makes sure that the signal strength of the Peripheral is within our acceptable range. Note that it is [a "Closed" range](https://developer.apple.com/documentation/swift/closedrange), that includes the upper and lower bounds.
 
 Once we have all these conditions met, we can assume that we have a valid, newly-discovered Peripheral (a "Magic 8-Ball" device), and can [add it to our collection](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L7).
 
@@ -234,7 +234,7 @@ We do this by instantiating the "Peripheral wrapper" class ([`ITCB_SDK_Device_Pe
 
 The last part of establishing [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) conformance, is to add [a callback](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) to "catch" a successful connection. Since this is a very basic demo, and we're trying to keep things simple, we won't add [a callback](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518988-centralmanager) to catch unsuccessful connections, but we should, in "real life."
 
-Inside the extension, just below the discovery callback, we should add the following code (This is in [the `00-StartingPoint-05.swift` snippet file](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-05-swift)):
+Inside the extension, just below [the discovery callback](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-04-swift-L1), we should add the following code (This is in [the `00-StartingPoint-05.swift` snippet file](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-05-swift)):
 
 ```
     public func centralManager(_ centralManager: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -243,7 +243,7 @@ Inside the extension, just below the discovery callback, we should add the follo
         peripheral.discoverServices([_static_ITCB_SDK_8BallServiceUUID])
     }
 ```
-This is the [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) method. It is called when a successful connection to the device occurs.
+This is the [`CBCentralManagerDelegate.centralManager(_:,didConnect:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager) method. It is called by [the `CBCentralManager` instance](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), when a successful connection to the device occurs.
 
 In this, we simply execute a couple of `print()` statements, recording the event(Note that we use [the Nil-Coalescing Operator](https://littlegreenviper.com/miscellany/swiftwater/the-nil-coalescing-operator/)), and then ask the newly-connected Peripheral to [discover its Services](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518706-discoverservices).
 
@@ -270,11 +270,8 @@ Note that charming "API MISUSE" error ("`API MISUSE: Discovering services for pe
 
 ## WHERE WE ARE NOW
 
-At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal.swift) file, after the original static constants:
+At this point, we have added the following code to the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file, after the original static constants. This means that the file will now look like [this](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift):
 ```
-    internal let _static_ITCB_SDK_RSSI_Min = -60
-    internal let _static_ITCB_SDK_RSSI_Max = -20
-
     extension ITCB_SDK_Central {
         override var _managerInstance: Any! {
             get {
@@ -323,7 +320,7 @@ Running the app in Central Mode still doesn't do anything, but we can see some o
 
 ## NEXT STEP
 
-Go back to the main lesson, and open the `01-SecondStep` directory, then, open the [`ITCB.xcworkspace` workspace](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep/ITCB.xcworkspace) file with Xcode, and follow the steps in the [`README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/README.md).
+In the project navigator of the workspace file, open [the `01-SecondStep` directory](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep), and follow the steps in its [`README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/README.md).
 
 # SNIPPETS
 
