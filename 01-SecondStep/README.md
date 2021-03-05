@@ -87,9 +87,6 @@ We will be copying (and pasting) pre-written snippets of code, supplied in [a Gi
 10. After successfuly sending the question, the code will send [the `ITCB_Observer_Central_Protocol.questionAskedOfDevice(_:)` message](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L297), confirming to the app, that the question was sent to the Peripheral.
 11. We will add the code to receive the notification from the Peripheral ([the `CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral)).
 12. This code will call [the `ITCB_Observer_Central_Protocol.questionAnsweredByDevice(_:)` SDK observer callback](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L287), informing the app that the question answer was received.
-.
-
-#### NEXT, The Actual Code
 
 ### STEP ONE: Establish Our [`CBPeripheralDelegate`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) Conformance
 
