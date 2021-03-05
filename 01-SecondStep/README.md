@@ -8,9 +8,9 @@ In this step, we will implement the [`CBPeripheralDelegate`](https://developer.a
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 
-If you haven't already, open the [`ITCB.xcworkspace` workspace](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep/ITCB.xcworkspace) with Xcode, and use the Project navigator to select the [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
+If you haven't already, open the [`ITCB.xcworkspace` workspace](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep/ITCB.xcworkspace) with Xcode, and use the Project navigator to select [the `01-SecondStep/ITCB_SDK_Central_internal_Callbacks.swift` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) (which is an alias of [the `01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift)).
 
-You should see something like this:
+You should see something like this (Remember that we are removing comments, to keep the code dumps manageable):
 
     import CoreBluetooth
 
@@ -65,9 +65,29 @@ You should see something like this:
         }
     }
 
-Remember that we've removed comments, in order to reduce the size of these code listings.
-
 ## ON TO CODING
+
+### The Snippets
+
+We will be copying (and pasting) pre-written snippets of code, supplied in [a GitHub Gist](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894), and also embedded in the main workspace (see image, below). The snippets will be pasted into [the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift), which will integrate the new code into the ITCB SDK project, which will integrate into the "Magic 8-Ball" app.
+
+![The Snippets in the Workspace](Snippets.png)
+
+### MAIN GOAL: Implementing [the `CBPeripheralDelegate` Protocol](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate), which will complete the SDK.
+
+1. We will start to extend [the `ITCB_SDK_Central` class](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130), by conforming it to [the `CBPeripheralDelegate` protocol](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate).
+2. We will add code to receive [the `CBPeripheralDelegate.peripheral(_:didDiscoverServices:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral), which is in response to the last step of Part 1. This will have the Magic 8-Ball Service.
+3. This code will then issue [the `CBPeripheral.discoverCharacteristics(_:for:)` call](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518797-discovercharacteristics), asking the Perippheral to discover all [the `CBCharacteristic` instances](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic) for the Magic 8-Ball Service.
+4. We will add code to receive [the `CBPeripheralDelegate.peripheral(_:didDiscoverCharacteristicsFor:error:)` callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral), which will return 2 instances of [`CBCharacteristic`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic); representing the 2 "parts" of the Magic 8-Ball Central implementation (ask question/receive answer).
+5. At this point, the Central will have a full "map" of the Peripheral, and will call [the `ITCB_Observer_Central_Protocol.deviceDiscovered(_ device:)` SDK observer method](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L307). The app will then present the device to the user, who will be prompted to ask a question.
+6. We will then add code to the SDK, to implement [the `ITCB_Device_Peripheral_Protocol.sendQuestion(_:)` method](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L239).
+7. Upon the user asking a question of the Peripheral (via the app interface), the SDK will have [its `ITCB_Device_Peripheral_Protocol.sendQuestion(_:)` method](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift-L2) called, with the question string, to be sent to the Peripheral.
+8. This code will first set Core Bluetooth to receive notifications from the Peripheral by calling [`CBPeripheral.setNotifyValue(_:for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue), and will wait for confirmation of the notification (via [the `CBPeripheralDelegate.peripheral(_:didUpdateNotificationStateFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518768-peripheral), before sending the question to the Peripheral.
+9. Upon receiving confirmation that the notifications are ready, the SDK will use [the `CBPeripheral.writeValue(_:for:type:)` method](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518747-writevalue) to send the question to the Peripheral, and will await a response, via [the `CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral).
+10. After successfuly sending the question, the code will send [the `ITCB_Observer_Central_Protocol.questionAskedOfDevice(_:)` message](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L297), confirming to the app, that the question was sent to the Peripheral.
+11. We will add the code to receive the notification from the Peripheral ([the `CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral)).
+12. This code will call [the `ITCB_Observer_Central_Protocol.questionAnsweredByDevice(_:)` SDK observer callback](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L287), informing the app that the question answer was received.
+.
 
 #### NEXT, The Actual Code
 
@@ -95,14 +115,14 @@ So that means that the last thing the Central did, was tell the newly-created Pe
 
 ![Disovery Timeline](02-Timeline-Discovery.png)
 
-1. Core Bluetooth Asks Peripheral To Discover Services
-2. Peripheral Responds With Discovered Services
-3. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didDiscoverServices:,error:)
-4. The SDK Calls CBPeripheral.discoverCharacteristics(_:,for:)
-5. Core Bluetooth Asks Peripheral To Discover Characteristics for Service
-6. Peripheral responds With Discovered Characteristics
-7. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didDiscoverCharacteristicsFor:,error:)
-8. The SDK Informs the App That the Peripheral Is Ready For A Question
+1. Core Bluetooth Asks Peripheral To Discover Services.
+2. Peripheral Responds With Discovered Services.
+3. Core Bluetooth Calls [the `CBPeripheralDelegate.peripheral(_:didDiscoverServices:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral).
+4. The SDK Calls [`CBPeripheral.discoverCharacteristics(_:for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518797-discovercharacteristics).
+5. Core Bluetooth Asks Peripheral To Discover Characteristics for Service.
+6. Peripheral responds With Discovered Characteristics.
+7. Core Bluetooth Calls [the `CBPeripheralDelegate.peripheral(_:didDiscoverCharacteristicsFor:error:)` callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral).
+8. The SDK Informs the App That the Peripheral Is Ready For A Question, by calling [the `ITCB_Observer_Central_Protocol.deviceDiscovered(_ device:)` SDK observer method](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L307).
 
 ##### Service Discovery
 
@@ -112,10 +132,8 @@ Services are reported as discovered *en masse*. One call to [`CBPeripheral.disco
 
 The original Service discovery request filtered for our "Magic 8-Ball" Service, so we should expect the [`services`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518978-services) Array to have just one member. Nevertheless, we treat it as if it has many members.
 
-So, at this point, we should add the following code, just below the `discoverServices(_:)` method code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)
-
+So, at this point, we should add the following code, just below the `discoverServices(_:)` method code (This is in [the `01-SecondStep-00.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift)):
+```
     extension ITCB_SDK_Device_Peripheral: CBPeripheralDelegate {
         public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
             if let error = error {
@@ -131,7 +149,7 @@ So, at this point, we should add the following code, just below the `discoverSer
             }
         }
     }
-
+```
 This is [the Services discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral).
 
 The first thing that we do, is check for an error. If there was one, we report it, and terminate the discovery.
@@ -148,10 +166,8 @@ Now that we have discovered the Service and asked the Peripheral to perform a di
 
 Like the Service discovery callback, the results are "atomic." All Characteristics will be discovered at once. The Characteristic discovery callback is very similar to the Service discovery callback.
 
-Just below the Service discovery callback, add the following code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)
-
+Just below the Service discovery callback, add the following code (This is in [the `01-SecondStep-01.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-01-swift)):
+```
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         if let error = error {
             print("Encountered an error \(error) for the Peripheral \(peripheral.name ?? "ERROR")")
@@ -164,7 +180,7 @@ Just below the Service discovery callback, add the following code:
         }
         owner.peripheralServicesUpdated(self)
     }
-
+```
 This is [the Characteristics discovered callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral).
 
 Like we did with the Service discovery callback, the first thing we do is check for errors.
@@ -181,19 +197,19 @@ At this point, the Peripheral is ready. It is connected to the Central, and is n
 
 ![Disovery Timeline](03-Timeline-Question.png)
 
-1. App calls SDK ITCB_SDK_Device_Peripheral.sendQuestion(_:)
-2. SDK Calls CBPeripheral.setNotifyValue(_:,for:)
-3. Core Bluetooth Asks Peripheral to Set the Notify Value for the Answer Characteristic
-4. Peripheral Reports Characteristic Notify is On.
-5. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didUpdateNotificationStateFor:,error:)
-6. SDK Calls CBPeripheral.writeValue(_:,for:)
-7. Core Bluetooth Asks peripheral to Set Value for Answer Characteristic, and Return Acknowledgment
-8. Peripheral Acknowledges Question Value Set
-9. Core Bluetooth Calls CBPeripheralDelegate.peripheral(_:,didWriteValueFor:,error:)
-10. The SDK Notifies the App That The Question Was Asked
-11. Peripheral Changes Value of Answer Characteristic and Notifies Core Bluetooth
-12. Core Bluetooth Calls CBPeripheral.peripheral(_:,didUpdateValueFor:,error:)
-13. The SDK notifies App that the Answer is Available
+1. App calls [the `ITCB_Device_Peripheral_Protocol.sendQuestion(_:)` method](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L239).
+2. SDK Calls [`CBPeripheral.setNotifyValue(_:for:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue).
+3. Core Bluetooth Asks Peripheral to Set the Notify Value for the Answer Characteristic.
+4. The Peripheral acknowledges that notify is on for the Characteristic.
+5. Core Bluetooth Calls [the `CBPeripheralDelegate.peripheral(_:didUpdateNotificationStateFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518768-peripheral).
+6. SDK Calls [the `CBPeripheral.writeValue(_:for:type:)` method](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518747-writevalue).
+7. Core Bluetooth Asks peripheral to Set Value for the Question Characteristic, and Return Acknowledgment
+8. Peripheral Acknowledges Question Value Set.
+9. Core Bluetooth Calls [`CBPeripheralDelegate.peripheral(_:,didWriteValueFor:,error:)`](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518823-peripheral).
+10. The SDK Notifies the App That The Question Was Asked, via [the `ITCB_Observer_Central_Protocol.questionAskedOfDevice(_:)` observer callback](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L297).
+11. Peripheral Changes Value of Answer Characteristic and Notifies Core Bluetooth.
+12. Core Bluetooth Calls [the `CBPeripheralDelegate.peripheral(_:didUpdateValueFor:error:)` delegate callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral).
+13. The SDK notifies App that the Answer is Available, via [the `ITCB_Observer_Central_Protocol.questionAnsweredByDevice(_:)` SDK observer callback](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L287).
 
 #### FIRST, the Backstory
 
@@ -201,14 +217,12 @@ Remember that local instances of [`CBPeripheral`](https://developer.apple.com/do
 
 ##### We Have to Politely Ask the Peripheral to Set A Value
 
-We don't actually "set" the value of the "question" Characteristic. Instead, *we send the new value to the Peripheral, and ask it to make it the new value of the Characteristic*. That's The Way of Bluetooth. The Peripheral is always in charge of its state.
+We don't actually "set" the value of the "question" Characteristic. Instead, *we send the new value to the Peripheral, and ask it to make the value we provided the new value of the Characteristic*. That's The Way of Bluetooth. The Peripheral is always in charge of its state.
 
 ##### A Cool Little Swift Trick
 
-Another thing that we did before we got here, was [this little "hack"](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_internal.swift#L147) (It's not actually a "hack." It's the way we do stuff in Swift):
-
-[This is a link to a gist, with the code sample.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-arrayextension-swift)
-
+Another thing that we did before we got here, was this little "hack" (It's not actually a "hack." It's the way we do stuff in Swift) (This is in [the `01-SecondStep-ArrayExtension.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-arrayextension-swift)):
+```
     extension Array where Element: CBAttribute {
         public subscript(_ inUUIDString: String) -> Element! {
             for element in self where element.uuid.uuidString == inUUIDString {
@@ -218,7 +232,7 @@ Another thing that we did before we got here, was [this little "hack"](https://g
             return nil
         }
     }
-
+```
 That's [a constrained Array extension](https://littlegreenviper.com/miscellany/swiftwater/swift-extensions-part-three/), and we use it to look up Attributes (Characteristics and Services, in our case) in an Array by their [`CBUUID`](https://developer.apple.com/documentation/corebluetooth/cbuuid)
 
 What we did, was add a subscript that accepts a [`String`](https://developer.apple.com/documentation/swift/string) as its argument, and then scans the Array, comparing the IDs, until it finds the one for which we're searching.
@@ -236,13 +250,11 @@ And finally, we have a stored property called [`_peerInstance`](https://github.c
 Note that this is a **strong** reference. We need it to be so, because this will hold our only reference to the entity. I won't go into much detail, but I wanted to mention it, as it makes an appearance below.
 
 We should replace this:
-
+```
     func sendQuestion(_ question: String) { }
-
-with this:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift)
-
+```
+with this (This is in [the `01-SecondStep-02.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-02-swift):
+```
     public func sendQuestion(_ inQuestion: String) {
         question = nil
         if  let peripheral = _peerInstance as? CBPeripheral,
@@ -260,7 +272,7 @@ with this:
             self.owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.deviceOffline))
         }
     }
-
+```
 That's quite a handful, eh? Let's walk through it.
 
 [The first thing that we do](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-00-swift-L2), is clear the [`question`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L138) property. It will only hold the question *after* it has been accepted by the Peripheral.
@@ -337,10 +349,8 @@ I have chosen to use the "Notify" method, so, if you remember, we called [`CBPer
 
 Before we go to the write, need to respond to notifications being enabled.
 
-Below the Characteristic discovery callback, add the following code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-03-swift)
-
+Below the Characteristic discovery callback, add the following code (This is in [the `01-SecondStep-03.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-03-swift):
+```
     public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
 
         if let error = error {
@@ -358,7 +368,7 @@ Below the Characteristic discovery callback, add the following code:
             peripheral.writeValue(data, for: questionCharacteristic, type: .withResponse)
         }
     }
-
+```
 This [callback responds to the "answer" Characteristic having its notification state changed](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518768-peripheral).
 
 As before, the first thing we do, is check for errors, and respond, if there are any.
@@ -385,10 +395,8 @@ Assuming that went well, the Peripheral should respond* to our request, telling 
 
 We don't actually do much with this information. We'll show it to the user, when we display the results, but it is more of a demonstrative exercise.
 
-Below the Notification Change callback, add the following code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-04-swift)
-
+Below the Notification Change callback, add the following code (This is in [the `01-SecondStep-04.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-04-swift):
+```
     public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let error = error else {
             print("Characteristic \(characteristic.uuid.uuidString) reports that its value was accepted by the Peripheral.")
@@ -418,7 +426,7 @@ Below the Notification Change callback, add the following code:
             owner?._sendErrorMessageToAllObservers(error: .sendFailed(ITCB_RejectionReason.unknown(error)))
         }
     }
-
+```
 This is [the write confirmation callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518823-peripheral).
 
 > ***NOTE:*** *At this point, even though we have received confirmation of the write, **the [`CBCharacteristic.value`](https://developer.apple.com/documentation/corebluetooth/cbcharacteristic/1518878-value) property is not valid!**. The only valid instance we have of the value that we sent is in [`_interimQuestion`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal.swift#L135). If we want to have a valid value, then we need to [send a read request to the Peripheral](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518759-readvalue), and wait for it to set that property.*
@@ -435,10 +443,8 @@ The rest of this method is looking for errors.
 
 Lastly, we need to get the answer from the Peripheral.
 
-After the write confirmation callback method, add the following code:
-
-[This is a link to a gist, with the code ready to go.](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-05-swift)
-
+After the write confirmation callback method, add the following code (This is in [the `01-SecondStep-05.swift` snippet file](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894#file-01-secondstep-05-swift):
+```
     public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         _timeoutTimer?.invalidate()
         _timeoutTimer = nil
@@ -455,7 +461,7 @@ After the write confirmation callback method, add the following code:
             answer = answerString
         }
     }
-
+```
 This is [the value updated callback](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518708-peripheral) (made when the value of the "answer" Characteristic has been updated).
 
 As before, the first thing we do, is clear the timeout.
@@ -487,7 +493,7 @@ If all has gone well, you can tap on that list row, ask a question of the "Magic
 
 ## RECAP
 
-The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file should now look more or less like this:
+The [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file should now look more or less like [this](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift):
 
     import CoreBluetooth
 
