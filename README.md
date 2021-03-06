@@ -99,6 +99,8 @@ It's likely that you have already done so, but, if not, open the [`TheOneRing.xc
 
 The ideal configuration for the lesson, is to use the Mac as the Central (question asker), and install the `03-Final-Bluetooth 8-Ball On iOS (App)` scheme *(explained below)* onto an iOS/iPadOS device (an iPod, iPhone, or iPad). You would then use the iOS device as a "test target," while developing the Mac application. This is the configuration that I will use during the class.
 
+![The Ideal Setup](img/Setup.png)
+
 ### SCHEMES
 
 At the top, in the Scheme Menu, you will see that there are sixteen (16) schemes that will implement the app for each operating system, at each phase of the lesson *(**NOTE:** The displayed order is likely to be different from the order below)*:

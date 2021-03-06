@@ -785,7 +785,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D40B436523F381F300CFE862 /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Watch App Extension" */;
 			buildPhases = (
-				D40B438923F3856000CFE862 /* SwiftLint */,
 				D40B434A23F381F200CFE862 /* Sources */,
 				D40B434C23F381F200CFE862 /* Resources */,
 				D49AE30E2408421C0002D53C /* Frameworks */,
@@ -804,7 +803,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4195F9823F4533E0031A99E /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On TV" */;
 			buildPhases = (
-				D475F9B2246C398A008A2923 /* SwiftLint */,
 				D4195F8323F4533E0031A99E /* Sources */,
 				D4195F8423F4533E0031A99E /* Frameworks */,
 				D4195F8523F4533E0031A99E /* Resources */,
@@ -824,7 +822,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4BC058F23F34351008266BC /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball On Mobile" */;
 			buildPhases = (
-				D40B438823F3854900CFE862 /* SwiftLint */,
 				D4BC057823F34350008266BC /* Sources */,
 				D4BC057A23F34350008266BC /* Resources */,
 				D41DD5202401D94600A99087 /* Frameworks */,
@@ -844,7 +841,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4D5F5D923EEF33500E4F52B /* Build configuration list for PBXNativeTarget "Bluetooth 8-Ball" */;
 			buildPhases = (
-				D4E2709C23EF49120072DC05 /* SwiftLint */,
 				D4D5F5C523EEF33400E4F52B /* Sources */,
 				D4D5F5C723EEF33400E4F52B /* Resources */,
 				D4FC12B023F734F600C3ED12 /* Frameworks */,
@@ -1013,81 +1009,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D40B438823F3854900CFE862 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
-		};
-		D40B438923F3856000CFE862 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
-		};
-		D475F9B2246C398A008A2923 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
-		};
-		D4E2709C23EF49120072DC05 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if test -f \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"; then\n    \"${PROJECT_DIR}/../Project-Meta/SwiftLint/swiftlint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D40B434A23F381F200CFE862 /* Sources */ = {
