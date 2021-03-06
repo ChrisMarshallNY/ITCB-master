@@ -8,21 +8,21 @@ This is a repo that will accompany a class on introduction to Core Bluetooth.
 
 The project consists of two parts: "Apps," that are complete, standalone applications (one for each Apple platform: [MacOS](https://apple.com/macos), [iOS](https://apple.com/ios)/[iPadOS](https://apple.com/ipados), [tvOS](https://apple.com/tvos), and [watchOS](https://apple.com/watchos)), and "SDKs," which are [Swift Frameworks](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Frameworks.html), embedded into each app. These frameworks implement the Core Bluetooth functionality, and are the target of the lesson, while the apps are merely high-functioning test harnesses.
 
-### [The SDKs](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src)
+### [The SDKs](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src)
 
 The main focus of the lesson will be on the SDKs.
 
 #### Common Core
 
-The entirety of [the SDK code](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/src) is shared between platforms, with the exception of [this file](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/blob/master/SDK-src/src/internal/ITCB_SDK_Peripheral_internal.swift), which is only included in the [MacOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Mac) and [iOS/iPadOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_iOS) targets (it implements Peripheral Mode, which is not supported in TV or Watch).
+The entirety of [the SDK code](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/src) is shared between platforms, with the exception of [this file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/03-Final-CompleteImplementation/SDK-src/src/internal/Mac_iOS_Only/ITCB_SDK_Peripheral_internal.swift), which is only included in the [MacOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_Mac) and [iOS/iPadOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_iOS) targets (it implements Peripheral Mode, which is not supported in TV or Watch).
 
-The various target directories ([MacOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Mac), [iOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_iOS), [watchOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_Watch), and [tvOS](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/SDK-src/ITCB_SDK_TVOS)) contain only a single [plist](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=13&cad=rja&uact=8&ved=2ahUKEwjytoaSy7HpAhXagnIEHdRwDRUQFjAMegQIPBAB&url=https%3A%2F%2Fdeveloper.apple.com%2Flibrary%2Farchive%2Fdocumentation%2FGeneral%2FReference%2FInfoPlistKeyReference%2FArticles%2FAboutInformationPropertyListFiles.html&usg=AOvVaw2rlth1YGdVn8U50mCDZp-n) file, each.
+The various target directories ([MacOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_Mac), [iOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_iOS), [watchOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_Watch), and [tvOS](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/SDK-src/ITCB_SDK_TVOS)) contain only a single [plist](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=13&cad=rja&uact=8&ved=2ahUKEwjytoaSy7HpAhXagnIEHdRwDRUQFjAMegQIPBAB&url=https%3A%2F%2Fdeveloper.apple.com%2Flibrary%2Farchive%2Fdocumentation%2FGeneral%2FReference%2FInfoPlistKeyReference%2FArticles%2FAboutInformationPropertyListFiles.html&usg=AOvVaw2rlth1YGdVn8U50mCDZp-n) file, each.
 
 There is a separate target for each platform, with the naming convention of "ITCB_SDK_*`XXX`*", where "*`XXX`*" is replaced with the target operating system ("Mac", "iOS", "Watch", or "TV").
 
 Each target is [a dynamic "pure Swift" framework](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html). By "pure Swift," we mean that there is no [bridging header](https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_swift_into_objective-c). Only Swift applications can use the SDK.
 
-### [The Apps](https://github.com/LittleGreenViper/TheBasicsOfCoreBluetooth/tree/master/Apps-src)
+### [The Apps](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation/Apps-src)
 
 The apps are "Ship-quality" apps, written to the standards of any apps destined to be sold/distributed through the various Apple App Stores. They are localizable and carefully designed.
 

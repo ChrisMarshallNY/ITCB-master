@@ -1,6 +1,6 @@
 ## EXERCISE COMPLETE (`02-FinishedLesson`)
 
-This step simply displays the completed [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/LittleGreenViper/ITCB/blob/02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
+This step simply displays the completed [`ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift) file.
 
 At this point, you should be able to build and run any of the apps (remember that they need to be run **on the device**. Simulators won't work, for Bluetooth).
 
@@ -8,7 +8,7 @@ The apps should work correctly. If you start one app as a Central (any platform)
 
 # REFERENCES
 
-- [The Git Repo Branch for This Step](https://github.com/LittleGreenViper/ITCB/tree/02-FinishedLesson)
+- [The Git Repo Branch for This Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
 - [The Apple Core Bluetooth Reference](https://developer.apple.com/documentation/corebluetooth)
 - [The Apple Core Bluetooth Programming Guide](https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html#//apple_ref/doc/uid/TP40013257)
 - [Apple CBCentralManager Documentation](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager)
