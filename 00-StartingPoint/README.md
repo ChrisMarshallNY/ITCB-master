@@ -1,16 +1,22 @@
 ## CREATING A CENTRAL MANAGER/DELEGATE (`00-StartingPoint`)
 
-At this point, none of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants will operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
+At this point, none of the applications will operate correctly as Bluetooth Centrals ("Question Askers"), but the MacOS and iOS/iPadOS variants already operate correctly as Bluetooth Peripherals ("Magic 8-Ball Answerers").
 
 In this exercise, we'll add the Central functionality to all the apps. We'll do this by working on the SDK, which is common to all the apps.
 
-In the first part of this step, we'll create the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
+The SDK has two different main classes: [the `ITCB_SDK_Central` class](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130), and [the `ITCB_SDK_Peripheral` class](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L169) (only available for MacOS and iOS/iPadOS).
+
+In this class, we will be working exclusively on [the `ITCB_SDK_Central` class](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130); starting from an "empty," non-functional implementation, and arrive at a full implementation.
+
+The lesson will be in two "phases." This is the first "phase," where we will implement the basic Central functionality that discovers and connects to Peripherals. In the second phase, we will be working on what happens after the connection is established.
+
+In the first part of this phase, we'll create the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) instance.
 
 In the second part, we'll add the basic [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and establish our Core Bluetooth presence.
 
-By the end of this exercise, the apps will still not operate completely, but we'll be able to observe Core Bluetooth operating "under the hood," through `print()` statements.
+By the end of this phase, the apps will still not operate completely, but we'll be able to observe Core Bluetooth operating "under the hood," through `print()` statements.
 
-We will see that the app initializes the Core Bluetooth subsystem, creates a Central Manager instance, then uses that instance to search for advertising devices, and initiate connections to them.
+We will see that the app initializes the Core Bluetooth subsystem, creates a Central Manager instance, then uses that instance to discover advertising devices, and initiate connections to them.
 
 ## FIRST, LET'S SEE WHAT WE HAVE
 

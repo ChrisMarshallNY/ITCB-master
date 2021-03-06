@@ -66,18 +66,18 @@ All other files and directories will be left alone.
 
 > ***NOTE:*** *We will need to have at least one device that can act as a Peripheral. Since we are working on a Mac, we already have that. This means that the other device can be an iPhone, iPod, iPad, Watch or AppleTV, as long as the device is recent enough to support the current operating system. We can use another Mac, but two-machine debugging can be a bit complex. We're probably best off having an iOS device as our other target (This also allows us to switch the roles of the devices).*
 
-## STEPS
+## PHASES
 
-#### The lesson will proceed in two major steps, which will have "sub-steps." These major steps can be found in these directories:
+#### The lesson will proceed in two major phases, which will have "sub-steps." These major phases can be found in these directories:
 
 - [`00-StartingPoint`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
 
 This directory contains the "bald" starting point. No code has been added.
-It walks through the process of adding [CBCentralManagerDelegate](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and starting the process by discovering devices and their Services and Peripherals.
+It walks through the process of adding [CBCentralManagerDelegate](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) callbacks, and starting the process by discovering devices, and initiating connections.
     
 - [`01-SecondStep`](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
 
-This directory starts at the completion of the previous step, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
+This directory starts at the completion of the previous phase, and walks through the process of adding support for [CBPeripheralDelegate](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate) callbacks, which is where the lions' share of functionality exists.
     
 #### These directories will contain the complete, running applications:
     
@@ -99,9 +99,9 @@ It's likely that you have already done so, but, if not, open the [`TheOneRing.xc
 
 The ideal configuration for the lesson, is to use the Mac as the Central (question asker), and install the `03-Final-Bluetooth 8-Ball On iOS (App)` scheme *(explained below)* onto an iOS/iPadOS device (an iPod, iPhone, or iPad). You would then use the iOS device as a "test target," while developing the Mac application. This is the configuration that I will use during the class.
 
-### RUN SCHEMES
+### SCHEMES
 
-At the top, in the Scheme Menu, you will see that there are sixteen schemes that will implement the app for each operating system, at each stage of the lesson *(**NOTE:** The displayed order is likely to be different from the order below)*:
+At the top, in the Scheme Menu, you will see that there are sixteen (16) schemes that will implement the app for each operating system, at each phase of the lesson *(**NOTE:** The displayed order is likely to be different from the order below)*:
 
 **These implement the first lesson (Part 1):**
 
@@ -177,8 +177,8 @@ Next, go to the [the `00-StartingPoint/README.md` file](https://github.com/Chris
 - [This is a Downloadable ZIP File, With the Entire Lesson](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/spec/ITCB.zip) *(**WARNING:** Big File -About 34MB)*
 - [The Git Repo for This Entire Exercise](https://github.com/ChrisMarshallNY/ITCB-master)
 - [The Git Repo Location of the Presentations](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/Presentations) *([Apple Keynote](https://www.apple.com/keynote/) files)*
-- [The Git Repo Location for the First Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
-- [The Git Repo Location for the Second Step](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
+- [The Git Repo Location for the First Phase](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/00-StartingPoint)
+- [The Git Repo Location for the Second Phase](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/01-SecondStep)
 - [The Git Repo Location for the Finished Lesson](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/02-FinishedLesson)
 - [The Git Repo Location for the "Ship-Ready" Apps](https://github.com/ChrisMarshallNY/ITCB-master/tree/master/03-Final-CompleteImplementation)
 - [This is a GitHub Gist, with the Snippets for the First Phase](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32)
