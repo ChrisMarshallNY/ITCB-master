@@ -1,6 +1,6 @@
 ![Bluetooth 8-Ball Icon](img/trySwiftWorldITCB.png)
 
-# INTRODUCTION TO CORE BLUETOOTH
+# A QUICK INTRODUCTION TO CORE BLUETOOTH
 
 Welcome to [try! Swift World](https://tryswift.co/world)!
 
