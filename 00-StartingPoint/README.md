@@ -95,6 +95,19 @@ This means that we'll be doing a couple of things:
     
 #3 means that the [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130) class will be set up to "catch" messages from our instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager), and act on them.
 
+### THIS WILL WORK ON ALL PLATFORMS
+
+When we make a change to the SDK, it immediately becomes available to **ALL** platforms. If you run any of the schemes for the given phase, you will see the new functionality (and debug printouts) available in that platform.
+
+So that means that you'll be able to see the changes by running any of these schemes:
+
+- `00-StartingPoint-Bluetooth 8-Ball On Mac (App)` (For the class, this is the one that we will use)
+- `00-StartingPoint-Bluetooth 8-Ball On iOS (App)` (Peripheral Mode will work, on this platform, as well as Central Mode. In our lesson, we will use Peripheral Mode on an iOS device)
+- `00-StartingPoint-Bluetooth 8-Ball On Watch (App)` (Remember that Peripheral Mode will not work, on this platform)
+- `00-StartingPoint-Bluetooth 8-Ball On TV (App)` (Remember that Peripheral Mode will not work, on this platform)
+
+Remember that, even though the app will *run* in a simulator, it will not *work* in a simulator. It needs to run on a real device.
+
 ### STEP ONE: Instantiating the [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager) Instance, and Assigning it to a Strong Reference
 
 The first thing that we'll do, is add the following code, just below the static variables (This is in [the `00-StartingPoint-00.swift` snippet file](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32#file-00-startingpoint-00-swift)):
