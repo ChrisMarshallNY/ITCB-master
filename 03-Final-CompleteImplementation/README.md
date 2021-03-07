@@ -95,3 +95,28 @@ Once a question is asked of a Peripheral, it is reported in an alert.
 *Figure 6: Reporting an Answer*
 
 ***NOTE*** *The alert needs to be dismissed by the user, so there is "a bit" of user interaction in Peripheral Mode.*
+
+## APP PROVISIONING REQUIREMENTS
+
+### PLIST STRINGS (ALL PLATFORMS)
+
+In order to run the apps, using Core Bluetooth, it is necessary to add some fields to the app `info.plist` file. The App Store will not allow release of apps that don't have these rows:
+
+- [`NSBluetoothPeripheralUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothperipheralusagedescription) *(Deprecated)*
+- [`NSBluetoothAlwaysUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription) *(Current)*
+
+I usually add both, even though `NSBluetoothPeripheralUsageDescription` is no longer necessary.
+
+If you do not include at least `NSBluetoothAlwaysUsageDescription`, your app will experience a runtime crash, as soon as a Core Bluetooth call is made. If you are not running the debugger, it can be difficult to figure out why this happened. The debugger gives a very clear console message; explaining the issue.
+
+### APP SANDBOX SETTING (MACOS)
+
+For MacOS, there is an additional step that needs to be taken, if you wish to use the [App Sandbox](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html):
+
+![The Sandbox Checkbox for the MacOS Target](img/Figure-7.png)
+
+*Figure 7: The Sandbox Checkbox*
+
+In order to set this, you need to select the MacOS target, then, in the top tab bar, select "Signing & Capabilities," select "All" (or at least "Release"), then, scroll to the "App Sandbox" section, and select "Bluetooth," in the "Hardware" section.
+
+If this is not checked, you won't get a crash, but the Bluetooth subsystem just plain won't work.
