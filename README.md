@@ -30,7 +30,7 @@ Go forth, and explore. Bluetooth is an enormous topic, and promises great advent
 
 The application that we will use as a learning platform will be a Bluetooth expression of the famous [Mattel Magic 8-Ball toy](https://en.wikipedia.org/wiki/Magic_8-Ball).
 
-In order to understand the game completely, view [the `README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/README.md) in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
+In order to understand the game completely, view [the `README.md` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/03-Final-CompleteImplementation/README.md) in the `Final-CompleteImplementation` directory. That file will have a detailed "walkthrough" of the app.
 
 At the start, we will have 4 applications that already function, but not completely. The goal of this exercise is to "fill in the blanks," and get the apps working properly.
 
