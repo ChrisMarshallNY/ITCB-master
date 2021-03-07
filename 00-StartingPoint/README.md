@@ -55,6 +55,7 @@ You can also use a UUID-generator Web site, [like this one](https://www.uuidgene
 This diagram will illustrate the various steps and states in the lesson:
 
 ![Timeline Diagram](01-Timeline-CBManager.png)
+*Figure 1: The Timeline*
 
 1. The app creates an instance of [`ITCB_SDK_Central`](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/public/ITCB_SDK.swift#L130), which is the Central version of the SDK.
 2. This SDK instance creates an instance of [`CBCentralManager`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanager).
@@ -82,6 +83,7 @@ Instead, we'll be building up the SDK, slowly making it functional; step-by-step
 We will be copying (and pasting) pre-written snippets of code, supplied in [a GitHub Gist](https://gist.github.com/ChrisMarshallNY/d287be6dbcc88627178058bdee348d32), and also embedded in the main workspace (see image, below). The snippets will be pasted into [the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/00-StartingPoint/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift), which will integrate the new code into the ITCB SDK project, which will integrate into the "Magic 8-Ball" app.
 
 ![The Snippets in the Workspace](Snippets.png)
+*Figure 2: The Snippets*
 
 ### MAIN GOAL: Implementing the [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) Protocol
 
@@ -143,6 +145,7 @@ The setter is a simple straight-up passthrough.
 > ***NOTE:*** *At this point, the build will be broken. The compiler will complain with a weird error like "Expression type 'CBCentralManager' is ambiguous without more context". This is because our main class is not [yet] conformant to [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate). We'll fix that in just a minute.*
 
 ![The Error](Error.png)
+*Figure 3: Houston, We Have a Problem*
 
 ### STEP TWO: Adding [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) Conformance
 
@@ -157,6 +160,8 @@ Nothing will change, but the compiler will stop complaining.
 
 That [`CBCentralManagerDelegate.centralManagerDidUpdateState(_:)`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate) method is the only required method for [`CBCentralManagerDelegate`](https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate) conformance. We added an empty "placeholder" method there (for now), in order to satisfy the conformance requirement.
 
+![The Error](NoError.png)
+*Figure 4: Ahh...That's Better*
 
 #### Examining the State
 

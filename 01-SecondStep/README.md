@@ -72,6 +72,7 @@ You should see something like this (Remember that we are removing comments, to k
 We will be copying (and pasting) pre-written snippets of code, supplied in [a GitHub Gist](https://gist.github.com/ChrisMarshallNY/80f3370d407f9b5f848077e5f2061894), and also embedded in the main workspace (see image, below). The snippets will be pasted into [the `ITCB/src/Shared/internal/ITCB_SDK_Central_internal_Callbacks.swift` file](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/internal/ITCB_SDK_Central_internal_Callbacks.swift), which will integrate the new code into the ITCB SDK project, which will integrate into the "Magic 8-Ball" app.
 
 ![The Snippets in the Workspace](Snippets.png)
+*Figure 1: The Snippets*
 
 ### MAIN GOAL: Implementing [the `CBPeripheralDelegate` Protocol](https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate), which will complete the SDK.
 
@@ -115,6 +116,7 @@ As of the start of this phase, all interactions will now be with methods that co
 ##### Timeline of Discovery
 
 ![Disovery Timeline](02-Timeline-Discovery.png)
+*Figure 2: The Timeline of the First Part*
 
 1. Core Bluetooth asks the Peripheral to discover its services.
 2. The Peripheral responds with the discovered Services.
@@ -197,6 +199,7 @@ At this point, the Peripheral is ready. It is connected to the Central, and is n
 #### Timeline of Question/Answer
 
 ![Disovery Timeline](03-Timeline-Question.png)
+*Figure 3: The Timeline of the Second Part*
 
 1. The app calls [the `ITCB_Device_Peripheral_Protocol.sendQuestion(_:)` SDK method](https://github.com/ChrisMarshallNY/ITCB-master/blob/master/01-SecondStep/SDK-src/src/public/ITCB_SDK_Protocol.swift#L239).
 2. The SDK calls [the `CBPeripheral.setNotifyValue(_:for:)` method](https://developer.apple.com/documentation/corebluetooth/cbperipheral/1518949-setnotifyvalue).
